@@ -1,7 +1,7 @@
-const ExpoDetail = () => {
-    return(
-        <>ExpoDetail</>
-    )
+import ExpoDetail from "../../components/expo/ExpoDetail"
+
+const Detail = () => {
+    return <ExpoDetail />
 }
 
-export default ExpoDetail
+export default Detail
