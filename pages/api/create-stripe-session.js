@@ -28,10 +28,6 @@ async function CreateStripeSession(req, res) {
             },
         quantity: item.qty,
         }],
-        metadata: {
-            from: item.from,
-            to: item.to,
-        }
     });
     
     res.json({ id: session.id });
