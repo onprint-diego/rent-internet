@@ -7,10 +7,9 @@ import {
     CalendarContainer,
 } from './Elements'
 
-const Calendar = ({ setQty }) => {
+const Calendar = ({ setQty, setDates }) => {
 
     const [ range, setRange ] = useState()
-    const [ days, setDays ] = useState()
 
     const handleSelect = (date) =>{
         setRange(date)
@@ -24,6 +23,10 @@ const Calendar = ({ setQty }) => {
             // Every 7 days add 1 qty and round always up
             const qty = Math.ceil(rangeInDays / 7)
             setQty(qty)
+            setDates({
+                from: format(range.from, 'dd/MM/yyyy'),
+                to: format(range.to, 'dd/MM/yyyy')
+            })
         }
     }, [range])
 

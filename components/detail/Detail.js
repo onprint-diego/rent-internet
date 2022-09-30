@@ -18,6 +18,7 @@ const Detail = ({ data }) => {
     const { setCart } = GetCartContext()
     //Set qty according to number of days - 1=7 days, 2=14days...
     const [ qty, setQty ] = useState(0)
+    const [ dates, setDates ] = useState({})
     const [ error, setError ] = useState(false)
 
     const getProductDetails = () => {
@@ -26,7 +27,13 @@ const Detail = ({ data }) => {
         if(qty !== 0) {
             setCart({
                 id: data.id,
+                name: data.name,
+                image:data.images[0].src,
                 qty: qty,
+                weeks: `${qty} weeks`,
+                total: qty * parseInt(data.price),
+                from: dates.from,
+                to: dates.to,
             })
 
         } else {
@@ -47,7 +54,7 @@ const Detail = ({ data }) => {
             <DescriptionContainer>
                 <Title>{data?.name}</Title>
                 <Description>{data?.description}</Description>
-                <Calendar setQty={setQty} />
+                <Calendar setQty={setQty} setDates={setDates} />
                 { error && <Error>Tenes que seleccionar al menos 1 dia</Error>}
                 <Link href='/checkout'>
                     <LinkSpan onClick={getProductDetails}>Rent</LinkSpan>

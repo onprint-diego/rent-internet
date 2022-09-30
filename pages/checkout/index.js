@@ -1,8 +1,8 @@
-import CheckoutForm from "../../components/forms/CheckoutForm/CheckoutForm"
+import Checkout from "../../components/checkout/Checkout"
 
 const CheckoutPage = () => {
   return (
-    <CheckoutForm />
+    <Checkout />
   )
 }
 
