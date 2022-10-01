@@ -1,5 +1,4 @@
-import { useState, useEffect } from 'react'
-import { api } from '../../services/wocommerce'
+import { useState } from 'react'
 import { loadStripe } from '@stripe/stripe-js';
 import { GetCartContext } from '../../context/CartContext'
 import CheckoutForm from '../forms/CheckoutForm/CheckoutForm'
@@ -14,35 +13,11 @@ const Checkout = () => {
     const { cart } = GetCartContext()
     const [ order, setOrder ] = useState({})
     const [ loading, setLoading ] = useState(false)
-    // const publishableKey = process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
-    const publishableKey = 'pk_test_51LkAFuHieiQtj1QLE4R8QafLiQaeNYhlFxO0mcCOS6pbRkDlXJfAP01MxopRDHIIFYQBex9XM4XAeRncF36pJsx000o4CnQfe0'
+    const publishableKey = process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
 
-    const stripePromise = loadStripe(publishableKey);
-    
-    console.log(cart)
+    const stripePromise = loadStripe(publishableKey)
 
     const createCheckOutSession = async () => {
-        // const stripe = await stripePromise;
-        // const checkoutSession = await axios.post('/api/create-stripe-session', {
-        //   item: cart,
-        // })
-        // const result = await stripe.redirectToCheckout({
-        //   sessionId: checkoutSession.data.id,
-        // })
-        // if (result.error) {
-        //     console.log('errrrrooooorrr') //////////////////////////////
-        //     alert(result.error.message);
-        // }
-        /////////////////////////////////////////////////////////////////////////////
-
-        // const checkoutSession = await axios.post('/api/create-stripe-session', {
-        //     item: cart,
-        // })
-        // if(checkoutSession.error) alert(checkoutSession.error.message)
-        // console.log(checkoutSession)
-
-
-        /////////////////////////////////////////////////////////////////////////////////
 
         const redirect = async (id) => {
             const stripe = await stripePromise
@@ -56,34 +31,15 @@ const Checkout = () => {
         })
         .then(res => res.json())
         .then(json => redirect(json.id))
-        // .then(json => console.log(json))
         .catch(err => console.log(err))
-      };
-
-    // const getCartItem = () => {
-    //     if(Object.values(cart).length !== 0) return null
-
-    //     return cart.map(product => {
-    //         console.log(product)
-    //         return {
-    //             id: product.id, qty: product.qty, amount: product.amount
-    //         }
-    //     })
-    // }
-
-    // //Set the order in WP WOO once payment was succesfull
-    // const placeOrder = () => {
-    //     setLoading(true)
-    //     api.post("orders", order)
-    //     .then(res => console.log(res))
-    //     .catch(err => console.log(err))
-    //     .finally(() => setLoading(false)) //TODO And redirect!!!!!!! to successful or error page
-    // }
-
+    }
 
     return (
         <FormContainer>
-            <p>Total: ${cart.total}</p>
+            <p>Dates: From {cart.from} to {cart.to}</p>
+            <p>Subtotal: u$s{cart.subtotal}</p>
+            <p>Shipping Fee: u$s{cart.shippingFee}</p>
+            <p>Total: u$s{cart.total}</p>
             {
                 //if cart is empty and enter chekout
                 Object.values(cart).length === 0 ? 

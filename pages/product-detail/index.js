@@ -1,4 +1,3 @@
-import React from 'react'
 import Detail from '../../components/detail/Detail'
 
 const ProductDetail = ({ data }) => {

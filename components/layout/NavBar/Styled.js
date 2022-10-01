@@ -8,11 +8,13 @@ export const Container = styled.header`
 `
 
 export const LogoContainer = styled.div`
-    width: 3rem;
+    /* height: 5rem; */
+    display: flex;
+    justify-content: center;
 `
 
 export const Logo = styled(Image)`
-    width: 100%;
+
 `
 
 export const Nav = styled.nav`

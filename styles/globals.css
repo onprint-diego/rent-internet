@@ -30,8 +30,9 @@ button {
   --section-max-width: 1500px;
   --section-min-height: 100vh;
 
-  --primary-color: #ffffff;
+  --primary-color: #041434;
   --secondary-color: #ffffff;
+  --black: #041434;
 }
 
 

@@ -20,8 +20,8 @@ const Calendar = ({ setQty, setDates }) => {
             const rangeInTime = range.to.getTime() - range.from.getTime() 
             //Add one day to include initial day
             const rangeInDays = rangeInTime / (1000 * 3600 * 24) + 1
-            // Every 7 days add 1 qty and round always up
-            const qty = Math.ceil(rangeInDays / 7)
+            // Every 14 days add 1 qty and round always up
+            const qty = Math.ceil(rangeInDays / 14)
             setQty(qty)
             setDates({
                 from: format(range.from, 'dd/MM/yyyy'),

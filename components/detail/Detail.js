@@ -16,7 +16,7 @@ import {
 const Detail = ({ data }) => {
 
     const { setCart } = GetCartContext()
-    //Set qty according to number of days - 1=7 days, 2=14days...
+    //Set qty according to number of days - 1=14 days, 2=14days...
     const [ qty, setQty ] = useState(0)
     const [ dates, setDates ] = useState({})
     const [ error, setError ] = useState(false)
@@ -25,15 +25,24 @@ const Detail = ({ data }) => {
 
         //Check if at least 1 day was selected
         if(qty !== 0) {
+
+            const shippingFee = parseInt(data.attributes[0].options[0])
+            const subtotal = qty * parseInt(data.price)
+            const total = subtotal + shippingFee
+
+            console.log(shippingFee, subtotal, total)
+
             setCart({
                 id: data.id,
                 name: data.name,
                 image:data.images[0].src,
                 qty: qty,
                 weeks: `${qty} weeks`,
-                total: qty * parseInt(data.price),
+                subtotal: subtotal,
                 from: dates.from,
                 to: dates.to,
+                shippingFee: shippingFee,
+                total: total, 
             })
 
         } else {

@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Lg from '/public/rent-internet-logo.png'
 import {
     Container,
     LogoContainer,
@@ -9,16 +10,13 @@ import {
     PageLink,
 } from './Styled'
 
-//PACEHOLDER
-import Lg from '/public/logo-placeholder.jpg'
-
 //TODO. If not '/' then Logo -> Link '/' else Logo -> scrollTo top
 
 const NavBar = () => {
 
     // DB
     const links = [
-        { to: '/add-expo', title: 'Create Expo', type: 'text'},
+        { to: '/product-detail', title: 'Rent', type: 'text'},
         { to: '/', title: 'Login', type: 'cta'},
         { to: '/', title: 'Signup', type: 'p'},
     ]
@@ -27,7 +25,7 @@ const NavBar = () => {
     return (
         <Container>
             <LogoContainer>
-                <Logo src={Lg} alt='logo' />
+                <Logo src={Lg} alt='logo' width={150} height={30} />
             </LogoContainer>
             <Nav>
                 <Links>

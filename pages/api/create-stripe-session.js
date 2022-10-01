@@ -1,22 +1,19 @@
-const stripe = require("stripe")('sk_test_51LkAFuHieiQtj1QL7mZTs5qzxPcfwsSf0RWjbTpf1ScXxQkaaXk28O0vYttDsQ7QAqfv5KTVL7Ak2QlkYrIbvcLC00Dk3IBm7y');
+import { api } from "../../services/wocommerce";
+const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
 async function CreateStripeSession(req, res) {
     const { item } = req.body;
-
-    const transformedItem = {
-      price_data: {
-        currency: 'usd',
-        product_data: {
-          name: item.name,
-        },
-        unit_amount: item.total,
-      },
-      quantity: item.qty,
-    };
   
+    const response = await api.get("products")
+    const price = response.data[0].price * item.qty
+    const shippingFee = parseInt(response.data[0].attributes[0].options[0])
+    const amount = price + shippingFee
+
     const session = await stripe.checkout.sessions.create({
         success_url: 'http://localhost:3000',
         cancel_url: 'http://localhost:3000',
+        // success_url: 'https://rent-internet/succesful',
+        // cancel_url: 'https://rent-internet/cancel',
         mode: 'payment',
         line_items: [{
             price_data: {
@@ -24,52 +21,13 @@ async function CreateStripeSession(req, res) {
                 product_data: {
                     name: item.name,
                 },
-                unit_amount: item.total * 100, //Esto traerlo desde woo, no desde el cart
+                unit_amount: amount * 100,
             },
-        quantity: item.qty,
+        quantity: 1,
         }],
     });
     
     res.json({ id: session.id });
-    
-//   res.json({item})
-//   res.json(item)
-//   res.json({transformedItem})
 }
 
 export default CreateStripeSession
-
-// export default async (req, res) => {
-//   const { item } = req.body;
-
-//   const transformedItem = {
-//     price_data: {
-//       currency: 'usd',
-//       product_data: {
-//         // images: [item.image],
-//         name: item.name,
-//       },
-//       unit_amount: item.total * 100,
-//     },
-//     // description: item.description,
-//     // quantity: item.quantity,
-//   };
-
-// //   const session = await stripe.checkout.sessions.create({
-// //     payment_method_types: ['card'],
-// //     line_items: [transformedItem],
-// //     mode: 'payment',
-// //     success_url: window.location.href,
-// //     cancel_url: window.location.href,
-// //     metadata: {
-// //       images: item.image,
-// //     },
-// //   });
-  
-// //   res.json({ id: session.id });
-  
-// // res.json({item})
-
-// res.json({transformedItem})
-
-// };

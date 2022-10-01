@@ -1,24 +1,20 @@
 import { useState, useEffect } from 'react'
 import Head from 'next/head'
 import ProductDetail from './product-detail'
-import { api } from '../services/wocommerce'
+import { GetProductsContext } from '../context/ProductsContext'
+import { getProductDetails } from '../services/wocommerce'
+import PrimaryButton from '../components/buttons/PrimaryLinkButton'
 
 export default function Home(props) {
   
- const [ products, setProducts ] = useState([])
- const [ loading, setLoading ] = useState(true)
+  const { products, setProducts } = GetProductsContext()
+  const [ loading, setLoading ] = useState(true)
 
   useEffect(() => {
-    api.get("products")
-    .then((res) => {
-      if (res.status === 200) {
-        setProducts(res.data)
-        console.log(res.data)
-      }
-    })
-    .catch(err => console.log(err))
-    .finally(() => setLoading(false))
+    getProductDetails(setProducts, setLoading)
   }, [])
+
+  console.log(products)
 
   return (
     <>
@@ -30,7 +26,7 @@ export default function Home(props) {
       {
         loading ?
         '...loading' :
-        <ProductDetail data={products[0]}/>
+        <PrimaryButton to='product-detail'>Rent</PrimaryButton>
       }
     </>
   )
