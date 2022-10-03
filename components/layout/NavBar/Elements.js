@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import Link from 'next/link'
-import Image from 'next/image'
+import Image from 'next/future/image'
 
 export const Container = styled.header`
     display: flex;
@@ -8,13 +8,16 @@ export const Container = styled.header`
 `
 
 export const LogoContainer = styled.div`
-    /* height: 5rem; */
+    height: 2.7rem;
     display: flex;
     justify-content: center;
+    align-self: center;
 `
 
 export const Logo = styled(Image)`
-
+    width: 100%;
+    height: auto;
+    object-fit: cover;
 `
 
 export const Nav = styled.nav`

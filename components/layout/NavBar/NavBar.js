@@ -8,7 +8,7 @@ import {
     Links,
     LinkContainer,
     PageLink,
-} from './Styled'
+} from './Elements'
 
 //TODO. If not '/' then Logo -> Link '/' else Logo -> scrollTo top
 
@@ -25,7 +25,7 @@ const NavBar = () => {
     return (
         <Container>
             <LogoContainer>
-                <Logo src={Lg} alt='logo' width={150} height={30} />
+                <Logo src={Lg} alt='logo'/>
             </LogoContainer>
             <Nav>
                 <Links>

@@ -27,7 +27,7 @@ button {
   box-sizing: border-box;
 
   /* GLOBALS */
-  --section-max-width: 1500px;
+  --section-max-width: 1400px;
   --section-min-height: 100vh;
 
   --primary-color: #041434;
