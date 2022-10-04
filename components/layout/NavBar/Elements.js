@@ -8,7 +8,7 @@ export const Container = styled.header`
 `
 
 export const LogoContainer = styled.div`
-    height: 2.7rem;
+    width: 7rem;
     display: flex;
     justify-content: center;
     align-self: center;

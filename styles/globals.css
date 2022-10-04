@@ -28,7 +28,7 @@ button {
 
   /* GLOBALS */
   --section-max-width: 1400px;
-  --section-min-height: 100vh;
+  --section-min-height: 35rem;
 
   --primary-color: #041434;
   --secondary-color: #ffffff;
