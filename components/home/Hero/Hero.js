@@ -1,4 +1,5 @@
-import React from 'react'
+import { ButtonPrimary } from '../../shared/ButtonPrimary/ButtonPrimary'
+import { ButtonSecondaryPage } from '../../shared/ButtonSecondary/ButtonSecondary'
 import {
     BackgroundContainer,
     BackgroundImg,
@@ -7,62 +8,55 @@ import {
     Container,
     IconsContainer,
     IconContainer,
+    IconImageContainer,
     Icon,
     Text,
+    ButtonsContainer,
+    ButtonsInner,
 } from './Elements'
 
-//PLACEHOLDER
-import BgImg from '/public/hero-back.jpg'
-import V from '/public/icons/Velocidad.svg'
-import E from '/public/icons/Economico.svg'
-import L from '/public/icons/Liviano.svg'
-import P from '/public/icons/Paises.svg'
+const Hero = ({ content }) => {
 
-const Hero = () => {
-
-    const icons = [
-        {
-            id: 1,
-            img: V,
-            txt: 'Aliquid ex ea commodi consequatur. ',
-        },
-        {
-            id: 2,
-            img: E,
-            txt: 'Aliquid ex ea commodi consequatur. ',
-        },
-        {
-            id: 3,
-            img: L,
-            txt: 'Aliquid ex ea commodi consequatur. ',
-        },
-        {
-            id: 4,
-            img: P,
-            txt: 'Aliquid ex ea commodi consequatur. ',
-        },
-    ]
-        
     return (
         <Container>
-            <BackgroundContainer>
-                <BackgroundImg src={BgImg} alt='hero background' />
-            </BackgroundContainer>
-            <Copy>Lorem ipsum dolor sit amet</Copy>
-            <SubCopy>Lorem ipsum dolor sit amet, consectetur adipisci elit, sed eiusmod tempor.</SubCopy>
-            <IconsContainer>
-                {
-                    icons.map(icon => {
-                        return(
-                            <IconContainer key={icon.id}>
-                                <Icon 
-                                src={icon.img} alt="featured icon"/>
-                                <Text>{icon.txt}</Text>
-                            </IconContainer>
-                        )
-                    })
-                }
-            </IconsContainer>
+            {
+                Object.entries(content).length !== 0 &&
+                <>
+                    <BackgroundContainer>
+                        <BackgroundImg src={content?.heroimage.src} alt='hero background' fill/>
+                    </BackgroundContainer>
+                    <Copy>{content?.title}</Copy>
+                    <SubCopy>{content?.subtitle}</SubCopy>
+                    <ButtonsContainer>
+                        <ButtonsInner>
+                            <ButtonPrimary to='product-detail'>
+                                {content?.rentbutton}
+                            </ButtonPrimary>
+                            <ButtonSecondaryPage>
+                                {content?.detailsbutton}
+                            </ButtonSecondaryPage>
+                        </ButtonsInner>
+                    </ButtonsContainer>
+                    <IconsContainer>
+                        {
+                            content.icons.map(icon => {
+                                return(
+                                    <IconContainer key={icon.src}>
+                                        <IconImageContainer>
+                                            <Icon
+                                            src={icon.src} 
+                                            alt="featured icon"
+                                            fill
+                                            />
+                                        </IconImageContainer>
+                                        <Text>{icon.description}</Text>
+                                    </IconContainer>
+                                )
+                            })
+                        }
+                    </IconsContainer>
+                </>
+            }
         </Container>
   )
 }

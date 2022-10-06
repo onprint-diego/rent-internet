@@ -2,58 +2,78 @@ import styled from 'styled-components'
 import Image from 'next/future/image'
 
 export const Container = styled.section`
-    position: relative;
+    margin: 0 auto;
+    width: 95%;
+    max-width: var(--section-max-width);
     min-height: var(--section-min-height);
-    padding-top: 5.5rem;
+    position: relative;
+    padding-top: 6.5rem;
 `
 
 export const BackgroundContainer = styled.div`
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-92%, -50%);
-    opacity: .5;
+    height: 32rem;
     aspect-ratio: 16/9;
+    transform: translate(-50%, -50%);
+    opacity: .2;
     z-index: -1;
+    width: 100%;
 `
 
 export const BackgroundImg = styled(Image)`
-    width: 180%;
-    max-width: 33rem;
-    height: auto;
-    object-fit: cover;
+    margin: 0 auto;
+    object-fit: contain;
 `
 
 export const Copy = styled.h1`
     text-align: center;
-    font-size: 3rem;
+    font-size: 4rem;
 `
 
 export const SubCopy = styled.p`
     text-align: center;
+    font-size: 1.7rem;
+    margin-top: .8rem;
 `
 
-export const IconsContainer = styled.div`
-    width: 80%;
+export const ButtonsContainer = styled.div`
+    position: relative;
+    margin-top: 5rem;
+`
+
+export const ButtonsInner = styled.div`
+    width: 20rem;
     margin: 0 auto;
     display: flex;
     justify-content: space-around;
 `
 
-export const IconContainer = styled.div`
-    /* width: 3rem; */
+export const IconsContainer = styled.div`
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    margin-top: 5rem;
 `
 
-export const Icon = styled(Image)`
-    width: 5rem;
-    height: auto;
-    object-fit: cover;
+export const IconContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+`
+
+export const IconImageContainer = styled.div`
+    position: relative;
+    height: 4.5rem;
+    aspect-ratio: 16/9;
+`
+
+export const Icon = styled(Image)`   
+    object-fit: contain;
 `
 
 export const Text = styled.p`
-    width: 80%;
+    font-size: .8rem;
     text-align: center;
 `

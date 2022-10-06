@@ -3,8 +3,12 @@ import Link from 'next/link'
 import Image from 'next/future/image'
 
 export const Container = styled.header`
+    margin: 0 auto;
+    width: 95%;
+    max-width: var(--section-max-width);
     display: flex;
     justify-content: space-between;
+    padding-top: 1rem;
 `
 
 export const LogoContainer = styled.div`
