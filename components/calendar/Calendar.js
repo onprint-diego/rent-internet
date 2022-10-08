@@ -36,7 +36,7 @@ const Calendar = ({ setQty, cart, setCart, text }) => {
             })
         }
     }, [range])
-    //react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
 
 
     return (

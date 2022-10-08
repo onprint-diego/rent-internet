@@ -24,7 +24,7 @@ export default function Home(props) {
       text: props.page.description.descriptiontext,
       backgroundimage: props.page.description.descriptionbackgroundimg.sourceUrl,
     }, [])
-    // react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
 
     setHeroContent({
       title: props.page.homepagehero.title, 
@@ -55,7 +55,7 @@ export default function Home(props) {
       ]
     })
   }, [])
-  // react-hooks/exhaustive-deps
+  // eslint-disable-next-line react-hooks/exhaustive-deps
 
   return (
     <>
