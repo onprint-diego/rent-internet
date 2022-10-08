@@ -7,7 +7,7 @@ export const api = new WooCommerceRestApi({
     version: "wc/v3",
     queryStringAuth: true,
     axiosConfig: {
-            headers: {'Content-Type': 'application/json'},
+          headers: {'Content-Type': 'application/json'},
     }
 });
 
