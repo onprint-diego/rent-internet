@@ -58,7 +58,6 @@ const Detail = ({ data }) => {
         }
 
     }, [mainProduct])
-    // eslint-disable-next-line react-hooks/exhaustive-deps
 
     useEffect(() => {
 
@@ -81,7 +80,6 @@ const Detail = ({ data }) => {
         getAdapter()
         getPowerBank()
     }, [])
-    // eslint-disable-next-line react-hooks/exhaustive-deps
 
     // //TODO chequear si puedo refactorizarlo inhabilitando el boton
     // useEffect(() => {
