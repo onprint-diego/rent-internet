@@ -8,9 +8,9 @@ const ProductDetail = ({ data }) => {
     const { products, setProducts } = GetProductsContext()
     const [ loading, setLoading ] = useState(true)
 
-    useEffect(() => {
-        getProductDetails(setProducts, setLoading)
-    }, [])
+    // useEffect(() => {
+    //     getProductDetails(setProducts, setLoading)
+    // }, [])
 
     return (
         <>
