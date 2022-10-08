@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react'
-import Link from 'next/link'
 import Calendar from '../calendar/Calendar'
+import Select from '../select/Select'
+import CheckBox from '../checkbox/CheckBox'
+import { ButtonSecondaryLink } from '../shared/ButtonSecondary/ButtonSecondary'
 import { GetCartContext } from '../../context/CartContext'
 import {
     ProductContainer,
@@ -11,93 +13,124 @@ import {
     Description,
     Error,
     LinkSpan,
+    LeftContainer,
+    ReviewContainer,
+    ReviewItem,
 } from './Elements'
 
 //TODO inhabilitar el boton de Rent si no selecciono fechas
-
-//Todos los detalles de producto vienen desde atributo en la página de productos de WP, no de custom fields
+//TODO el check de los checkbox customizarlo y que dependa del estado, porque tiene un bug
 
 const Detail = ({ data }) => {
 
-    console.log(data)
-
-    const { setCart } = GetCartContext()
-    const [ mainProduct, setMainProduct ] = useState({})
+    const { cart, setCart } = GetCartContext()
+    const [mainProduct, setMainProduct] = useState({})
     //Set qty according to number of days - 1=14 days, 2=14days...
-    const [ qty, setQty ] = useState(0)
-    const [ dates, setDates ] = useState({})
-    const [ error, setError ] = useState(false)
+    const [error, setError] = useState(false)
+    const [adapter, setAdapter] = useState({ product: {}, is: false })
+    const [powerBank, setPowerBank] = useState({ product: {}, is: false })
 
-    const getRentedProductDetails = () => {
+    console.log(cart)
 
-        //Check if at least 1 day was selected
-        if(qty !== 0) {
+    useEffect(() => {
 
-            const shippingFee = parseInt(data.attributes[0].options[0])
-            const subtotal = qty * parseInt(data.price)
+        if (Object.entries(mainProduct).length !== 0) {
+
+            const shippingFee = parseInt(mainProduct.attributes[0].options[0])
+            const mainProductPrice = parseInt(mainProduct.price)
+            const subtotal = mainProductPrice
             const total = subtotal + shippingFee
 
-            console.log(shippingFee, subtotal, total)
-
+            //SET DEFAULT CART
             setCart({
-                id: data.id,
-                name: data.name,
-                image:data.images[0].src,
-                qty: qty,
-                weeks: `${qty} weeks`,
-                subtotal: subtotal,
-                from: dates.from,
-                to: dates.to,
+                ...cart,
+                id: mainProduct.id,
+                name: mainProduct.name,
+                image: mainProduct.images[0].src,
+                mainProductPrice: mainProductPrice,
+                qty: 1,
                 shippingFee: shippingFee,
-                total: total, 
+                subtotal: subtotal,
+                total: total,
+                adapter: adapter,
+                powerBank: powerBank,
             })
-
-        } else {
-            setError(!error)
         }
-    }
+
+    }, [mainProduct])
 
     useEffect(() => {
 
         const getMainProduct = () => {
-            const modem = data.filter(item => item.name === "Modem")
-            setMainProduct(...modem)
-        } 
+            const product = data.find(item => item.name === "Modem")
+            setMainProduct(product)
+        }
+
+        const getAdapter = () => {
+            const product = data.find(item => item.slug === "adaptador")
+            setAdapter({ ...adapter, product })
+        }
+
+        const getPowerBank = () => {
+            const product = data.find(item => item.slug === "power-bank")
+            setPowerBank({ ...powerBank, product })
+        }
 
         getMainProduct()
+        getAdapter()
+        getPowerBank()
     }, [])
 
-    console.log(mainProduct)
+    // //TODO chequear si puedo refactorizarlo inhabilitando el boton
+    // useEffect(() => {
+    //     //Por ejemplo, si cambia la cantidad y hay cantidad,
+    //     //disabled(false), else disabled(true) y pasar estado
+    //     //al boton
 
 
-    //TODO chequear si puedo refactorizarlo inhabilitando el boton
-    useEffect(() => {
-        //Por ejemplo, si cambia la cantidad y hay cantidad,
-        //disabled(false), else disabled(true) y pasar estado
-        //al boton
-
-
-        //Remove error msg if any
-        error && setError(!error)
-    }, [qty])
+    //     //Remove error msg if any
+    //     error && setError(!error)
+    // }, [qty])
 
     return (
         <ProductContainer>
             {
                 Object.entries(mainProduct).length !== 0 &&
-                <ImageContainer>
-                    <ProductImage src={mainProduct.images[0].src} alt={mainProduct.images[0].alt} />
-                </ImageContainer>
+                <>
+                    <LeftContainer>
+                        <ImageContainer>
+                            <ProductImage src={mainProduct.images[0].src} alt={mainProduct.images[0].alt} />
+                        </ImageContainer>
+                        <ReviewContainer>
+                            <ReviewItem>Modem Portátil: u$d {cart.mainProductPrice} x{cart.qty}</ReviewItem>
+                            <ReviewItem>Shipping Fee: u$d {cart.shippingFee}</ReviewItem>
+                            <ReviewItem>Subtotal: u$d {cart.subtotal}</ReviewItem>
+                            <ReviewItem>Total: u$d {cart.total}</ReviewItem>
+                        </ReviewContainer>
+                    </LeftContainer>
+                    <DescriptionContainer>
+                        <Title>{mainProduct.attributes[1].options[0]}</Title>
+                        <Description>{mainProduct.attributes[5].options[0]}</Description>
+                        <Calendar
+                            cart={cart}
+                            setCart={setCart}
+                            text="Seleccione una fecha"
+                        />
+                        <Select
+                            options={mainProduct.attributes[4].options}
+                            name="Países disponibles"
+                            text="Seleccione un país"
+                            cart={cart}
+                            setCart={setCart}
+                        />
+                        <CheckBox label="Agregar un adaptador de viaje" cart={cart} setCart={setCart} extraProductData={adapter} value="adapter"/>
+                        <CheckBox label="Agregar Power Bank" cart={cart} setCart={setCart} extraProductData={powerBank} value="powerBank"/>
+                        <ButtonSecondaryLink to="/checkout">
+                            {mainProduct.attributes[6].options[0]}
+                        </ButtonSecondaryLink>
+                    </DescriptionContainer>
+                </>
             }
-            {/* <DescriptionContainer>
-                <Title>{data?.name}</Title>
-                <Description>{data?.description}</Description>
-                <Calendar setQty={setQty} setDates={setDates} />
-                { error && <Error>Tenes que seleccionar al menos 1 dia</Error>}
-                <Link href='/checkout'>
-                    <LinkSpan onClick={getRentedProductDetails}>Rent</LinkSpan>
-                </Link>
-            </DescriptionContainer> */}
         </ProductContainer>
     )
 }

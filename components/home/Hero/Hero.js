@@ -29,7 +29,7 @@ const Hero = ({ content }) => {
                     <SubCopy>{content?.subtitle}</SubCopy>
                     <ButtonsContainer>
                         <ButtonsInner>
-                            <ButtonPrimary to='product-detail'>
+                            <ButtonPrimary to='/product-detail'>
                                 {content?.rentbutton}
                             </ButtonPrimary>
                             <ButtonSecondaryPage>

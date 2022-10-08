@@ -18,10 +18,6 @@ export default function Home(props) {
   const [ loading, setLoading ] = useState(true)
 
   useEffect(() => {
-    
-    // getProductDetails(setProducts, setLoading)
-
-    // console.log(props)
 
     setDetailsContent({
       title: props.page.description.descriptiontitle,

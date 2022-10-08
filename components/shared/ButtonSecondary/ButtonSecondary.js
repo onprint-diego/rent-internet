@@ -6,9 +6,9 @@ import styled from 'styled-components'
 const Button = styled.button`
   width: var(--button-width);
   height: var(--button-height);
-  border: 2px solid var(--styled-middle-blue);
+  border: 1px solid var(--primary-color);
   border-radius: 5px;
-  color: var(--styled-middle-blue);
+  color: var(--primary-color);
   font-size: 1rem;
   transition: all .5 ease-in-out;
   box-shadow: var(--button-shadow);

@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { loadStripe } from '@stripe/stripe-js';
 import { GetCartContext } from '../../context/CartContext'
 import CheckoutForm from '../forms/CheckoutForm/CheckoutForm'
+import { BuyButton } from '../shared/BuyButton/BuyButton';
 import {
     FormContainer,
     Input,
@@ -31,12 +32,16 @@ const Checkout = () => {
         })
         .then(res => res.json())
         .then(json => redirect(json.id))
-        .catch(err => console.log(err))
+        .catch(err => console.log('Error creating checkout: ' + err))
+    }
+
+    const handleBankTransfer = () => {
+        
     }
 
     return (
         <FormContainer>
-            <p>Dates: From {cart.from} to {cart.to}</p>
+            <p>Fechas: From {cart.from} to {cart.to}</p>
             <p>Subtotal: u$s{cart.subtotal}</p>
             <p>Shipping Fee: u$s{cart.shippingFee}</p>
             <p>Total: u$s{cart.total}</p>
@@ -46,15 +51,8 @@ const Checkout = () => {
                 <p>Cart is empty, nothing to checkout</p> :
                 <CheckoutForm setOrder={setOrder} /> 
             }
-            {
-                loading &&
-                'loading...'
-                // <>
-                //     <Input />
-                //     <ConfirmButton onClick={placeOrder}>Rent</ConfirmButton>
-                // </>
-            }
-            <button onClick={createCheckOutSession}>Rent</button>
+            <BuyButton event={createCheckOutSession}>Pay with card</BuyButton>
+            <button onCklick={handleBankTransfer}>Bank Transfer</button>
         </FormContainer>
     )
 }

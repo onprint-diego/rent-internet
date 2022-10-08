@@ -5,9 +5,10 @@ import { format } from 'date-fns'
 import es from 'date-fns/locale/es'
 import {
     CalendarContainer,
+    Label,
 } from './Elements'
 
-const Calendar = ({ setQty, setDates }) => {
+const Calendar = ({ setQty, cart, setCart, text }) => {
 
     const [ range, setRange ] = useState()
 
@@ -22,10 +23,16 @@ const Calendar = ({ setQty, setDates }) => {
             const rangeInDays = rangeInTime / (1000 * 3600 * 24) + 1
             // Every 14 days add 1 qty and round always up
             const qty = Math.ceil(rangeInDays / 14)
-            setQty(qty)
-            setDates({
+
+            const updatedSubtotal = cart.mainProductPrice * qty
+
+            setCart({
+                ...cart,
+                qty: qty,
                 from: format(range.from, 'dd/MM/yyyy'),
-                to: format(range.to, 'dd/MM/yyyy')
+                to: format(range.to, 'dd/MM/yyyy'),
+                subtotal: updatedSubtotal,
+                total: updatedSubtotal + cart.shippingFee,
             })
         }
     }, [range])
@@ -33,6 +40,7 @@ const Calendar = ({ setQty, setDates }) => {
 
     return (
         <CalendarContainer>
+            <Label>{text}</Label>
             <DayPicker
             selected={range}
             onSelect={handleSelect}

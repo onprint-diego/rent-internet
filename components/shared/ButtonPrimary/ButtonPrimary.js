@@ -15,7 +15,8 @@ const Button = styled.button`
   box-shadow: var(--button-shadow);
   color: white;
   font-size: 1rem;
-  transition: all .5s ease-in-out;
+  font-weight: bold;
+  transition: all .2s ease-in-out;
 
   &:hover {
     background-position: right center;

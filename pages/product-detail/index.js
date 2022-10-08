@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import Detail from '../../components/detail/Detail'
-import { getProductDetails } from '../../services/wocommerce'
+import { getProductDetails } from '../../utils/wocommerce'
 import { GetProductsContext } from '../../context/ProductsContext'
 
 const ProductDetail = ({ data }) => {
