@@ -36,6 +36,7 @@ const Calendar = ({ setQty, cart, setCart, text }) => {
             })
         }
     }, [range])
+    //react-hooks/exhaustive-deps
 
 
     return (

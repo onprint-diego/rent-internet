@@ -23,7 +23,8 @@ export default function Home(props) {
       title: props.page.description.descriptiontitle,
       text: props.page.description.descriptiontext,
       backgroundimage: props.page.description.descriptionbackgroundimg.sourceUrl,
-    })
+    }, [])
+    // react-hooks/exhaustive-deps
 
     setHeroContent({
       title: props.page.homepagehero.title, 
@@ -54,6 +55,7 @@ export default function Home(props) {
       ]
     })
   }, [])
+  // react-hooks/exhaustive-deps
 
   return (
     <>

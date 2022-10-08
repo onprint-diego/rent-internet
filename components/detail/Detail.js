@@ -58,6 +58,7 @@ const Detail = ({ data }) => {
         }
 
     }, [mainProduct])
+    //react-hooks/exhaustive-deps
 
     useEffect(() => {
 
@@ -80,6 +81,7 @@ const Detail = ({ data }) => {
         getAdapter()
         getPowerBank()
     }, [])
+    // react-hooks/exhaustive-deps
 
     // //TODO chequear si puedo refactorizarlo inhabilitando el boton
     // useEffect(() => {
