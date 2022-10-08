@@ -64,13 +64,31 @@ async function CreateStripeSession(req, res) {
         })
     }
 
+    // const session = await stripe.checkout.sessions.create({
+    //     // success_url: 'http://localhost:3000',
+    //     // cancel_url: 'http://localhost:3000',
+    //     success_url: 'https://rent-internet/succesful',
+    //     cancel_url: 'https://rent-internet/cancel',
+    //     mode: 'payment',
+    //     line_items: items,
+    // });
+
     const session = await stripe.checkout.sessions.create({
-        // success_url: 'http://localhost:3000',
-        // cancel_url: 'http://localhost:3000',
         success_url: 'https://rent-internet/succesful',
         cancel_url: 'https://rent-internet/cancel',
         mode: 'payment',
-        line_items: items,
+        line_items: [
+            {
+                price_data: {
+                    currency: 'usd',
+                    product_data: {
+                        name: modemName,
+                    },
+                    unit_amount: subTotal * 100,
+                },
+                quantity: 1,
+            }
+        ],
     });
 
     res.json({ id: session.id });
