@@ -25,7 +25,6 @@ import {
 // a Stripe, bank transfer a un formulario.
 // Falta: cómo recolectar data del usuario en caso Stripe Checkout
 // Hacer WebHooks para enviar mails y actualizar la compra en db 
-//
 
 const Detail = ({ data }) => {
 
