@@ -19,6 +19,8 @@ export default async function handler(req, res) {
         const payload = reqBuffer.toString()
         const sig = req.headers["stripe-signature"]
 
+        console.log(req.body, req, payload)
+
         let event
 
         try {
