@@ -36,7 +36,7 @@ const Checkout = () => {
     }
 
     const handleBankTransfer = () => {
-        
+        console.log('bank transfer')
     }
 
     return (
