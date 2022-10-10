@@ -55,7 +55,9 @@ export default async function handler(req, res) {
                     subject: `Booking confirmation from Rent Internet `,
                     html: `
                     <p>Compra OK</p><br>
-                    <p>Session: ${session}</p>
+                    <p>Session: ${session.id}</p>
+                    <p>Amount: ${session.amount_total / 100}</p>
+                    <p>Email: ${session.metadata.email}</p>
                   `
                 });
             } catch (error) {
