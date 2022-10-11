@@ -6,7 +6,7 @@ import Stripe from 'stripe'
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY)
 
 const endpointSecret = 'whsec_4GZuTKO7MA0xd2WhAmDiwlHSWl5R9AfB'
-// const endpointSecret = 'whsec_a6d2c13640b5t415b7f8a03b7d1deef1eetad64b331f6d0b61024e72tf5038777f3'
+// const endpointSecret = 'whsec_a6d2c13640b5415b7f8a03b7d1deef1eead64b331f6d0b61024e72f5038777f3'
 
 export const config = {
     api: {
@@ -51,16 +51,10 @@ export default async function handler(req, res) {
             try {
                 await transporter.sendMail({
                     from: "paseolosberros@gmail.com",
-                    to: "diegoeliseoiovane@gmail.com",
-                    subject: `Booking confirmation from Rent Internet `,
+                    to: "paseolosberros@gmail.com",
+                    subject: `Booking confirmation from Rent Internet v3 `,
                     html: `
                     <p>Compra OK v3</p><br>
-                    <p>Session: ${session.id}</p>
-                    <p>Amount: ${session.amount_total / 100}</p>
-                    <p>Email: ${session.metadata.email}</p>
-                    <p>Products: ${session.metadata.products}</p>}
-                    <p>Products: ${session.line_items.data}</p>
-                    <p>Random Feature: ${session.metadata.feature}</p>
                   `
                 });
             } catch (error) {
@@ -70,3 +64,12 @@ export default async function handler(req, res) {
         }
     }
 }
+
+
+{/* <p>Compra OK v3</p><br>
+<p>Session: ${session.id}</p>
+<p>Amount: ${session.amount_total / 100}</p>
+<p>Email: ${session.metadata.email}</p>
+<p>Products: ${session.metadata.products}</p>}
+<p>Products: ${session.line_items.data}</p>
+<p>Random Feature: ${session.metadata.feature}</p> */}

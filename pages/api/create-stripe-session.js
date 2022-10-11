@@ -69,11 +69,6 @@ async function CreateStripeSession(req, res) {
         cancel_url: 'https://rent-internet.com/cancel',
         mode: 'payment',
         line_items: items,
-        metadata: {
-            email: 'diegoeliseoiovane@gmail.com',
-            feature: 'Random Feature',
-            // products: items,
-        }
     });
 
     res.json({ id: session.id });
