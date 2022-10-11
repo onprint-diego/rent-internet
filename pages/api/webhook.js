@@ -5,8 +5,8 @@ import Stripe from 'stripe'
 // const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY)
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY)
 
-// const endpointSecret = 'whsec_4GZuTKO7MA0xd2WhAmDiwlHSWl5R9AfB'
-const endpointSecret = 'whsec_a6d2c13640b5t415b7f8a03b7d1deef1eetad64b331f6d0b61024e72tf5038777f3'
+const endpointSecret = 'whsec_4GZuTKO7MA0xd2WhAmDiwlHSWl5R9AfB'
+// const endpointSecret = 'whsec_a6d2c13640b5t415b7f8a03b7d1deef1eetad64b331f6d0b61024e72tf5038777f3'
 
 export const config = {
     api: {
