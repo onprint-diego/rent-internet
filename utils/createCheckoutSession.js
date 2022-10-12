@@ -6,8 +6,6 @@ export const createCheckOutSession = async ( cart, customer ) => {
 
     const stripePromise = loadStripe(publishableKey)
 
-    // console.log(data)
-
     const redirect = async (id) => {
         const stripe = await stripePromise
         stripe.redirectToCheckout({sessionId: id})

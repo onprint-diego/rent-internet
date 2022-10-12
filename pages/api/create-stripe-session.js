@@ -2,7 +2,7 @@ import { api } from "../../utils/wocommerce";
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY)
 
 async function CreateStripeSession(req, res) {
-    const { cart } = req.body;
+    const { cart, customer } = req.body;
 
     // const cart = item
     const response = await api.get("products")
