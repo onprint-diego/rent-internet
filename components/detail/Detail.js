@@ -46,7 +46,7 @@ const Detail = ({ data }) => {
             const subtotal = mainProductPrice
             const total = subtotal + shippingFee
 
-            //SET DEFAULT CART
+            //SET MAIN PRODUCT BY DEFAULT IN CART
             setCart({
                 ...cart,
                 id: mainProduct.id,
@@ -59,6 +59,7 @@ const Detail = ({ data }) => {
                 total: total,
                 adapter: adapter,
                 powerBank: powerBank,
+                customerDetails: {},
             })
         }
 

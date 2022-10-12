@@ -13,6 +13,8 @@ async function CreateStripeSession(req, res) {
     const shippingFee = parseInt(response.data[4].attributes[0].options[0])
     const subTotal = modemPrice * item.qty
 
+    console.log(cart)
+
     const items = []
     items.push({
         price_data: {
@@ -63,12 +65,18 @@ async function CreateStripeSession(req, res) {
     }
 
     const session = await stripe.checkout.sessions.create({
-        // success_url: 'http://localhost:3000',
-        // cancel_url: 'http://localhost:3000',
-        success_url: 'https://rent-internet.com/succesful',
-        cancel_url: 'https://rent-internet.com/cancel',
+        success_url: 'http://localhost:3000',
+        cancel_url: 'http://localhost:3000',
+        // success_url: 'https://rent-internet.com/succesful',
+        // cancel_url: 'https://rent-internet.com/cancel',
         mode: 'payment',
         line_items: items,
+        metadata: {
+            extra: 'extra data',
+            customerDetails: {
+                name: 'hola'
+            }
+        }
     });
 
     res.json({ id: session.id });

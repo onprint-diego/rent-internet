@@ -4,15 +4,16 @@ import { GetCartContext } from '../../context/CartContext'
 import CheckoutForm from '../forms/CheckoutForm/CheckoutForm'
 import { BuyButton } from '../shared/BuyButton/BuyButton';
 import {
-    FormContainer,
-    Input,
+    CheckoutContainer,
+    CheckoutInner,
     ConfirmButton,
+    EmptyCart,
 } from './Elements'
+import CartDetails from './CartDetails/CartDetails';
 
 const Checkout = () => {
 
-    const { cart } = GetCartContext()
-    const [ order, setOrder ] = useState({})
+    const { cart, setCart } = GetCartContext()
     const [ loading, setLoading ] = useState(false)
     const publishableKey = process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
 
@@ -39,21 +40,23 @@ const Checkout = () => {
         console.log('bank transfer')
     }
 
+    console.log(cart)
+
     return (
-        <FormContainer>
-            <p>Fechas: From {cart.from} to {cart.to}</p>
-            <p>Subtotal: u$s{cart.subtotal}</p>
-            <p>Shipping Fee: u$s{cart.shippingFee}</p>
-            <p>Total: u$s{cart.total}</p>
+        <CheckoutContainer>
             {
-                //if cart is empty and enter chekout
-                Object.values(cart).length === 0 ? 
-                <p>Cart is empty, nothing to checkout</p> :
-                <CheckoutForm setOrder={setOrder} /> 
+                Object.values(cart).length === 0 ?
+                <EmptyCart>
+                    <p>Cart is empty, nothing to checkout</p>
+                </EmptyCart> :
+                <CheckoutInner>
+                    <CartDetails cart={cart} />
+                    <CheckoutForm cart={cart} setCart={setCart} /> 
+                    <BuyButton event={createCheckOutSession}>Pay with card</BuyButton>
+                    <button onClick={handleBankTransfer}>Bank Transfer</button>
+                </CheckoutInner>
             }
-            <BuyButton event={createCheckOutSession}>Pay with card</BuyButton>
-            <button onCklick={handleBankTransfer}>Bank Transfer</button>
-        </FormContainer>
+        </CheckoutContainer>
     )
 }
 
