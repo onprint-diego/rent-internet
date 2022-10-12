@@ -26,7 +26,7 @@ export const config = {
 //     return `${htmlBody} ${productsHtml}`
 // }
 
-const sendConfirmationMail =  async ( session ) => {
+const sendConfirmationMail =  async ( session, products ) => {
 
     const transporter = nodemailer.createTransport({
         host: "smtp.gmail.com",
@@ -38,14 +38,14 @@ const sendConfirmationMail =  async ( session ) => {
         }
     })
 
-    // const html = prepareHtml(session, products)
+    const html = prepareHtml(session, products)
 
     try {
         await transporter.sendMail({
-            // from: "rent@rent-internet.com",
-            // to: session.customer_details.email,
-            from: "paseolosberros@gmail.com",
-            to: "diegoeliseoiovane@gmail.com",
+            from: "rent@rent-internet.com",
+            to: session.customer_details.email,
+            // from: "paseolosberros@gmail.com",
+            // to: "diegoeliseoiovane@gmail.com",
             subject: `Booking confirmation from Rent Internet v6`,
             html: `<p>hola</p>`,
         })
@@ -54,7 +54,7 @@ const sendConfirmationMail =  async ( session ) => {
     }
 }
 
-const setOrderInWoo = ( session ) => {
+const setOrderInWoo = ( session, products ) => {
     const data = {
         payment_method: "Card",
         payment_method_title: "Card",
@@ -118,6 +118,8 @@ export default async function handler(req, res) {
         const payload = reqBuffer.toString()
         const sig = req.headers["stripe-signature"]
 
+        console.log('---------------------')
+
         let event
 
         try {
@@ -132,13 +134,13 @@ export default async function handler(req, res) {
             const clientSecret = session.id
             sendConfirmationMail(session)
             setOrderInWoo(session)
-            // let products
-            // stripe.checkout.sessions.listLineItems(clientSecret)
-            // .then( res => {
-            //     products = res.data
-            //     sendConfirmationMail(session, products)
-            //     // setOrderInWoo(session, products)
-            // })
+            let products
+            stripe.checkout.sessions.listLineItems(clientSecret)
+            .then( res => {
+                products = res.data
+                sendConfirmationMail(session, products)
+                setOrderInWoo(session, products)
+            })
         }
     }
 }
