@@ -56,13 +56,16 @@ const sendConfirmationMail =  async ( session, products ) => {
 
 const setOrderInWoo = ( session, products ) => {
 
+    console.log('Session', session)
+    console.log('Products', products)
 
+    
     const data = {
         payment_method: "Card",
         payment_method_title: "Card",
         set_paid: true,
         billing: {
-          first_name: session.metadata.customerName,
+          first_name: "John",
           last_name: "Doe",
           address_1: "969 Market",
           address_2: "",
@@ -70,7 +73,7 @@ const setOrderInWoo = ( session, products ) => {
           state: "CA",
           postcode: "94103",
           country: "US",
-          email: session.metadata.customerEmail,
+          email: "john.doe@example.com",
           phone: "(555) 555-5555"
         },
         shipping: {
