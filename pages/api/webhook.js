@@ -42,9 +42,10 @@ const sendConfirmationMail =  async ( session, products ) => {
     try {
         await transporter.sendMail({
             from: "rent@rent-internet.com",
-            to: session.customer_details.email,
+            // to: session.customer_details.email,
+            to: 'diegoeliseoiovane@gmail.com',
             subject: `Booking confirmation from Rent Internet v6`,
-            html: html,
+            html: `<p>hola</p>`,
         })
     } catch (error) {
         return res.status(500).json({ error: error.message || error.toString() })
@@ -135,8 +136,8 @@ export default async function handler(req, res) {
             stripe.checkout.sessions.listLineItems(clientSecret)
             .then( res => {
                 products = res.data
-                // sendConfirmationMail(session, products)
-                setOrderInWoo(session, products)
+                sendConfirmationMail(session, products)
+                // setOrderInWoo(session, products)
             })
         }
     }

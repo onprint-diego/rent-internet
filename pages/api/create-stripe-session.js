@@ -2,18 +2,16 @@ import { api } from "../../utils/wocommerce";
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY)
 
 async function CreateStripeSession(req, res) {
-    const { item } = req.body;
+    const { cart } = req.body;
 
-    const cart = item
+    // const cart = item
     const response = await api.get("products")
     const modemName = response.data[4].name
     const modemPrice = parseInt(response.data[4].price)
     const powerBankPrice = parseInt(response.data[0].price)
     const adapterPrice = parseInt(response.data[1].price)
     const shippingFee = parseInt(response.data[4].attributes[0].options[0])
-    const subTotal = modemPrice * item.qty
-
-    console.log(cart)
+    const subTotal = modemPrice * cart.qty
 
     const items = []
     items.push({
@@ -71,12 +69,11 @@ async function CreateStripeSession(req, res) {
         // cancel_url: 'https://rent-internet.com/cancel',
         mode: 'payment',
         line_items: items,
-        metadata: {
-            extra: 'extra data',
-            customerDetails: {
-                name: 'hola'
-            }
-        }
+        // metadata: {
+        //     extra: 'extra data',
+        //     customerName: customer.name,
+        //     customerEmail: customer.email,
+        // }
     });
 
     res.json({ id: session.id });
