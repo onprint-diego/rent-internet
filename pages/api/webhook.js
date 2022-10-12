@@ -20,7 +20,7 @@ const prepareHtml = ( session, products ) => {
     const htmlBody = `
         <h2 style="color:blue;font-size:46px;">TEST Hemos recibido tu pago!</h2><br>
         <p>Tu id de compra es: ${session.id}</p><br>
-        <p>Total: u$d ${session.amount_total / 100}</p><br>
+        <p>Total: u$d ${session.amount_total * 100}</p><br>
     `
 
     return `${htmlBody} ${productsHtml}`
@@ -43,9 +43,9 @@ const sendConfirmationMail =  async ( session, products ) => {
     try {
         await transporter.sendMail({
             from: "rent@rent-internet.com",
-            // to: session.customer_details.email,
+            to: session.customer_details.email,
             // from: "paseolosberros@gmail.com",
-            to: "diegoeliseoiovane@gmail.com",
+            // to: "diegoeliseoiovane@gmail.com",
             subject: `Booking confirmation from Rent Internet v7`,
             html: html,
         })
@@ -65,7 +65,7 @@ const setOrderInWoo = ( session, products ) => {
         payment_method_title: "Card",
         set_paid: true,
         billing: {
-          first_name: "John",
+          first_name: session.metadata.customerName,
           last_name: "Doe",
           address_1: "969 Market",
           address_2: "",
@@ -73,7 +73,7 @@ const setOrderInWoo = ( session, products ) => {
           state: "CA",
           postcode: "94103",
           country: "US",
-          email: "john.doe@example.com",
+          email: session.metadata.customerEmail,
           phone: "(555) 555-5555"
         },
         shipping: {
