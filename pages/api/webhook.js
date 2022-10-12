@@ -43,9 +43,9 @@ const sendConfirmationMail =  async ( session, products ) => {
     try {
         await transporter.sendMail({
             from: "rent@rent-internet.com",
-            to: session.customer_details.email,
+            // to: session.customer_details.email,
             // from: "paseolosberros@gmail.com",
-            // to: "diegoeliseoiovane@gmail.com",
+            to: "diegoeliseoiovane@gmail.com",
             subject: `Booking confirmation from Rent Internet v7`,
             html: html,
         })
@@ -123,8 +123,6 @@ export default async function handler(req, res) {
         const payload = reqBuffer.toString()
         const sig = req.headers["stripe-signature"]
 
-        console.log('---------------------')
-
         let event
 
         try {
@@ -137,8 +135,6 @@ export default async function handler(req, res) {
         if (event.type === 'checkout.session.completed') {
             const session = event.data.object
             const clientSecret = session.id
-            sendConfirmationMail(session)
-            setOrderInWoo(session)
             let products
             stripe.checkout.sessions.listLineItems(clientSecret)
             .then( res => {
