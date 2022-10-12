@@ -14,17 +14,17 @@ export const config = {
     },
 }
 
-// const prepareHtml = ( session, products ) => {
-//     const productsHtml = products.map(product => `<p>${product.description} - u$d${product.price.unit_amount * 100}</p>`).join('<br>')
+const prepareHtml = ( session, products ) => {
+    const productsHtml = products.map(product => `<p>${product.description} - u$d${product.price.unit_amount * 100}</p>`).join('<br>')
 
-//     const htmlBody = `
-//         <h2 style="color:blue;font-size:46px;">TEST Hemos recibido tu pago!</h2><br>
-//         <p>Tu id de compra es: ${session.id}</p><br>
-//         <p>Total: u$d ${session.amount_total / 100}</p><br>
-//     `
+    const htmlBody = `
+        <h2 style="color:blue;font-size:46px;">TEST Hemos recibido tu pago!</h2><br>
+        <p>Tu id de compra es: ${session.id}</p><br>
+        <p>Total: u$d ${session.amount_total / 100}</p><br>
+    `
 
-//     return `${htmlBody} ${productsHtml}`
-// }
+    return `${htmlBody} ${productsHtml}`
+}
 
 const sendConfirmationMail =  async ( session, products ) => {
 
@@ -46,8 +46,8 @@ const sendConfirmationMail =  async ( session, products ) => {
             to: session.customer_details.email,
             // from: "paseolosberros@gmail.com",
             // to: "diegoeliseoiovane@gmail.com",
-            subject: `Booking confirmation from Rent Internet v6`,
-            html: `<p>hola</p>`,
+            subject: `Booking confirmation from Rent Internet v7`,
+            html: html,
         })
     } catch (error) {
         return res.status(500).json({ error: error.message || error.toString() })
@@ -55,12 +55,14 @@ const sendConfirmationMail =  async ( session, products ) => {
 }
 
 const setOrderInWoo = ( session, products ) => {
+
+
     const data = {
         payment_method: "Card",
         payment_method_title: "Card",
         set_paid: true,
         billing: {
-          first_name: "John",
+          first_name: session.metadata.customerName,
           last_name: "Doe",
           address_1: "969 Market",
           address_2: "",
@@ -68,7 +70,7 @@ const setOrderInWoo = ( session, products ) => {
           state: "CA",
           postcode: "94103",
           country: "US",
-          email: "john.doe@example.com",
+          email: session.metadata.customerEmail,
           phone: "(555) 555-5555"
         },
         shipping: {
