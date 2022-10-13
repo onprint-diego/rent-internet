@@ -23,6 +23,6 @@ export const sendMail = async ( session ) => {
             html: `<p>Session id: ${session.id}`,
         })
     } catch (error) {
-        return console.log('Hay Error: ', error)
+        return console.log('Error sendind e-mail: ', error)
     }
 }

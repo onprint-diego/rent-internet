@@ -1,9 +1,8 @@
 import { buffer } from 'micro'
-// import { api } from '../../utils/wocommerce'
-// import nodemailer from 'nodemailer'
 import Stripe from 'stripe'
 
 import { sendMail } from '../../utils/sendMail'
+import { setWooOrder } from '../../utils/setWooOrder'
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY)
 
@@ -16,106 +15,6 @@ export const config = {
     },
 }
 
-// const prepareHtml = ( session, products ) => {
-//     const productsHtml = products.map(product => `<p>${product.description} - u$d${product.price.unit_amount * 100}</p>`).join('<br>')
-
-//     const htmlBody = `
-//         <h2 style="color:blue;font-size:46px;">TEST Hemos recibido tu pago!</h2><br>
-//         <p>Tu id de compra es: ${session.id}</p><br>
-//         <p>Total: u$d ${session.amount_total / 100}</p><br>
-//     `
-
-//     return `${htmlBody} ${productsHtml}`
-// }
-
-// const sendConfirmationMail =  async ( session, products ) => {
-
-//     const transporter = nodemailer.createTransport({
-//         host: "smtp.gmail.com",
-//         port: 465,
-//         secure: true,
-//         auth: {
-//             user: process.env.SMTP_USER,
-//             pass: process.env.SMTP_PASSWORD
-//         }
-//     })
-
-//     const html = prepareHtml(session, products)
-
-//     try {
-//         await transporter.sendMail({
-//             from: "rent@rent-internet.com",
-//             to: session.customer_details.email,
-//             // from: "paseolosberros@gmail.com",
-//             // to: "diegoeliseoiovane@gmail.com",
-//             subject: `Booking confirmation from Rent Internet v7`,
-//             html: html,
-//         })
-//     } catch (error) {
-//         return res.status(500).json({ error: error.message || error.toString() })
-//     }
-// }
-
-// const setOrderInWoo = ( session, products ) => {
-
-//     console.log('Session', session)
-//     console.log('Products', products)
-
-//     //Format the incoming detail from Stripe line items to Woo orders format
-//     const lineItems = products.map(product => {
-//         return {
-//             name: product.description,
-//             quantity: product.quantity,
-//             price: product.price.unit_amount / 100,
-//         }
-//     })
-    
-//     const data = {
-//         payment_method: "Card",
-//         payment_method_title: "Card",
-//         set_paid: true,
-//         billing: {
-//           first_name: session.metadata.customerName,
-//           last_name: "Doe",
-//           address_1: "969 Market",
-//           address_2: "",
-//           city: "San Francisco",
-//           state: "CA",
-//           postcode: "94103",
-//           country: "US",
-//           email: session.metadata.customerEmail,
-//           phone: "(555) 555-5555"
-//         },
-//         shipping: {
-//           first_name: "John",
-//           last_name: "Doe",
-//           address_1: "969 Market",
-//           address_2: "",
-//           city: "San Francisco",
-//           state: "CA",
-//           postcode: "94103",
-//           country: "US"
-//         },
-//         line_items: [
-//           {
-//             name: 'Item',
-//             quantity: 2,
-//             price: 10,
-//           },
-//         ],
-//       };
-      
-//       api.post("orders", data)
-//         .then((response) => {
-//           console.log(response.data);
-//         })
-//         .catch((error) => {
-//           console.log(error.response.data);
-//         });
-      
-// }
-
-// MAIN FUNCTION
 export default async function handler(req, res) {
     if (req.method === 'POST') {
         const reqBuffer = await buffer(req)
@@ -133,9 +32,10 @@ export default async function handler(req, res) {
 
         if (event.type === 'checkout.session.completed') {
             const session = event.data.object
-            const clientSecret = session.id
             sendMail(session)
-            let products
+            setWooOrder(session)
+            // const clientSecret = session.id
+            // let products
             // stripe.checkout.sessions.listLineItems(clientSecret) //Check bottom for structure of response object
             // .then( res => {
             //     products = res.data
@@ -146,7 +46,7 @@ export default async function handler(req, res) {
     }
 }
 
-//Response Object for listLintItems
+//Response Object for listLineItems
 /*
 {
   "object": "list",
