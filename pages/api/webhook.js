@@ -1,6 +1,5 @@
 import { buffer } from 'micro'
 import Stripe from 'stripe'
-
 import { sendMail } from '../../utils/sendMail'
 import { setWooOrder } from '../../utils/setWooOrder'
 
@@ -35,7 +34,6 @@ export default async function handler(req, res) {
             sendMail(session)
             setWooOrder(session)
             // const clientSecret = session.id
-            // let products
             // stripe.checkout.sessions.listLineItems(clientSecret) //Check bottom for structure of response object
             // .then( res => {
             //     products = res.data

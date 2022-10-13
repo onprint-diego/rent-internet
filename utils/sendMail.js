@@ -1,5 +1,23 @@
 import nodemailer from 'nodemailer'
 
+const prepareHtml = ( session, products ) => {
+    // const productsHtml = products.map(product => `<p>${product.description} - u$d${product.price.unit_amount * 100}</p>`).join('<br>')
+
+    const htmlBody = `
+        <h2 style="color:blue;font-size:46px;">TEST Hemos recibido tu pago!</h2><br>
+        <p>Tu id de compra es: ${session.id}</p><br>
+        <p>Total: u$d ${session.amount_total / 100}</p><br>
+        <div>
+            <ul>
+                <li>${session.metadata.customerName}</li>
+            </ul>
+        </div>
+    `
+
+    // return `${htmlBody} ${productsHtml}`
+    return `${htmlBody} ${productsHtml}`
+}
+
 export const sendMail = async ( session ) => {
     const transporter = nodemailer.createTransport({
         host: "smtp.gmail.com",

@@ -8,10 +8,13 @@ export const CheckoutContainer = styled.article`
     position: relative;
     padding-top: 4.5rem;
     display: flex;
+    justify-content: center;
+    align-items: center;
 `
 
 export const CheckoutInner = styled.div`
-
+    width: 100%;
+    display: flex;
 `
 
 export const ConfirmButton = styled.button`
