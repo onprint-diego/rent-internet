@@ -20,13 +20,41 @@ const prepareHtml = ( session, products ) => {
     const htmlBody = `
         <h2 style="color:blue;font-size:46px;">TEST Hemos recibido tu pago!</h2><br>
         <p>Tu id de compra es: ${session.id}</p><br>
-        <p>Total: u$d ${session.amount_total * 100}</p><br>
+        <p>Total: u$d ${session.amount_total / 100}</p><br>
     `
 
     return `${htmlBody} ${productsHtml}`
 }
 
-const sendConfirmationMail =  async ( session, products ) => {
+// const sendConfirmationMail =  async ( session, products ) => {
+
+//     const transporter = nodemailer.createTransport({
+//         host: "smtp.gmail.com",
+//         port: 465,
+//         secure: true,
+//         auth: {
+//             user: process.env.SMTP_USER,
+//             pass: process.env.SMTP_PASSWORD
+//         }
+//     })
+
+//     const html = prepareHtml(session, products)
+
+//     try {
+//         await transporter.sendMail({
+//             from: "rent@rent-internet.com",
+//             to: session.customer_details.email,
+//             // from: "paseolosberros@gmail.com",
+//             // to: "diegoeliseoiovane@gmail.com",
+//             subject: `Booking confirmation from Rent Internet v7`,
+//             html: html,
+//         })
+//     } catch (error) {
+//         return res.status(500).json({ error: error.message || error.toString() })
+//     }
+// }
+
+const sendConfirmationMailSHORT =  async ( session ) => {
 
     const transporter = nodemailer.createTransport({
         host: "smtp.gmail.com",
@@ -38,8 +66,6 @@ const sendConfirmationMail =  async ( session, products ) => {
         }
     })
 
-    const html = prepareHtml(session, products)
-
     try {
         await transporter.sendMail({
             from: "rent@rent-internet.com",
@@ -47,7 +73,7 @@ const sendConfirmationMail =  async ( session, products ) => {
             // from: "paseolosberros@gmail.com",
             // to: "diegoeliseoiovane@gmail.com",
             subject: `Booking confirmation from Rent Internet v7`,
-            html: html,
+            html: `<p>Fast answer only once ${session.id}</p>`,
         })
     } catch (error) {
         return res.status(500).json({ error: error.message || error.toString() })
@@ -59,9 +85,12 @@ const setOrderInWoo = ( session, products ) => {
     console.log('Session', session)
     console.log('Products', products)
 
+    //Format the incoming detail from Stripe line items to Woo orders format
     const lineItems = products.map(product => {
         return {
-
+            name: product.description,
+            quantity: product.quantity,
+            price: product.price.unit_amount / 100,
         }
     })
     
@@ -129,13 +158,14 @@ export default async function handler(req, res) {
         if (event.type === 'checkout.session.completed') {
             const session = event.data.object
             const clientSecret = session.id
+            sendConfirmationMailSHORT(session)
             let products
-            stripe.checkout.sessions.listLineItems(clientSecret) //Check bottom for structure of response object
-            .then( res => {
-                products = res.data
-                sendConfirmationMail(session, products)
-                setOrderInWoo(session, products)
-            })
+            // stripe.checkout.sessions.listLineItems(clientSecret) //Check bottom for structure of response object
+            // .then( res => {
+            //     products = res.data
+            //     sendConfirmationMail(session, products)
+            //     setOrderInWoo(session, products)
+            // })
         }
     }
 }
