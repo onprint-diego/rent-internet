@@ -59,6 +59,11 @@ const setOrderInWoo = ( session, products ) => {
     console.log('Session', session)
     console.log('Products', products)
 
+    const lineItems = products.map(product => {
+        return {
+
+        }
+    })
     
     const data = {
         payment_method: "Card",
@@ -88,22 +93,11 @@ const setOrderInWoo = ( session, products ) => {
         },
         line_items: [
           {
-            product_id: 93,
-            quantity: 2
+            name: 'Item',
+            quantity: 2,
+            price: 10,
           },
-          {
-            product_id: 22,
-            variation_id: 23,
-            quantity: 1
-          }
         ],
-        shipping_lines: [
-          {
-            method_id: "flat_rate",
-            method_title: "Flat Rate",
-            total: "10.00"
-          }
-        ]
       };
       
       api.post("orders", data)
@@ -136,7 +130,7 @@ export default async function handler(req, res) {
             const session = event.data.object
             const clientSecret = session.id
             let products
-            stripe.checkout.sessions.listLineItems(clientSecret)
+            stripe.checkout.sessions.listLineItems(clientSecret) //Check bottom for structure of response object
             .then( res => {
                 products = res.data
                 sendConfirmationMail(session, products)
@@ -145,3 +139,48 @@ export default async function handler(req, res) {
         }
     }
 }
+
+//Response Object for listLintItems
+/*
+{
+  "object": "list",
+  "url": "/v1/checkout/sessions/cs_test_a1ccs8sV5Z5tVjD6kSnnkjVP64WFgdzda9rxlDvvNXVfX6a45euhrAmOXj/line_items",
+  "has_more": false,
+  "data": [
+    {
+      "id": "li_1LsFRo2wqvxfBLhLnGXqlOim",
+      "object": "item",
+      "amount_discount": 0,
+      "amount_subtotal": 0,
+      "amount_tax": 0,
+      "amount_total": 0,
+      "currency": "chf",
+      "description": "test product",
+      "price": {
+        "id": "price_1KdKDX2wqvxfBLhLd92Pz31t",
+        "object": "price",
+        "active": true,
+        "billing_scheme": "per_unit",
+        "created": 1647288611,
+        "currency": "chf",
+        "custom_unit_amount": null,
+        "livemode": false,
+        "lookup_key": null,
+        "metadata": {},
+        "nickname": null,
+        "product": "prod_LJy9hMFV56fFUV",
+        "recurring": null,
+        "tax_behavior": "unspecified",
+        "tiers_mode": null,
+        "transform_quantity": null,
+        "type": "one_time",
+        "unit_amount": 1200,
+        "unit_amount_decimal": "1200"
+      },
+      "quantity": 1
+    },
+    {...},
+    {...}
+  ]
+}
+*/

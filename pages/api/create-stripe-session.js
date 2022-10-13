@@ -4,7 +4,6 @@ const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY)
 async function CreateStripeSession(req, res) {
     const { cart, customer } = req.body;
 
-    // const cart = item
     const response = await api.get("products")
     const modemName = response.data[4].name
     const modemPrice = parseInt(response.data[4].price)
