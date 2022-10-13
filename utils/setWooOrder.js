@@ -1,4 +1,4 @@
-import { api } from './wocommerce'
+import { api } from './woocommerce'
 
 export const setWooOrder = (session) => {
 

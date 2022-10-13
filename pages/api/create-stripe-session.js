@@ -1,4 +1,4 @@
-import { api } from "../../utils/wocommerce";
+import { api } from "../../utils/woocommerce";
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY)
 
 async function CreateStripeSession(req, res) {
