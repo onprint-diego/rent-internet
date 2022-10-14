@@ -22,6 +22,8 @@
   --styled-blue: #3E83FE;
   --styled-middle-blue: #42D7FF;
   --styled-light-blue: #43F0FF;
+  --soft-lines-color: #DEE0E1;
+  --soft-color: #7b7b7b;
 
   --titles-font: 'Poppins', -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
   Ubuntu, Cantarell, Fira Sans, Droid Sans, sans-serif;
@@ -69,6 +71,10 @@ button {
   border: none;
   background: none;
   cursor: pointer;
+}
+
+input {
+  border: none;
 }
 
 /* REVISAR */

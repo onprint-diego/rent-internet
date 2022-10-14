@@ -16,6 +16,7 @@ import {
     LeftContainer,
     ReviewContainer,
     ReviewItem,
+    Sticky,
 } from './Elements'
 
 //TODO inhabilitar el boton de Rent si no selecciono fechas
@@ -104,15 +105,17 @@ const Detail = ({ data }) => {
                 Object.entries(mainProduct).length !== 0 &&
                 <>
                     <LeftContainer>
-                        <ImageContainer>
-                            <ProductImage src={mainProduct.images[0].src} alt={mainProduct.images[0].alt} />
-                        </ImageContainer>
-                        <ReviewContainer>
-                            <ReviewItem>Modem Portátil: u$d {cart.mainProductPrice} x{cart.qty}</ReviewItem>
-                            <ReviewItem>Shipping Fee: u$d {cart.shippingFee}</ReviewItem>
-                            <ReviewItem>Subtotal: u$d {cart.subtotal}</ReviewItem>
-                            <ReviewItem>Total: u$d {cart.total}</ReviewItem>
-                        </ReviewContainer>
+                        <Sticky>
+                            <ImageContainer>
+                                <ProductImage src={mainProduct.images[0].src} alt={mainProduct.images[0].alt} />
+                            </ImageContainer>
+                            <ReviewContainer>
+                                <ReviewItem>Modem Portátil: u$d {cart.mainProductPrice} x{cart.qty}</ReviewItem>
+                                <ReviewItem>Shipping Fee: u$d {cart.shippingFee}</ReviewItem>
+                                <ReviewItem>Subtotal: u$d {cart.subtotal}</ReviewItem>
+                                <ReviewItem>Total: u$d {cart.total}</ReviewItem>
+                            </ReviewContainer>
+                        </Sticky>
                     </LeftContainer>
                     <DescriptionContainer>
                         <Title>{mainProduct.attributes[1].options[0]}</Title>

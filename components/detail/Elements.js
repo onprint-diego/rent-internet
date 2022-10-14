@@ -15,6 +15,11 @@ export const LeftContainer = styled.div`
     margin: 0 7rem;
 `
 
+export const Sticky = styled.div`
+    position: sticky;
+    top: 5rem;
+`
+
 export const ImageContainer = styled.div`
     position: relative;
     width: 100%;
@@ -41,7 +46,7 @@ export const DescriptionContainer = styled.div`
 `
 
 export const Title = styled.h1`
-    border-bottom: 1px solid #DEE0E1;
+    border-bottom: 1px solid var(--soft-lines-color);
     font-size: 2.5rem;
     padding-bottom: .7rem;
     margin-bottom: .5rem;

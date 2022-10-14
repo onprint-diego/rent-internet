@@ -6,18 +6,24 @@ import {
     FormContainer,
     Form,
     FormSection,
+    BillingSection,
     SectionTitle,
     Input,
     InputContainer,
+    CheckBox,
+    Label,
+    CheckBoxContainer,
     MethodSelectContainer,
+    Method,
+    MethodBox,
 } from './Elements'
 
 const CheckoutForm = ({ cart, setCart }) => {
 
-    //If true, card, else bank transfer
-    const [paymentMethod, setPaymentMethod] = useState(true)
+    const [paymentMethod, setPaymentMethod] = useState(true) //true = card, false = bank
     const [loader, setLoader] = useState(false)
     const [disabledButton, setDisabledButton] = useState(false)
+    const [billingNeeded, setBillingNeeded] = useState(false)
 
     const placeholderName = 'Nombre' //si es ingles 'Name', etc
     const placeholderSurname = 'Apellido'
@@ -30,26 +36,16 @@ const CheckoutForm = ({ cart, setCart }) => {
     const generalError = 'Obligatorio'
     const emailError = 'Debe ser un correo válido'
 
-    const handleInput = (e) => {
-        setCart({
-            ...cart,
-            customerDetails: {
-                ...cart.customerDetails,
-                name: e.target.value,
-            }
-        })
-    }
-
     const formik = useFormik({
         initialValues: {
             name: '',
             email: '',
         },
         validationSchema: Yup.object({
-            // name: Yup.string().required(generalError),
-            // email: Yup.string().email(emailError).required(generalError)
+            name: Yup.string().required(generalError),
+            email: Yup.string().email(emailError).required(generalError)
         }),
-        onSubmit: (values, { resetForm }) => {
+        onSubmit: (values) => {
             const customer = {
                 name: values.name,
                 surname: values.surname,
@@ -63,15 +59,14 @@ const CheckoutForm = ({ cart, setCart }) => {
                 billingCp: values.billingCp,
                 billingCity: values.billingCity,
                 billlingCountry: values.billlingCountry,
+                // language: en or es // pasar  como variable el idioma para que en sendMail pueda armar el idiom 
             }
 
             console.log(customer)
 
             setLoader(true)
             setDisabledButton(true)
-            // sendMail(data, resetForm)
             //paymentMethod ? card method : bank transfer
-
 
             createCheckOutSession(cart, customer)
         }
@@ -123,7 +118,7 @@ const CheckoutForm = ({ cart, setCart }) => {
                         />
                     </InputContainer>
                 </FormSection>
-                <FormSection>
+                <FormSection billingNeeded={billingNeeded}>
                     <SectionTitle>Envío</SectionTitle>
                     <InputContainer>
                         <Input
@@ -139,7 +134,8 @@ const CheckoutForm = ({ cart, setCart }) => {
                         <Input
                             id="deliveryCp"
                             name="deliveryCp"
-                            type="number"
+                            type="text"
+                            pattern="[0-9]*"
                             value={formik.values.deliveryCp}
                             onChange={formik.handleChange}
                             placeholder={placeholderCp}
@@ -166,7 +162,17 @@ const CheckoutForm = ({ cart, setCart }) => {
                         />
                     </InputContainer>
                 </FormSection>
-                <FormSection>
+                <CheckBoxContainer>
+                    <CheckBox
+                        type="checkbox"
+                        id="billing"
+                        name="billing"
+                        value="billing"
+                        onChange={() => setBillingNeeded(!billingNeeded)}
+                    />
+                    <Label htmlFor="billing">Billing address different</Label>
+                </CheckBoxContainer>
+                <BillingSection billingNeeded={billingNeeded}>
                     <SectionTitle>Facturación</SectionTitle>
                     <InputContainer>
                         <Input
@@ -182,7 +188,8 @@ const CheckoutForm = ({ cart, setCart }) => {
                         <Input
                             id="billingCp"
                             name="billingCp"
-                            type="number"
+                            type="text"
+                            pattern="[0-9]*"
                             value={formik.values.billingCp}
                             onChange={formik.handleChange}
                             placeholder={placeholderCp}
@@ -208,21 +215,23 @@ const CheckoutForm = ({ cart, setCart }) => {
                             placeholder={placeholderCountry}
                         />
                     </InputContainer>
-                </FormSection>
+                </BillingSection>
+                <MethodSelectContainer>
+                    <MethodBox paymentMethod={paymentMethod} />
+                    <Method onClick={() => setPaymentMethod(true)}>Card</Method>   
+                    <Method onClick={() => setPaymentMethod(false)}>Bank transfer</Method>
+                </MethodSelectContainer>
                 <button
                     type="submit"
                     disabled={disabledButton}
                 >
                     {
                         loader ?
-                        'loading...' :
-                        'Rentar'
+                            'loading...' :
+                            'Rentar'
                     }
                 </button>
             </Form>
-            {/* <MethodSelectContainer>
-                <input type="checkbox" onChange={() => setPaymentMethod(!paymentMethod)} />
-            </MethodSelectContainer> */}
         </FormContainer>
     )
 }
