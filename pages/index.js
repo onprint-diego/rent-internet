@@ -15,15 +15,17 @@ export default function Home(props) {
   
   const [ heroContent, setHeroContent ] = useState({})
   const [ detailsContent, setDetailsContent ] = useState({})
-  const [ loading, setLoading ] = useState(true)
+  const [ featuresContent, setFeaturesContent ] = useState([])
 
   useEffect(() => {
+
+    console.log(props.page.features)
 
     setDetailsContent({
       title: props.page.description.descriptiontitle,
       text: props.page.description.descriptiontext,
       backgroundimage: props.page.description.descriptionbackgroundimg.sourceUrl,
-    }, [])
+    })
 
     setHeroContent({
       title: props.page.homepagehero.title, 
@@ -51,8 +53,42 @@ export default function Home(props) {
           description: sliceString(props.page.icons.travelers.description),
           src: props.page.icons.travelers.sourceUrl,
         },
-      ]
+      ],
     })
+
+    setFeaturesContent([
+        {
+          title: props.page.features.uso.title,
+          description: sliceString(props.page.features.uso.description),
+          src: props.page.features.uso.sourceUrl,
+        },
+        {
+          title: props.page.features.speed.title,
+          description: sliceString(props.page.features.speed.description),
+          src: props.page.features.speed.sourceUrl,
+        },
+        {
+          title: props.page.features.segura.title,
+          description: sliceString(props.page.features.segura.description),
+          src: props.page.features.segura.sourceUrl,
+        },
+        {
+          title: props.page.features.price.title,
+          description: sliceString(props.page.features.price.description),
+          src: props.page.features.price.sourceUrl,
+        },
+        {
+          title: props.page.features.compartida.title,
+          description: sliceString(props.page.features.compartida.description),
+          src: props.page.features.compartida.sourceUrl,
+        },
+        {
+          title: props.page.features.bateria.title,
+          description: sliceString(props.page.features.bateria.description),
+          src: props.page.features.bateria.sourceUrl,
+        },
+      ]
+    )
   }, [])
 
   return (
@@ -64,7 +100,7 @@ export default function Home(props) {
       </Head>
       <Hero content={heroContent}/>
       <Details content={detailsContent} />
-      <Features />
+      <Features content={featuresContent} />
     </>
   )
 }
@@ -113,7 +149,39 @@ export async function getStaticProps() {
               descriptionbackgroundimg {
                 sourceUrl
               }
-            }  
+            }
+            features {
+              bateria {
+                description
+                title
+                sourceUrl
+              }
+              compartida {
+                description
+                title
+                sourceUrl
+              }
+              price {
+                description
+                title
+                sourceUrl
+              }
+              segura {
+                description
+                title
+                sourceUrl
+              }
+              speed {
+                description
+                title
+                sourceUrl
+              }
+              uso {
+                description
+                title
+                sourceUrl
+              }
+            }
           }
         }
       `,

@@ -1,5 +1,3 @@
-import { useState } from 'react'
-import { loadStripe } from '@stripe/stripe-js'
 import { GetCartContext } from '../../context/CartContext'
 import CheckoutForm from '../forms/CheckoutForm/CheckoutForm'
 import {
@@ -14,7 +12,6 @@ import CartDetails from './CartDetails/CartDetails'
 const Checkout = () => {
 
     const { cart, setCart } = GetCartContext()
-    const [loading, setLoading] = useState(false)
 
     return (
         <CheckoutContainer>

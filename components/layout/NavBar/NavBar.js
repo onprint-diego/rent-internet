@@ -18,6 +18,7 @@ const NavBar = () => {
     // DB
     const links = [
         { to: '/product-detail', title: 'Rentar', type: 'text'},
+        { to: '/', title: 'Recargas', type: 'cta'},
         { to: '/', title: 'Contacto', type: 'cta'},
         { to: '/', title: 'Idioma', type: 'p'},
     ]
