@@ -63,10 +63,10 @@ const CheckoutForm = ({ cart, setCart }) => {
             deliveryCp: Yup.string().required(generalError).min(2, minGeneralError).max(20, maxGeneralError),
             deliveryCity: Yup.string().required(generalError).min(2, minGeneralError).max(30, maxGeneralError),
             deliveryCountry: Yup.string().required(generalError).min(2, minGeneralError).max(30, maxGeneralError),
-            billingAddress: Yup.string().required(generalError).min(2, minGeneralError).max(50, maxGeneralError),
-            billingCp: Yup.string().required(generalError).min(2, minGeneralError).max(20, maxGeneralError),
-            billingCity: Yup.string().required(generalError).min(2, minGeneralError).max(30, maxGeneralError),
-            billingCountry: Yup.string().required(generalError).min(2, minGeneralError).max(30, maxGeneralError),
+            billingAddress: Yup.string().min(2, minGeneralError).max(50, maxGeneralError),
+            billingCp: Yup.string().min(2, minGeneralError).max(20, maxGeneralError),
+            billingCity: Yup.string().min(2, minGeneralError).max(30, maxGeneralError),
+            billingCountry: Yup.string().min(2, minGeneralError).max(30, maxGeneralError),
         }),
         onSubmit: (values) => {
             const customer = {
