@@ -1,6 +1,6 @@
 import React from 'react'
-import Link from 'next/link'
 import styled from 'styled-components'
+import Loader from '../Loader/Loader'
 
 //Styles
 const Button = styled.button`
@@ -13,6 +13,7 @@ const Button = styled.button`
   font-size: 1rem;
   font-weight: 500;
   transition: opacity .2s ease-in-out;
+  opacity: ${({ dis }) => dis ? '.7' : '1'};
 
   &:hover {
     opacity: .7;
@@ -20,14 +21,16 @@ const Button = styled.button`
 `
 
 //Component
-export const ButtonPrimaryLink = ({ children, to }) => {
-  return (
-    <Link href={to}>
-      <Button>{children}</Button>
-    </Link>
-  )
-}
+export const CheckoutButton = ({ type, disabled, text }) => {
 
-export const ButtonPrimaryAction = ({ children, event }) => {
-  <Button onClick={event}>{children}</Button>
+  return (
+    <Button
+      type={type}
+      disabled={disabled}
+      dis={disabled}>
+        {
+          disabled ? <Loader /> : text
+        }
+    </Button>
+  )
 }

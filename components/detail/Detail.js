@@ -21,22 +21,14 @@ import {
 
 //TODO inhabilitar el boton de Rent si no selecciono fechas
 //TODO el check de los checkbox customizarlo y que dependa del estado, porque tiene un bug
-// TODO. Eliminar pagina checkout y pasar todo al resumen de compra en esta pagina.
-// Abajo del resumen, dos botones, pay with card y bank transfer. pay with card lleva
-// a Stripe, bank transfer a un formulario.
-// Falta: cómo recolectar data del usuario en caso Stripe Checkout
-// Hacer WebHooks para enviar mails y actualizar la compra en db 
 
 const Detail = ({ data }) => {
 
     const { cart, setCart } = GetCartContext()
     const [mainProduct, setMainProduct] = useState({})
-    //Set qty according to number of days - 1=14 days, 2=14days...
-    const [error, setError] = useState(false)
     const [adapter, setAdapter] = useState({ product: {}, is: false })
     const [powerBank, setPowerBank] = useState({ product: {}, is: false })
-
-    console.log(cart)
+    const [error, setError] = useState(false)
 
     useEffect(() => {
 

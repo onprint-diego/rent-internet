@@ -6,28 +6,29 @@ import styled from 'styled-components'
 const Button = styled.button`
   width: var(--button-width);
   height: var(--button-height);
-  background-color: var(--background-blue);
+  background-image: linear-gradient(
+    80.81deg, var(--styled-blue) 0%, 
+    var(--styled-light-blue) 50%, 
+    var(--styled-blue) 100%);
+  background-size: 200% auto;
   border-radius: 5px;
   box-shadow: var(--button-shadow);
   color: white;
   font-size: 1rem;
-  font-weight: 500;
-  transition: opacity .2s ease-in-out;
+  font-weight: bold;
+  transition: all .2s ease-in-out;
 
   &:hover {
-    opacity: .7;
+    background-position: right center;
   }
 `
 
+
 //Component
-export const ButtonPrimaryLink = ({ children, to }) => {
+export const ButtonPrimary = ({children, to}) => {
   return (
     <Link href={to}>
       <Button>{children}</Button>
     </Link>
   )
-}
-
-export const ButtonPrimaryAction = ({ children, event }) => {
-  <Button onClick={event}>{children}</Button>
 }

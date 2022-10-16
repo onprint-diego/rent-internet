@@ -16,12 +16,14 @@ export const FormSection = styled.div`
 `
 
 export const SectionTitle = styled.h4`
+    font-size: 1.4rem;
     padding-bottom: .8rem;
     border-bottom: 1px solid var(--soft-lines-color);
 `
 
 export const InputContainer = styled.div`
     margin: 1rem 0;
+    position: relative;
 `
 
 export const Input = styled.input`
@@ -32,6 +34,7 @@ export const Input = styled.input`
 
     &&::placeholder {
         color: var(--soft-color);
+        font-family: var(--text-font);
     }
 `
 
@@ -50,27 +53,33 @@ export const Label = styled.label`
 
 export const BillingSection = styled.div`
     overflow: hidden;
-    margin-bottom: .8rem;
+    margin-bottom: .9rem;
     max-height: ${({billingNeeded}) => billingNeeded ? '100rem' : 0};
     transition: all .5s ease-in-out;
 `
 
 export const Error = styled.p`
-    color: red;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 1rem;
+    color: var(--alert-color);
+    font-size: .7rem;
 `
 
 export const MethodSelectContainer = styled.div`
     position: relative;
-    width: 20rem;
+    width: 100%;
     margin: 0 auto;
     display: flex;
     justify-content: center;
     align-items: center;
     border: 1px solid var(--soft-lines-color);
+    border-radius: 5px;
 `
 
 export const Method = styled.button`
-    height: 5rem;
+    height: 3rem;
     width: 50%;
     text-align: center;
     z-index: 1;
@@ -83,6 +92,13 @@ export const MethodBox = styled.button`
     height: 100%;
     width: 50%;
     transform: ${({paymentMethod}) => paymentMethod ? 'translateX(0)' : 'translateX(100%)'};
-    background-color: var(--soft-color);
+    border-radius: ${({paymentMethod}) => paymentMethod ? '5px 0 0 5px' : '0 5px 5px 0'};
+    background-color: var(--soft-lines-color);
     transition: transform .2s ease-in-out;
+`
+
+export const CheckoutBtnContainer = styled.div`
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 1.5rem;
 `

@@ -2,7 +2,6 @@ import { useState } from 'react'
 import { loadStripe } from '@stripe/stripe-js'
 import { GetCartContext } from '../../context/CartContext'
 import CheckoutForm from '../forms/CheckoutForm/CheckoutForm'
-import { BuyButton } from '../shared/BuyButton/BuyButton'
 import {
     CheckoutContainer,
     CheckoutInner,
@@ -15,11 +14,11 @@ import CartDetails from './CartDetails/CartDetails'
 const Checkout = () => {
 
     const { cart, setCart } = GetCartContext()
-    const [ loading, setLoading ] = useState(false)
-    
+    const [loading, setLoading] = useState(false)
+
     return (
         <CheckoutContainer>
-            {
+            {/* {
                 Object.values(cart).length === 0 ?
                 <EmptyCart>
                     <p>Cart is empty, nothing to checkout</p>
@@ -27,10 +26,10 @@ const Checkout = () => {
                 <CheckoutInner>
                     <CartDetails cart={cart} />
                     <CheckoutForm cart={cart} setCart={setCart} /> 
-                    {/* <BuyButton event={handleEvent}>Pay with card</BuyButton> */}
-                    {/* <button onClick={handleBankTransfer}>Bank Transfer</button> */}
                 </CheckoutInner>
-            }
+            } */}
+
+            <CheckoutForm cart={cart} setCart={setCart} />
         </CheckoutContainer>
     )
 }

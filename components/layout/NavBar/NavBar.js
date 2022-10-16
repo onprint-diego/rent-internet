@@ -2,6 +2,7 @@ import Link from 'next/link'
 import Lg from '/public/rent-internet-logo.png'
 import {
     Container,
+    Inner,
     LogoContainer,
     Logo,
     Nav,
@@ -16,34 +17,38 @@ const NavBar = () => {
 
     // DB
     const links = [
-        { to: '/product-detail', title: 'Rent', type: 'text'},
-        { to: '/', title: 'Login', type: 'cta'},
-        { to: '/', title: 'Signup', type: 'p'},
+        { to: '/product-detail', title: 'Rentar', type: 'text'},
+        { to: '/', title: 'Contacto', type: 'cta'},
+        { to: '/', title: 'Idioma', type: 'p'},
     ]
     //
 
     return (
         <Container>
-            <LogoContainer>
-                <Logo src={Lg} alt='logo'/>
-            </LogoContainer>
-            <Nav>
-                <Links>
-                    {
-                        links?.map(link => {
-                            return(
-                                <LinkContainer key={link.title}>
-                                    <Link 
-                                    href={link.to}
-                                    >
-                                        {link.title}
-                                    </Link>
-                                </LinkContainer>
-                            )
-                        })
-                    }
-                </Links>
-            </Nav>
+            <Inner>
+                <Link href='/'>
+                    <LogoContainer>
+                        <Logo src={Lg} alt='logo'/>
+                    </LogoContainer>
+                </Link>
+                <Nav>
+                    <Links>
+                        {
+                            links?.map(link => {
+                                return(
+                                    <LinkContainer key={link.title}>
+                                        <Link 
+                                        href={link.to}
+                                        >
+                                            {link.title}
+                                        </Link>
+                                    </LinkContainer>
+                                )
+                            })
+                        }
+                    </Links>
+                </Nav>
+            </Inner>
         </Container>
     )
 }

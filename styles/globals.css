@@ -19,6 +19,8 @@
   --primary-color: #0C2156;
   --secondary-color: #ffffff;
   --text-primary-color: #0C2156;
+  --background-blue: #3483fa;
+  --alert-color: #c45c5c;
   --styled-blue: #3E83FE;
   --styled-middle-blue: #42D7FF;
   --styled-light-blue: #43F0FF;
@@ -35,6 +37,7 @@ html,
 body {
   padding: 0;
   margin: 0;
+  scroll-behavior: smooth;
 }
 
 

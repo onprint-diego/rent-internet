@@ -1,4 +1,4 @@
-import { ButtonPrimary } from '../../shared/ButtonPrimary/ButtonPrimary'
+import { ButtonPrimaryLink } from '../../shared/ButtonPrimary/ButtonPrimary'
 import { ButtonSecondaryPage } from '../../shared/ButtonSecondary/ButtonSecondary'
 import {
     BackgroundContainer,
@@ -29,9 +29,9 @@ const Hero = ({ content }) => {
                     <SubCopy>{content?.subtitle}</SubCopy>
                     <ButtonsContainer>
                         <ButtonsInner>
-                            <ButtonPrimary to='/product-detail'>
+                            <ButtonPrimaryLink to='/product-detail'>
                                 {content?.rentbutton}
-                            </ButtonPrimary>
+                            </ButtonPrimaryLink>
                             <ButtonSecondaryPage>
                                 {content?.detailsbutton}
                             </ButtonSecondaryPage>
