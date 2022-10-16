@@ -27,7 +27,7 @@ const Process = ({ content }) => {
                             {
                                 content.items.map(item =>{
                                     return(
-                                        <Card>
+                                        <Card key={item.title}>
                                             <Title>{item.title}</Title>
                                             <Text>{item.text}</Text>
                                         </Card>
