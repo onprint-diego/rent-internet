@@ -35,8 +35,6 @@ export const sendMail = async ( session ) => {
         await transporter.sendMail({
             from: "rent@rent-internet.com",
             to: session.customer_details.email,
-            // from: "paseolosberros@gmail.com",
-            // to: "diegoeliseoiovane@gmail.com",
             subject: `Booking confirmation from Rent Internet v7`,
             html: html,
         })

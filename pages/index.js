@@ -6,6 +6,7 @@ import Head from 'next/head'
 import Details from '../components/home/Details/Details'
 import Features from '../components/home/Features/Features'
 import Hero from '../components/home/Hero/Hero'
+import Process from '../components/home/Process/Process'
 
 //TODO> loading, cleanup en useEffect
 //TODO> pasar toda la logica representacional a un componente Home.js
@@ -16,10 +17,9 @@ export default function Home(props) {
   const [ heroContent, setHeroContent ] = useState({})
   const [ detailsContent, setDetailsContent ] = useState({})
   const [ featuresContent, setFeaturesContent ] = useState([])
+  const [ processContent, setProcessContent ] = useState({})
 
   useEffect(() => {
-
-    console.log(props.page.features)
 
     setDetailsContent({
       title: props.page.description.descriptiontitle,
@@ -89,6 +89,25 @@ export default function Home(props) {
         },
       ]
     )
+
+    setProcessContent({
+      backgroundImg: props.page.process.processbackground.sourceUrl,
+      sectionTitle: props.page.process.sectiontitle,
+      items: [
+        {
+          title: props.page.process.reservatitle,
+          text: props.page.process.reserva,
+        },
+        {
+          title: props.page.process.retirotitle,
+          text: props.page.process.retiro,
+        },
+        {
+          title: props.page.process.devoluciontitle,
+          text: props.page.process.devolucion,
+        },
+      ]
+    })
   }, [])
 
   return (
@@ -101,6 +120,7 @@ export default function Home(props) {
       <Hero content={heroContent}/>
       <Details content={detailsContent} />
       <Features content={featuresContent} />
+      <Process content={processContent} />
     </>
   )
 }
@@ -179,6 +199,19 @@ export async function getStaticProps() {
               uso {
                 description
                 title
+                sourceUrl
+              }
+            }
+            process {
+              devolucion
+              devoluciontitle
+              reserva
+              reservatitle
+              retiro
+              retirotitle
+              sectiontitle
+              processbackground {
+                altText
                 sourceUrl
               }
             }

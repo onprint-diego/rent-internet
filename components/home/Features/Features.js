@@ -10,8 +10,6 @@ import {
 
 const Features = ({ content }) => {
 
-  // console.log(content)
-
   return (
     <Container>
       <Grid>
