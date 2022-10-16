@@ -95,7 +95,7 @@ const CheckoutForm = ({ cart, setCart }) => {
 
             //paymentMethod ? card method : bank transfer
 
-            // createCheckOutSession(cart, customer)
+            createCheckOutSession(cart, customer)
         }
     })
 
