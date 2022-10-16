@@ -22,7 +22,6 @@ import InputField from './Input'
 const CheckoutForm = ({ cart, setCart }) => {
 
     const [paymentMethod, setPaymentMethod] = useState(true) //true = card, false = bank
-    const [loader, setLoader] = useState(false)
     const [disabledButton, setDisabledButton] = useState(false)
     const [billingNeeded, setBillingNeeded] = useState(false)
 
@@ -86,8 +85,7 @@ const CheckoutForm = ({ cart, setCart }) => {
             }
 
             console.log(customer)
-
-            setLoader(true)
+            
             setDisabledButton(true)
 
 

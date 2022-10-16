@@ -1,11 +1,5 @@
 import styled, { keyframes } from 'styled-components'
 
-// @keyframes rotate {
-//   100% {
-//     transform: rotate(360deg);
-//   }
-// }
-
 const stretch = keyframes`
   0% {
     stroke-dasharray: 1, 200;
