@@ -11,16 +11,14 @@ import {
     PageLink,
 } from './Elements'
 
-//TODO. If not '/' then Logo -> Link '/' else Logo -> scrollTo top
-
 const NavBar = () => {
 
     // DB
     const links = [
         { to: '/product-detail', title: 'Rentar', type: 'text'},
         { to: '/', title: 'Recargas', type: 'cta'},
+        { to: '/', title: 'FAQ', type: 'p'},
         { to: '/', title: 'Contacto', type: 'cta'},
-        { to: '/', title: 'Idioma', type: 'p'},
     ]
     //
 

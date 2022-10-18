@@ -9,6 +9,7 @@ import Hero from '../components/home/Hero/Hero'
 import Process from '../components/home/Process/Process'
 import Recharge from '../components/home/Recharge/Recharge'
 import Faq from '../components/home/Faq/Faq'
+import HeroFeatures from '../components/home/Hero/HeroFeatures'
 
 //TODO> loading, cleanup en useEffect
 //TODO> pasar toda la logica representacional a un componente Home.js
@@ -130,6 +131,7 @@ export default function Home(props) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Hero content={heroContent}/>
+      <HeroFeatures content={heroContent} />
       <Details content={detailsContent} />
       <Features content={featuresContent} />
       <Process content={processContent} />

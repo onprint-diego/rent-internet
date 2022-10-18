@@ -18,13 +18,14 @@ export const Inner = styled.div`
 export const ImageContainer = styled.div`
     position: absolute;
     right: 0;
-    top: -3rem;
+    top: -4rem;
     width: 35rem;
-    transform: translateY(-50%);
+    height: 28rem;
 `
 
 export const SideImage = styled(Image)`
     width: 100%;
+    height: 100%;
     margin: 0 auto;
     object-fit: cover;
 `

@@ -1,5 +1,6 @@
 import NavBar from "./NavBar/NavBar"
 import styled from 'styled-components'
+import Footer from "./Footer/Footer"
 
 //Styles
 const LayoutContainer = styled.div`
@@ -12,6 +13,7 @@ const Layout = ({ children }) => {
     <LayoutContainer>
         <NavBar />
         <main>{children}</main>
+        <Footer />
     </LayoutContainer>
   )
 }

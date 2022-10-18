@@ -1,13 +1,17 @@
 import { useState } from 'react'
+import chevIco from '/public/icons/chevron.svg'
 import {
     Container,
     Inner,
+    Title,
     Accordion,
     Item,
     Qcontainer,
     Acontainer,
     Q,
     A,
+    ChevContainer,
+    Chevron,
 } from './Elements'
 
 const Faq = () => {
@@ -51,6 +55,7 @@ const Faq = () => {
     return (
         <Container>
             <Inner>
+                <Title>Preguntas frecuentes</Title>
                 <Accordion>
                     {
                         data.map(item => {
@@ -58,6 +63,9 @@ const Faq = () => {
                                 <Item key={item.id}>
                                     <Qcontainer onClick={() => handleToggle(item.id)}>
                                         <Q>{item.q}</Q>
+                                        <ChevContainer open={isOpenId === item.id}>
+                                            <Chevron src={chevIco} fill />
+                                        </ChevContainer>
                                     </Qcontainer>
                                     <Acontainer open={isOpenId === item.id}>
                                         <A dangerouslySetInnerHTML={{ __html: item.a }} />

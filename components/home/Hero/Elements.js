@@ -2,59 +2,71 @@ import styled from 'styled-components'
 import Image from 'next/future/image'
 
 export const Container = styled.section`
-    margin: 0 auto;
-    width: 95%;
-    max-width: var(--section-max-width);
-    min-height: var(--section-min-height);
     position: relative;
-    padding-top: 6.5rem;
-`
-
-export const BackgroundContainer = styled.div`
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    height: 32rem;
-    aspect-ratio: 16/9;
-    transform: translate(-50%, -50%);
-    opacity: .2;
-    z-index: -1;
     width: 100%;
+    /* height: 37rem; */
 `
 
-export const BackgroundImg = styled(Image)`
+export const BackgroundImage = styled(Image)`
+    object-fit: cover;
+    z-index: 0;
+`
+export const Inner = styled.div`
+    position: relative;
+    margin: 0 auto;
+    width: 85%;
+    max-width: var(--section-max-width);
+    height: 37rem;
+    /* display: flex; */
+    /* align-items: center; */
+    z-index: 2;
+`
+
+export const ObjectContainer = styled.div`
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    height: 32rem;
+    width: 32rem;
+    aspect-ratio: 16/9;
+`
+
+export const ObjectImg = styled(Image)`
     margin: 0 auto;
     object-fit: contain;
 `
 
 export const Copy = styled.h1`
-    text-align: center;
     font-size: 4rem;
+    text-transform: uppercase;
+    color: #ffffff;
 `
 
 export const SubCopy = styled.p`
-    text-align: center;
     font-size: 1.7rem;
     margin-top: .8rem;
+    color: #ffffff;
 `
 
 export const ButtonsContainer = styled.div`
     position: relative;
     margin-top: 5rem;
+    display: flex;
 `
 
-export const ButtonsInner = styled.div`
-    width: 20rem;
-    margin: 0 auto;
-    display: flex;
-    justify-content: space-around;
+export const SmallContainer = styled.section`
+    position: relative;
+    width: 100%;
 `
 
 export const IconsContainer = styled.div`
+    width: 85%;
+    max-width: var(--section-max-width);
+    margin: 0 auto;
+    padding: 7rem 0;
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
-    margin-top: 5rem;
 `
 
 export const IconContainer = styled.div`

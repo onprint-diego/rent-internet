@@ -10,7 +10,6 @@ export const Container = styled.header`
     top: 0;
     z-index: 999;
     padding: .5rem 0;
-    margin-bottom: 1rem;
 `
 
 export const Inner = styled.div`
@@ -42,6 +41,7 @@ export const Nav = styled.nav`
 export const Links = styled.ul`
     display: flex;
     justify-content: space-between;
+    margin: 1rem 0;
 `
 
 export const LinkContainer = styled.li`

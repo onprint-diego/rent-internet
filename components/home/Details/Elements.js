@@ -4,7 +4,6 @@ import Image from 'next/future/image'
 export const Container = styled.section`
     width: 100%;
     position: relative;
-    margin-top: 5.5rem;
     min-height: var(--section-min-height);
 `
 
@@ -30,9 +29,9 @@ export const Inner = styled.div`
     width: 85%;
     max-width: var(--section-max-width);
     height: var(--section-min-height);
-    z-index: 2;
     display: flex;
     align-items: center;
+    z-index: 2;
 `
 
 export const Content = styled.div`
