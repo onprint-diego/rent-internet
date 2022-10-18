@@ -1,4 +1,6 @@
-import React from 'react'
+import {
+    Container,
+} from './Elements'
 
 const SuccessCancel = () => {
 
@@ -15,7 +17,12 @@ const SuccessCancel = () => {
 
 
     return (
-        <div>SuccessCancel</div>
+        <Container>
+            <Inner>
+                La compra fue exitosa. 
+                Mail en casilla.
+            </Inner>
+        </Container>
     )
 }
 

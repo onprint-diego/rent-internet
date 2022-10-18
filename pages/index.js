@@ -7,17 +7,20 @@ import Details from '../components/home/Details/Details'
 import Features from '../components/home/Features/Features'
 import Hero from '../components/home/Hero/Hero'
 import Process from '../components/home/Process/Process'
+import Recharge from '../components/home/Recharge/Recharge'
+import Faq from '../components/home/Faq/Faq'
 
 //TODO> loading, cleanup en useEffect
 //TODO> pasar toda la logica representacional a un componente Home.js
 
 
 export default function Home(props) {
-  
+
   const [ heroContent, setHeroContent ] = useState({})
   const [ detailsContent, setDetailsContent ] = useState({})
   const [ featuresContent, setFeaturesContent ] = useState([])
   const [ processContent, setProcessContent ] = useState({})
+  const [ rechargeContent, setRechargeContent ] = useState({})
 
   useEffect(() => {
 
@@ -108,6 +111,15 @@ export default function Home(props) {
         },
       ]
     })
+
+    setRechargeContent({
+      title: props.page.recharge.rechargetitle,
+      text: props.page.recharge.rechargetext,
+      img: {
+        alt: props.page.recharge.rechargeimg.altText,
+        src: props.page.recharge.rechargeimg.sourceUrl,
+      },
+    })
   }, [])
 
   return (
@@ -121,6 +133,8 @@ export default function Home(props) {
       <Details content={detailsContent} />
       <Features content={featuresContent} />
       <Process content={processContent} />
+      <Recharge content={rechargeContent} />
+      <Faq />
     </>
   )
 }
@@ -211,6 +225,14 @@ export async function getStaticProps() {
               retirotitle
               sectiontitle
               processbackground {
+                altText
+                sourceUrl
+              }
+            }
+            recharge {
+              rechargetext
+              rechargetitle
+              rechargeimg {
                 altText
                 sourceUrl
               }
