@@ -1,5 +1,6 @@
 import {
     Container,
+    Inner,
 } from './Elements'
 
 const SuccessCancel = () => {
