@@ -12,8 +12,6 @@ import {
 
 const Process = ({ content }) => {
 
-    // console.log(content)
-
     return (
         <Container>
             {

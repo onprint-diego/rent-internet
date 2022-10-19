@@ -15,7 +15,6 @@ export const Inner = styled.div`
     margin: 0 auto;
     width: 85%;
     max-width: var(--section-max-width);
-    height: var(--section-min-height);
 `
 
 export const Title = styled.h2`

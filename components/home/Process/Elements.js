@@ -30,7 +30,6 @@ export const Inner = styled.div`
     margin: 0 auto;
     width: 85%;
     max-width: var(--section-max-width);
-    height: var(--section-min-height);
     z-index: 2;
     display: flex;
     flex-direction: column;
@@ -52,15 +51,14 @@ export const CardsContainer = styled.div`
 export const Card = styled.div`
     position: relative;
     background-color: rgba(250, 250, 250, 0.8);
-    flex-basis: 30%;
-    width: 18rem;
+    width: 40%;
     padding: 1rem 2rem;
-    margin: .5rem;
+    margin: 2rem;
     border-radius: 5px;
-    transition: all .5s ease-in-out;
+    transition: all .2s ease-in-out;
 
     &:hover {
-        bottom: .3rem;
+        background-color: rgba(250, 250, 250, 1);
     }
 `
 

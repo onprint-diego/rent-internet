@@ -17,6 +17,7 @@ import HeroFeatures from '../components/home/Hero/HeroFeatures'
 
 export default function Home(props) {
 
+  const [ mounted, setMounted ] = useState(false)
   const [ heroContent, setHeroContent ] = useState({})
   const [ detailsContent, setDetailsContent ] = useState({})
   const [ featuresContent, setFeaturesContent ] = useState([])
@@ -103,10 +104,6 @@ export default function Home(props) {
           text: props.page.process.reserva,
         },
         {
-          title: props.page.process.retirotitle,
-          text: props.page.process.retiro,
-        },
-        {
           title: props.page.process.devoluciontitle,
           text: props.page.process.devolucion,
         },
@@ -122,6 +119,10 @@ export default function Home(props) {
       },
     })
   }, [])
+
+  useEffect(() => setMounted(true), [])
+
+  if(!mounted) return null
 
   return (
     <>
