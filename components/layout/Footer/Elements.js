@@ -45,11 +45,11 @@ export const IconContainer = styled.li`
     height: 2rem;
     margin: 0 .5rem;
     cursor: pointer;
-
+    
     &:hover {
         opacity: .7;
     }
-`
+    `
 
 export const Icon = styled(Image)`
     object-fit: cover;

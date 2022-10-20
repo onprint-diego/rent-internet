@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import Detail from '../../components/detail/Detail'
+import Skeleton from '../../components/detail/Skeleton'
 import { getProductDetails } from '../../utils/woocommerce'
 import { GetProductsContext } from '../../context/ProductsContext'
 
@@ -15,7 +16,7 @@ const ProductDetail = ({ data }) => {
     return (
         <>
             {
-                loading ? <>loading....</>: <Detail data={products} />
+                loading ? <Skeleton />: <Detail data={products} />
             }
         </>
     )

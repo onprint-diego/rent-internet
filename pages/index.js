@@ -132,11 +132,11 @@ export default function Home(props) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <Hero content={heroContent}/>
-      <HeroFeatures content={heroContent} />
-      <Details content={detailsContent} />
       <Features content={featuresContent} />
-      <Process content={processContent} />
+      <Details content={detailsContent} />
       <Recharge content={rechargeContent} />
+      <Process content={processContent} />
+      <HeroFeatures content={heroContent} />
       <Faq />
     </>
   )

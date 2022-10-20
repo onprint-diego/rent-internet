@@ -7,7 +7,6 @@ import {
 const CheckBox = ({ label, value, extraProductData, cart, setCart }) => {
 
     const handleChange = (e) => {
-        console.log(e.target.checked)
 
         const total = !e.target.checked ?
             cart.total - parseInt(cart[e.target.value].product.price) : 
@@ -16,7 +15,7 @@ const CheckBox = ({ label, value, extraProductData, cart, setCart }) => {
         setCart({
             ...cart,
             [e.target.value]: {
-                ...extraProductData, is: !extraProductData.is,
+                ...extraProductData, is: e.target.checked,
             },
             total: total
         })

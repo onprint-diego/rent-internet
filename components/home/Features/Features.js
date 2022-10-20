@@ -11,7 +11,7 @@ import {
 const Features = ({ content }) => {
 
   return (
-    <Container>
+    <Container id="features-section">
       <Grid>
         {
           content.length !== 0 &&

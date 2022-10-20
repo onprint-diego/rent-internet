@@ -5,7 +5,7 @@ import Image from 'next/future/image'
 export const Container = styled.header`
     width: 100%;
     background-color: #ffffff;
-    box-shadow: 0px 4px 15px 4px rgba(0, 0, 0, 0.25);
+    box-shadow: 0px 2px 9px 3px rgba(0, 0, 0, 0.2);
     position: sticky;
     top: 0;
     z-index: 999;

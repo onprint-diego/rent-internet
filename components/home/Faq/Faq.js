@@ -93,7 +93,7 @@ const Faq = () => {
     console.log(isOpenId)
 
     return (
-        <Container>
+        <Container id="faq-section">
             <Inner>
                 <Title>Preguntas frecuentes</Title>
                 <Accordion>

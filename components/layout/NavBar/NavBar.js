@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 import Lg from '/public/rent-internet-logo.png'
 import {
     Container,
@@ -8,42 +9,45 @@ import {
     Nav,
     Links,
     LinkContainer,
-    PageLink,
 } from './Elements'
 
 const NavBar = () => {
 
-    // DB
-    const links = [
-        { to: '/product-detail', title: 'Rentar', type: 'text'},
-        { to: '/', title: 'Recargas', type: 'cta'},
-        { to: '/', title: 'FAQ', type: 'p'},
-        { to: '/', title: 'Contacto', type: 'cta'},
-    ]
-    //
+    const router = useRouter()
+
+    const toTop = () => scrollTo(top)
 
     return (
         <Container>
             <Inner>
-                <Link href='/'>
-                    <LogoContainer>
-                        <Logo src={Lg} alt='logo'/>
-                    </LogoContainer>
-                </Link>
+                {
+                    router.pathname === '/' ?
+                    <LogoContainer onClick={toTop}>
+                        <Logo src={Lg} alt='logo' />
+                    </LogoContainer> :
+                    <Link href='/'>
+                        <LogoContainer>
+                            <Logo src={Lg} alt='logo' />
+                        </LogoContainer>
+                    </Link>
+                }
                 <Nav>
                     <Links>
+                        <LinkContainer>
+                            <Link href='/product-detail'>
+                                Rentar
+                            </Link>
+                        </LinkContainer>
+                        <LinkContainer>
+                            <Link href='/'>
+                                Recargas
+                            </Link>
+                        </LinkContainer>
                         {
-                            links?.map(link => {
-                                return(
-                                    <LinkContainer key={link.title}>
-                                        <Link 
-                                        href={link.to}
-                                        >
-                                            {link.title}
-                                        </Link>
-                                    </LinkContainer>
-                                )
-                            })
+                            router.pathname === '/' &&
+                            <LinkContainer>
+                                <a href='#faq-section'>FAQ</a>
+                            </LinkContainer>
                         }
                     </Links>
                 </Nav>

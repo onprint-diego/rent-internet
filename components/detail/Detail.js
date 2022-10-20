@@ -2,9 +2,10 @@ import { useEffect, useState } from 'react'
 import Calendar from '../calendar/Calendar'
 import Select from '../select/Select'
 import CheckBox from '../checkbox/CheckBox'
-import { ButtonSecondaryLink } from '../shared/ButtonSecondary/ButtonSecondary'
+import { PrimaryButton } from '../shared/PrimaryButton/PrimaryButton'
 import { GetCartContext } from '../../context/CartContext'
 import {
+    Container,
     ProductContainer,
     ImageContainer,
     ProductImage,
@@ -17,6 +18,7 @@ import {
     ReviewContainer,
     ReviewItem,
     Sticky,
+    Bold,
 } from './Elements'
 
 //TODO inhabilitar el boton de Rent si no selecciono fechas
@@ -38,6 +40,8 @@ const Detail = ({ data }) => {
             const mainProductPrice = parseInt(mainProduct.price)
             const subtotal = mainProductPrice
             const total = subtotal + shippingFee
+
+            console.log(adapter)
 
             //SET MAIN PRODUCT BY DEFAULT IN CART
             setCart({
@@ -91,48 +95,78 @@ const Detail = ({ data }) => {
     //     error && setError(!error)
     // }, [qty])
 
+    // console.log(cart)
+
     return (
-        <ProductContainer>
-            {
-                Object.entries(mainProduct).length !== 0 &&
-                <>
-                    <LeftContainer>
-                        <Sticky>
-                            <ImageContainer>
-                                <ProductImage src={mainProduct.images[0].src} alt={mainProduct.images[0].alt} />
-                            </ImageContainer>
-                            <ReviewContainer>
-                                <ReviewItem>Modem Portátil: u$d {cart.mainProductPrice} x{cart.qty}</ReviewItem>
-                                <ReviewItem>Shipping Fee: u$d {cart.shippingFee}</ReviewItem>
-                                <ReviewItem>Subtotal: u$d {cart.subtotal}</ReviewItem>
-                                <ReviewItem>Total: u$d {cart.total}</ReviewItem>
-                            </ReviewContainer>
-                        </Sticky>
-                    </LeftContainer>
-                    <DescriptionContainer>
-                        <Title>{mainProduct.attributes[1].options[0]}</Title>
-                        <Description>{mainProduct.attributes[5].options[0]}</Description>
-                        <Calendar
-                            cart={cart}
-                            setCart={setCart}
-                            text="Seleccione una fecha"
-                        />
-                        <Select
-                            options={mainProduct.attributes[4].options}
-                            name="Países disponibles"
-                            text="Seleccione un país"
-                            cart={cart}
-                            setCart={setCart}
-                        />
-                        <CheckBox label="Agregar un adaptador de viaje" cart={cart} setCart={setCart} extraProductData={adapter} value="adapter"/>
-                        <CheckBox label="Agregar Power Bank" cart={cart} setCart={setCart} extraProductData={powerBank} value="powerBank"/>
-                        <ButtonSecondaryLink to="/checkout">
-                            {mainProduct.attributes[6].options[0]}
-                        </ButtonSecondaryLink>
-                    </DescriptionContainer>
-                </>
-            }
-        </ProductContainer>
+        <Container>
+
+            <ProductContainer>
+                {
+                    Object.entries(mainProduct).length !== 0 && 
+                    Object.entries(cart).length !== 0 &&
+                    <>
+                    {console.log(cart)}
+                        <LeftContainer>
+                            <Sticky>
+                                <ImageContainer>
+                                    <ProductImage src={mainProduct.images[0].src} alt={mainProduct.images[0].alt} />
+                                </ImageContainer>
+                                <ReviewContainer>
+                                    <ReviewItem>
+                                        <Bold>Modem:</Bold> u$d {cart.mainProductPrice} ({cart.qty} semana{cart.qty > 1 && 's'})
+                                    </ReviewItem>
+                                    <ReviewItem>
+                                        <Bold>Depósito:</Bold> u$d ...
+                                    </ReviewItem>
+                                    <ReviewItem>
+                                        <Bold>Envío:</Bold> u$d {cart.shippingFee}
+                                    </ReviewItem>
+                                    {/* <ReviewItem>
+                                        <Bold>Subtotal:</Bold> u$d {cart.subtotal}</ReviewItem> */}
+                                    {
+                                        cart.adapter.is === true &&
+                                        <ReviewItem>
+                                            <Bold>Adaptador:</Bold> u$d {cart.adapter.product.price}
+                                        </ReviewItem>
+                                    }
+                                    {
+                                        cart.powerBank.is === true &&
+                                        <ReviewItem>
+                                            <Bold>Cargador:</Bold> u$d {cart.powerBank.product.price}
+                                        </ReviewItem>
+                                    }
+                                    <ReviewItem>
+                                        <Bold>Total:</Bold> u$d {cart.total}
+                                    </ReviewItem>
+                                </ReviewContainer>
+                            </Sticky>
+                        </LeftContainer>
+                        <DescriptionContainer>
+                            <Title>{mainProduct.attributes[1].options[0]}</Title>
+                            <Description>{mainProduct.attributes[5].options[0]}</Description>
+                            <Calendar
+                                cart={cart}
+                                setCart={setCart}
+                                text="Seleccione una fecha"
+                            />
+                            <Select
+                                options={mainProduct.attributes[4].options}
+                                name="Países disponibles"
+                                text="Seleccione un país"
+                                cart={cart}
+                                setCart={setCart}
+                            />
+                            <CheckBox label="Agregar un adaptador de viaje" cart={cart} setCart={setCart} extraProductData={adapter} value="adapter" />
+                            <CheckBox label="Agregar Power Bank" cart={cart} setCart={setCart} extraProductData={powerBank} value="powerBank" />
+                            <PrimaryButton to="/checkout">
+                                {mainProduct.attributes[6].options[0]}
+                            </PrimaryButton>
+                        </DescriptionContainer>
+                    </>
+                }
+            </ProductContainer>
+        </Container>
+
     )
 }
 

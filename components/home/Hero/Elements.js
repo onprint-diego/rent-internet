@@ -4,7 +4,6 @@ import Image from 'next/future/image'
 export const Container = styled.section`
     position: relative;
     width: 100%;
-    /* height: 37rem; */
 `
 
 export const BackgroundImage = styled(Image)`
@@ -17,8 +16,6 @@ export const Inner = styled.div`
     width: 85%;
     max-width: var(--section-max-width);
     height: 37rem;
-    /* display: flex; */
-    /* align-items: center; */
     z-index: 2;
 `
 
@@ -36,6 +33,12 @@ export const ObjectImg = styled(Image)`
     object-fit: contain;
 `
 
+export const Content = styled.div`
+    position: relative;
+    top: 6.5rem;
+    width: 70%;
+`
+
 export const Copy = styled.h1`
     font-size: 4rem;
     text-transform: uppercase;
@@ -50,7 +53,7 @@ export const SubCopy = styled.p`
 
 export const ButtonsContainer = styled.div`
     position: relative;
-    margin-top: 5rem;
+    margin-top: 3rem;
     display: flex;
 `
 

@@ -1,7 +1,14 @@
 import styled from 'styled-components'
 
+export const Container = styled.div`
+    width: 100%;
+    background-color: var(--soft-bg-gray);
+    padding-bottom: 3rem;
+`
+
 export const ProductContainer = styled.article`
-    margin: 1rem auto;
+    margin: 0 auto;
+    padding-bottom: 1.5rem;
     width: 95%;
     max-width: var(--section-max-width);
     min-height: var(--section-min-height);
@@ -38,11 +45,27 @@ export const ReviewContainer = styled.div`
 `
 
 export const ReviewItem = styled.p`
+    font-size: .9rem;
+    margin-bottom: .5rem;
 
+    &:last-child {
+        border-top: 1px solid var(--soft-lines-color);
+        padding-top: .5rem;
+        margin-top: .7rem;
+        font-size: 1.2rem;
+    }
+`
+
+export const Bold = styled.span`
+    font-weight: 500;
 `
 
 export const DescriptionContainer = styled.div`
     width: 40%;
+    padding: 2rem;
+    background-color: #ffffff;
+    border-radius: 5px;
+    box-shadow: var(--container-shadow);
 `
 
 export const Title = styled.h1`
@@ -59,3 +82,5 @@ export const Description = styled.p`
 export const Error = styled.p`
 
 `
+
+//SKELETON
