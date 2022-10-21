@@ -24,12 +24,12 @@ const Checkout = () => {
     return (
         <Container>
             <CheckoutContainer>
-                <LeftContainer>
+                {/* <LeftContainer>
                     <Summary cart={cart} mainProduct={mainProduct} />
-                </LeftContainer>
-                {/* <RightContainer>
+                </LeftContainer> */}
+                <RightContainer>
                     <CheckoutForm cart={cart} setCart={setCart} />
-                </RightContainer> */}
+                </RightContainer>
                 {/* {
                     Object.values(cart).length === 0 ?
                     <EmptyCart>
