@@ -12,22 +12,22 @@ import {
 const Checkout = () => {
 
     const { cart, setCart } = GetCartContext()
-    const { products } = GetProductsContext()
-    let mainProduct = {}
+    // const { products } = GetProductsContext()
+    // let mainProduct = {}
 
-    if (products.length !== 0) {
-        mainProduct = products.find(item => item.name === "Modem")
-    }
+    // if (products.length !== 0) {
+    //     mainProduct = products.find(item => item.name === "Modem")
+    // }
 
     return (
         <Container>
             <CheckoutContainer>
-                <LeftContainer>
+                {/* <LeftContainer>
                     <Summary cart={cart} mainProduct={mainProduct} />
                 </LeftContainer>
                 <RightContainer>
                     <CheckoutForm cart={cart} setCart={setCart} />
-                </RightContainer>
+                </RightContainer> */}
                 {/* {
                     Object.values(cart).length === 0 ?
                     <EmptyCart>
