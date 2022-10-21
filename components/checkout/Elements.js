@@ -31,9 +31,27 @@ export const RightContainer = styled.div`
 `
 
 export const EmptyCartContainer = styled.div`
+    width: 100%;
+    display: flex;
+    height: var(--section-min-height);
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 5rem;
+`
 
+export const EmptyCartInner = styled.div`
+    background-color: #ffffff;
+    border-radius: 5px;
+    box-shadow: var(--container-shadow);
+    padding: 2rem;
+    width: 30rem;
 `
 
 export const Msj = styled.p`
+    margin-bottom: 1.5rem;
+`
 
+export const ButtonContainer = styled.div`
+    display: flex;
+    justify-content: flex-end;
 `

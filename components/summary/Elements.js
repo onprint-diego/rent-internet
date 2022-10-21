@@ -27,6 +27,8 @@ export const ReviewContainer = styled.div`
 export const ReviewItem = styled.p`
     font-size: .9rem;
     margin-bottom: .5rem;
+    display: flex;
+    justify-content: space-between;
 
     &:last-child {
         border-top: 1px solid var(--soft-lines-color);
@@ -38,4 +40,13 @@ export const ReviewItem = styled.p`
 
 export const Bold = styled.span`
     font-weight: 500;
+`
+
+export const Soft = styled.span`
+    color: var(--soft-color);
+`
+
+export const Small = styled.span`
+    color: var(--soft-color);
+    font-size: .7rem;
 `

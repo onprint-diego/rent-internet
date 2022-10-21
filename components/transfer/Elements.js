@@ -13,7 +13,6 @@ export const Inner = styled.article`
     max-width: var(--section-max-width);
     min-height: 100vh;
     position: relative;
-    /* padding-top: 4.5rem; */
     display: flex;
     justify-content: center;
     align-items: center;

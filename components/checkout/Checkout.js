@@ -3,6 +3,7 @@ import { GetCartContext } from '../../context/CartContext'
 import { GetProductsContext } from '../../context/ProductsContext'
 import CheckoutForm from '../forms/CheckoutForm/CheckoutForm'
 import Summary from '../summary/Summary'
+import { PrimaryButton } from '../shared/PrimaryButton/PrimaryButton'
 import {
     Container,
     CheckoutContainer,
@@ -10,6 +11,8 @@ import {
     RightContainer,
     EmptyCartContainer,
     Msj,
+    EmptyCartInner,
+    ButtonContainer,
 } from './Elements'
 
 const Checkout = () => {
@@ -17,7 +20,7 @@ const Checkout = () => {
     const { cart, setCart } = GetCartContext()
     const { products } = GetProductsContext()
     const [ mainProduct, setMainProduct ] = useState({})
-    
+
     useEffect(() => {
         console.log(products)
         if (products.length !== 0) {
@@ -31,7 +34,12 @@ const Checkout = () => {
                 {
                     Object.values(cart).length === 0 ?
                         <EmptyCartContainer>
-                            <Msj>No has hecho ninguna reserva</Msj>
+                            <EmptyCartInner>
+                                <Msj>No has hecho ninguna reserva</Msj>
+                                <ButtonContainer>
+                                    <PrimaryButton to='product-detail'>Rentar</PrimaryButton>
+                                </ButtonContainer>
+                            </EmptyCartInner>
                         </EmptyCartContainer> :
                         <>
                             <LeftContainer>
