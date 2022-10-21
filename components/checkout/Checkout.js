@@ -7,39 +7,37 @@ import {
     CheckoutContainer,
     LeftContainer,
     RightContainer,
+    EmptyCartContainer,
+    Msj,
 } from './Elements'
 
 const Checkout = () => {
 
     const { cart, setCart } = GetCartContext()
     const { products } = GetProductsContext()
-    let mainProduct = {}
+    // let mainProduct = {}
 
-    if (products.length !== 0) {
-        mainProduct = products.find(item => item.name === "Modem")
-    }
-
-    console.log(mainProduct)
+    // if (products.length !== 0) {
+    //     mainProduct = products.find(item => item.name === "Modem")
+    // }
 
     return (
         <Container>
             <CheckoutContainer>
-                {/* <LeftContainer>
-                    <Summary cart={cart} mainProduct={mainProduct} />
-                </LeftContainer> */}
-                <RightContainer>
-                    <CheckoutForm cart={cart} setCart={setCart} />
-                </RightContainer>
-                {/* {
+                {
                     Object.values(cart).length === 0 ?
-                    <EmptyCart>
-                        <p>Cart is empty, nothing to checkout</p>
-                    </EmptyCart> :
-                    <CheckoutInner>
-                        <CartDetails cart={cart} />
-                        <CheckoutForm cart={cart} setCart={setCart} /> 
-                    </CheckoutInner>
-                } */}
+                    <EmptyCartContainer>
+                        <Msj>No has hecho ninguna reserva</Msj>
+                    </EmptyCartContainer> :
+                    <>
+                        <LeftContainer>
+                            {/* <Summary cart={cart} mainProduct={mainProduct} /> */}
+                        </LeftContainer>
+                        <RightContainer>
+                            <CheckoutForm cart={cart} setCart={setCart} />
+                        </RightContainer>
+                    </>
+                }
             </CheckoutContainer>
         </Container>
     )
