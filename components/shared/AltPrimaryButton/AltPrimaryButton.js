@@ -30,3 +30,7 @@ export const AltPrimaryButton = ({ children, to }) => {
         </Link>
     )
 }
+
+export const AltPrimaryButtonAction = ({ children, event }) => {
+    return <Button onClick={event}>{children}</Button>
+}

@@ -4,7 +4,7 @@ import Skeleton from '../../components/detail/Skeleton'
 import { getProductDetails } from '../../utils/woocommerce'
 import { GetProductsContext } from '../../context/ProductsContext'
 
-const ProductDetail = ({ data }) => {
+const ProductDetail = () => {
 
     const { products, setProducts } = GetProductsContext()
     const [ loading, setLoading ] = useState(true)

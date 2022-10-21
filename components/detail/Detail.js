@@ -2,23 +2,18 @@ import { useEffect, useState } from 'react'
 import Calendar from '../calendar/Calendar'
 import Select from '../select/Select'
 import CheckBox from '../checkbox/CheckBox'
+import Summary from '../summary/Summary'
 import { PrimaryButton } from '../shared/PrimaryButton/PrimaryButton'
 import { GetCartContext } from '../../context/CartContext'
 import {
     Container,
     ProductContainer,
-    ImageContainer,
-    ProductImage,
-    DescriptionContainer,
+    RightContainer,
     Title,
     Description,
     Error,
     LinkSpan,
     LeftContainer,
-    ReviewContainer,
-    ReviewItem,
-    Sticky,
-    Bold,
 } from './Elements'
 
 //TODO inhabilitar el boton de Rent si no selecciono fechas
@@ -99,7 +94,6 @@ const Detail = ({ data }) => {
 
     return (
         <Container>
-
             <ProductContainer>
                 {
                     Object.entries(mainProduct).length !== 0 && 
@@ -107,41 +101,9 @@ const Detail = ({ data }) => {
                     <>
                     {console.log(cart)}
                         <LeftContainer>
-                            <Sticky>
-                                <ImageContainer>
-                                    <ProductImage src={mainProduct.images[0].src} alt={mainProduct.images[0].alt} />
-                                </ImageContainer>
-                                <ReviewContainer>
-                                    <ReviewItem>
-                                        <Bold>Modem:</Bold> u$d {cart.mainProductPrice} ({cart.qty} semana{cart.qty > 1 && 's'})
-                                    </ReviewItem>
-                                    <ReviewItem>
-                                        <Bold>Depósito:</Bold> u$d ...
-                                    </ReviewItem>
-                                    <ReviewItem>
-                                        <Bold>Envío:</Bold> u$d {cart.shippingFee}
-                                    </ReviewItem>
-                                    {/* <ReviewItem>
-                                        <Bold>Subtotal:</Bold> u$d {cart.subtotal}</ReviewItem> */}
-                                    {
-                                        cart.adapter.is === true &&
-                                        <ReviewItem>
-                                            <Bold>Adaptador:</Bold> u$d {cart.adapter.product.price}
-                                        </ReviewItem>
-                                    }
-                                    {
-                                        cart.powerBank.is === true &&
-                                        <ReviewItem>
-                                            <Bold>Cargador:</Bold> u$d {cart.powerBank.product.price}
-                                        </ReviewItem>
-                                    }
-                                    <ReviewItem>
-                                        <Bold>Total:</Bold> u$d {cart.total}
-                                    </ReviewItem>
-                                </ReviewContainer>
-                            </Sticky>
+                            <Summary cart={cart} mainProduct={mainProduct} />
                         </LeftContainer>
-                        <DescriptionContainer>
+                        <RightContainer>
                             <Title>{mainProduct.attributes[1].options[0]}</Title>
                             <Description>{mainProduct.attributes[5].options[0]}</Description>
                             <Calendar
@@ -161,7 +123,7 @@ const Detail = ({ data }) => {
                             <PrimaryButton to="/checkout">
                                 {mainProduct.attributes[6].options[0]}
                             </PrimaryButton>
-                        </DescriptionContainer>
+                        </RightContainer>
                     </>
                 }
             </ProductContainer>

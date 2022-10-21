@@ -1,12 +1,7 @@
 import styled from 'styled-components'
 
-export const FormContainer = styled.div`
-    display: flex;
-    flex-direction: column;
-    margin-left: 5rem;
-`
-
 export const Form = styled.form`
+    position: relative;
     display: flex;
     flex-direction: column;
 `
@@ -23,11 +18,12 @@ export const SectionTitle = styled.h4`
 
 export const InputContainer = styled.div`
     margin: 1rem 0;
+    width: 22rem;
     position: relative;
 `
 
 export const Input = styled.input`
-    width: 22rem;
+    width: 100%;
     border: 1px solid var(--soft-lines-color);
     border-radius: 4px;
     padding: .6rem .8rem;
@@ -69,8 +65,7 @@ export const Error = styled.p`
 
 export const MethodSelectContainer = styled.div`
     position: relative;
-    width: 100%;
-    margin: 0 auto;
+    width: 22rem;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -78,14 +73,17 @@ export const MethodSelectContainer = styled.div`
     border-radius: 5px;
 `
 
-export const Method = styled.button`
+export const Method = styled.p`
     height: 3rem;
     width: 50%;
-    text-align: center;
     z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
 `
 
-export const MethodBox = styled.button`
+export const MethodBox = styled.div`
     position: absolute;
     top: 0;
     left: 0;

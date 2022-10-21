@@ -1,39 +1,37 @@
 import styled from 'styled-components'
 
 export const Container = styled.div`
+    position: relative;
+    bottom: 4rem;
     width: 100%;
     background: linear-gradient(208.39deg, #1966D1 57.39%, #3483FA 57.39%);
-    padding-bottom: 3rem;
 `
 
-export const CheckoutContainer = styled.article`
+export const Inner = styled.article`
     margin: 0 auto;
     width: 95%;
     max-width: var(--section-max-width);
-    min-height: var(--section-min-height);
+    min-height: 100vh;
     position: relative;
-    padding-top: 4.5rem;
+    /* padding-top: 4.5rem; */
     display: flex;
+    justify-content: center;
+    align-items: center;
 `
 
-export const LeftContainer = styled.div`
-    width: 25%;
-    margin-right: 3rem;
-`
-
-
-export const RightContainer = styled.div`
-    width: 60%;
+export const MsjContainer = styled.div`
+    width: 30rem;
     padding: 2rem;
     background-color: #ffffff;
-    border-radius: 5px;
     box-shadow: var(--container-shadow);
-`
-
-export const EmptyCartContainer = styled.div`
-
+    border-radius: 5px;
 `
 
 export const Msj = styled.p`
+    margin-bottom: 2rem;
+`
 
+export const ButtonContainer = styled.div`
+    display: flex;
+    justify-content: flex-end;
 `

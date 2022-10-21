@@ -1,10 +1,11 @@
 import { useState } from 'react'
+import { useRouter } from 'next/router'
 import * as Yup from 'yup'
 import { useFormik } from 'formik'
 import { CheckoutButton } from '../../shared/CheckoutButton/CheckoutButton'
 import { createCheckOutSession } from '../../../utils/createCheckoutSession'
+import InputField from './InputField'
 import {
-    FormContainer,
     Form,
     FormSection,
     BillingSection,
@@ -17,10 +18,10 @@ import {
     MethodBox,
     CheckoutBtnContainer,
 } from './Elements'
-import InputField from './Input'
 
 const CheckoutForm = ({ cart, setCart }) => {
 
+    const router = useRouter()
     const [paymentMethod, setPaymentMethod] = useState(true) //true = card, false = bank
     const [disabledButton, setDisabledButton] = useState(false)
     const [billingNeeded, setBillingNeeded] = useState(false)
@@ -40,7 +41,7 @@ const CheckoutForm = ({ cart, setCart }) => {
     const placeholderCountry = 'País'
 
     const cardMethodText = 'Tarjerta'
-    const bankMethodText= 'Transferencia'
+    const bankMethodText = 'Transferencia'
 
     const generalError = 'Obligatorio'
     const minGeneralError = 'Mínimo 2 caracteres'
@@ -80,181 +81,176 @@ const CheckoutForm = ({ cart, setCart }) => {
                 billingAddress: values.billingAddress,
                 billingCp: values.billingCp,
                 billingCity: values.billingCity,
-                billlingCountry: values.billlingCountry,
-                // language: en or es // pasar  como variable el idioma para que en sendMail pueda armar el idiom 
+                billlingCountry: values.billlingCountry, 
             }
 
-            console.log(customer)
-            
             setDisabledButton(true)
 
-
-
-
-            //paymentMethod ? card method : bank transfer
-
-            createCheckOutSession(cart, customer)
+            paymentMethod ? 
+            createCheckOutSession(cart, customer) :
+            router.push('/bank-transfer')
+            
         }
     })
 
+    // console.log(paymentMethod)
+
     return (
-        <FormContainer>
-            <Form onSubmit={formik.handleSubmit}>
-                <FormSection>
-                    <SectionTitle>{detailsTitle}</SectionTitle>
-                    <InputField
-                        id="name"
-                        name="name"
-                        type="text"
-                        value={formik.values.name}
-                        event={formik.handleChange}
-                        placeholder={placeholderName}
-                        touched={formik.touched}
-                        error={formik.errors.name}
-                    />
-                    <InputField
-                        id="surname"
-                        name="surname"
-                        type="text"
-                        value={formik.values.surname}
-                        event={formik.handleChange}
-                        placeholder={placeholderSurname}
-                        touched={formik.touched}
-                        error={formik.errors.surname}
-                    />
-                    <InputField
-                        id="email"
-                        name="email"
-                        type="email"
-                        value={formik.values.email}
-                        event={formik.handleChange}
-                        placeholder={placeholderEmail}
-                        touched={formik.touched}
-                        error={formik.errors.email}
-                    />
-                    <InputField
-                        id="phone"
-                        name="phone"
-                        type="tel"
-                        value={formik.values.phone}
-                        event={formik.handleChange}
-                        placeholder={placeholderPhone}
-                        touched={formik.touched}
-                        error={formik.errors.phone}
-                    />
-                </FormSection>
-                <FormSection>
-                    <SectionTitle>{deliveryTitle}</SectionTitle>
-                    <InputField
-                        id="deliveryAddress"
-                        name="deliveryAddress"
-                        type="text"
-                        value={formik.values.deliveryAddress}
-                        event={formik.handleChange}
-                        placeholder={placeholderAdd}
-                        touched={formik.touched}
-                        error={formik.errors.deliveryAddress}
-                    />
-                    <InputField
-                        id="deliveryCp"
-                        name="deliveryCp"
-                        type="text"
-                        pattern="[0-9]*"
-                        value={formik.values.deliveryCp}
-                        event={formik.handleChange}
-                        placeholder={placeholderCp}
-                        touched={formik.touched}
-                        error={formik.errors.deliveryCp}
-                    />
-                    <InputField
-                        id="deliveryCity"
-                        name="deliveryCity"
-                        type="text"
-                        value={formik.values.deliveryCity}
-                        event={formik.handleChange}
-                        placeholder={placeholderCity}
-                        touched={formik.touched}
-                        error={formik.errors.deliveryCity}
-                    />
-                    <InputField
-                        id="deliveryCountry"
-                        name="deliveryCountry"
-                        type="text"
-                        value={formik.values.deliveryCountry}
-                        event={formik.handleChange}
-                        placeholder={placeholderCountry}
-                        touched={formik.touched}
-                        error={formik.errors.deliveryCountry}
-                    />
-                </FormSection>
-                <CheckBoxContainer>
-                    <CheckBox
-                        type="checkbox"
-                        id="billing"
-                        name="billing"
-                        value="billing"
-                        onChange={() => setBillingNeeded(!billingNeeded)}
-                    />
-                    <Label htmlFor="billing">Billing address different</Label>
-                </CheckBoxContainer>
-                <BillingSection billingNeeded={billingNeeded}>
-                    <SectionTitle>{billingTitle}</SectionTitle>
-                    <InputField
-                        id="billingAddress"
-                        name="billingAddress"
-                        type="text"
-                        value={formik.values.billingAddress}
-                        event={formik.handleChange}
-                        placeholder={placeholderAdd}
-                        touched={formik.touched}
-                        error={formik.errors.billingAddress}
-                    />
-                    <InputField
-                        id="billingCp"
-                        name="billingCp"
-                        type="text"
-                        pattern="[0-9]*"
-                        value={formik.values.billingCp}
-                        event={formik.handleChange}
-                        placeholder={placeholderCp}
-                        touched={formik.touched}
-                        error={formik.errors.billingCp}
-                    />
-                    <InputField
-                        id="billingCity"
-                        name="billingCity"
-                        type="text"
-                        value={formik.values.billingCity}
-                        event={formik.handleChange}
-                        placeholder={placeholderCity}
-                        touched={formik.touched}
-                        error={formik.errors.billingCity}
-                    />
-                    <InputField
-                        id="billlingCountry"
-                        name="billlingCountry"
-                        type="text"
-                        value={formik.values.billlingCountry}
-                        event={formik.handleChange}
-                        placeholder={placeholderCountry}
-                        touched={formik.touched}
-                        error={formik.errors.billingCountry}
-                    />
-                </BillingSection>
-                <MethodSelectContainer>
-                    <MethodBox paymentMethod={paymentMethod} />
-                    <Method onClick={() => setPaymentMethod(true)}>{cardMethodText}</Method>
-                    <Method onClick={() => setPaymentMethod(false)}>{bankMethodText}</Method>
-                </MethodSelectContainer>
-                <CheckoutBtnContainer>
-                    <CheckoutButton
+        <Form onSubmit={formik.handleSubmit}>
+            <FormSection>
+                <SectionTitle>{detailsTitle}</SectionTitle>
+                <InputField
+                    id="name"
+                    name="name"
+                    type="text"
+                    value={formik.values.name}
+                    event={formik.handleChange}
+                    placeholder={placeholderName}
+                    touched={formik.touched}
+                    error={formik.errors.name}
+                />
+                <InputField
+                    id="surname"
+                    name="surname"
+                    type="text"
+                    value={formik.values.surname}
+                    event={formik.handleChange}
+                    placeholder={placeholderSurname}
+                    touched={formik.touched}
+                    error={formik.errors.surname}
+                />
+                <InputField
+                    id="email"
+                    name="email"
+                    type="email"
+                    value={formik.values.email}
+                    event={formik.handleChange}
+                    placeholder={placeholderEmail}
+                    touched={formik.touched}
+                    error={formik.errors.email}
+                />
+                <InputField
+                    id="phone"
+                    name="phone"
+                    type="tel"
+                    value={formik.values.phone}
+                    event={formik.handleChange}
+                    placeholder={placeholderPhone}
+                    touched={formik.touched}
+                    error={formik.errors.phone}
+                />
+            </FormSection>
+            <FormSection>
+                <SectionTitle>{deliveryTitle}</SectionTitle>
+                <InputField
+                    id="deliveryAddress"
+                    name="deliveryAddress"
+                    type="text"
+                    value={formik.values.deliveryAddress}
+                    event={formik.handleChange}
+                    placeholder={placeholderAdd}
+                    touched={formik.touched}
+                    error={formik.errors.deliveryAddress}
+                />
+                <InputField
+                    id="deliveryCp"
+                    name="deliveryCp"
+                    type="text"
+                    pattern="[0-9]*"
+                    value={formik.values.deliveryCp}
+                    event={formik.handleChange}
+                    placeholder={placeholderCp}
+                    touched={formik.touched}
+                    error={formik.errors.deliveryCp}
+                />
+                <InputField
+                    id="deliveryCity"
+                    name="deliveryCity"
+                    type="text"
+                    value={formik.values.deliveryCity}
+                    event={formik.handleChange}
+                    placeholder={placeholderCity}
+                    touched={formik.touched}
+                    error={formik.errors.deliveryCity}
+                />
+                <InputField
+                    id="deliveryCountry"
+                    name="deliveryCountry"
+                    type="text"
+                    value={formik.values.deliveryCountry}
+                    event={formik.handleChange}
+                    placeholder={placeholderCountry}
+                    touched={formik.touched}
+                    error={formik.errors.deliveryCountry}
+                />
+            </FormSection>
+            <CheckBoxContainer>
+                <CheckBox
+                    type="checkbox"
+                    id="billing"
+                    name="billing"
+                    value="billing"
+                    onChange={() => setBillingNeeded(!billingNeeded)}
+                />
+                <Label htmlFor="billing">Billing address different</Label>
+            </CheckBoxContainer>
+            <BillingSection billingNeeded={billingNeeded}>
+                <SectionTitle>{billingTitle}</SectionTitle>
+                <InputField
+                    id="billingAddress"
+                    name="billingAddress"
+                    type="text"
+                    value={formik.values.billingAddress}
+                    event={formik.handleChange}
+                    placeholder={placeholderAdd}
+                    touched={formik.touched}
+                    error={formik.errors.billingAddress}
+                />
+                <InputField
+                    id="billingCp"
+                    name="billingCp"
+                    type="text"
+                    pattern="[0-9]*"
+                    value={formik.values.billingCp}
+                    event={formik.handleChange}
+                    placeholder={placeholderCp}
+                    touched={formik.touched}
+                    error={formik.errors.billingCp}
+                />
+                <InputField
+                    id="billingCity"
+                    name="billingCity"
+                    type="text"
+                    value={formik.values.billingCity}
+                    event={formik.handleChange}
+                    placeholder={placeholderCity}
+                    touched={formik.touched}
+                    error={formik.errors.billingCity}
+                />
+                <InputField
+                    id="billlingCountry"
+                    name="billlingCountry"
+                    type="text"
+                    value={formik.values.billlingCountry}
+                    event={formik.handleChange}
+                    placeholder={placeholderCountry}
+                    touched={formik.touched}
+                    error={formik.errors.billingCountry}
+                />
+            </BillingSection>
+            <MethodSelectContainer>
+                <MethodBox paymentMethod={paymentMethod} />
+                <Method onClick={() => setPaymentMethod(true)}>{cardMethodText}</Method>
+                <Method onClick={() => setPaymentMethod(false)}>{bankMethodText}</Method>
+            </MethodSelectContainer>
+            <CheckoutBtnContainer>
+                <CheckoutButton
                     type="submit"
                     disabled={disabledButton}
                     text={buttonText}
-                    />
-                </CheckoutBtnContainer>
-            </Form>
-        </FormContainer >
+                />
+            </CheckoutBtnContainer>
+        </Form>
     )
 }
 

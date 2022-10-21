@@ -30,3 +30,7 @@ export const PrimaryButton = ({ children, to }) => {
         </Link>
     )
 }
+
+export const PrimaryButtonAction = ({ children, event}) => {
+    return <Button onClick={event}>{children}</Button>
+}

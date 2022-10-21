@@ -12,6 +12,10 @@ const Calendar = ({ setQty, cart, setCart, text }) => {
 
     const [ range, setRange ] = useState()
 
+    const css={
+
+    }
+
     const handleSelect = (date) =>{
         setRange(date)
     }
@@ -19,7 +23,7 @@ const Calendar = ({ setQty, cart, setCart, text }) => {
     useEffect(() => {
         if(range?.from && range?.to) {
             const rangeInTime = range.to.getTime() - range.from.getTime() 
-            //Add one day to include initial day
+            // Add one day to include initial day
             const rangeInDays = rangeInTime / (1000 * 3600 * 24) + 1
             // Every 14 days add 1 qty and round always up
             const qty = Math.ceil(rangeInDays / 14)
@@ -40,6 +44,7 @@ const Calendar = ({ setQty, cart, setCart, text }) => {
 
     return (
         <CalendarContainer>
+            <style>{`.rdp-day_selected {background-color: var(--main-dark-blue);}`}</style>
             <Label>{text}</Label>
             <DayPicker
             selected={range}

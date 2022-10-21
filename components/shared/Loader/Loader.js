@@ -40,7 +40,6 @@ const Spinner = styled.svg`
 const Loader = () => {
   return (
     <Spinner
-      class="ring"
       viewBox="25 25 50 50"
       strokeWidth="3"
     >
