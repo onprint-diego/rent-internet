@@ -13,12 +13,12 @@ const Checkout = () => {
 
     const { cart, setCart } = GetCartContext()
     const { products } = GetProductsContext()
-    let mainProduct
+    let mainProduct = {}
 
-    if(products.length !== 0) mainProduct = products.find(item => item.name === "Modem")
+    if (products.length !== 0) {
+        mainProduct = products.find(item => item.name === "Modem")
+    }
 
-    console.log(mainProduct)
-    
     return (
         <Container>
             <CheckoutContainer>
@@ -38,7 +38,6 @@ const Checkout = () => {
                         <CheckoutForm cart={cart} setCart={setCart} /> 
                     </CheckoutInner>
                 } */}
-
             </CheckoutContainer>
         </Container>
     )
