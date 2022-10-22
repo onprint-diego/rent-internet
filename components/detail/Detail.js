@@ -14,6 +14,7 @@ import {
     Error,
     LinkSpan,
     LeftContainer,
+    CheckBoxContainer,
 } from './Elements'
 
 //TODO inhabilitar el boton de Rent si no selecciono fechas
@@ -100,9 +101,6 @@ const Detail = ({ data }) => {
                     Object.entries(cart).length !== 0 &&
                     <>
                     {console.log(cart)}
-                        <LeftContainer>
-                            <Summary cart={cart} mainProduct={mainProduct} />
-                        </LeftContainer>
                         <RightContainer>
                             <Title>{mainProduct.attributes[1].options[0]}</Title>
                             <Description>{mainProduct.attributes[5].options[0]}</Description>
@@ -118,12 +116,17 @@ const Detail = ({ data }) => {
                                 cart={cart}
                                 setCart={setCart}
                             />
-                            <CheckBox label="Agregar un adaptador de viaje" cart={cart} setCart={setCart} extraProductData={adapter} value="adapter" />
-                            <CheckBox label="Agregar Power Bank" cart={cart} setCart={setCart} extraProductData={powerBank} value="powerBank" />
+                            <CheckBoxContainer>
+                                <CheckBox label="Agregar un adaptador de viaje" cart={cart} setCart={setCart} extraProductData={adapter} value="adapter" />
+                                <CheckBox label="Agregar Power Bank" cart={cart} setCart={setCart} extraProductData={powerBank} value="powerBank" />
+                            </CheckBoxContainer>
                             <PrimaryButton to="/checkout">
                                 {mainProduct.attributes[6].options[0]}
                             </PrimaryButton>
                         </RightContainer>
+                        <LeftContainer>
+                            <Summary cart={cart} mainProduct={mainProduct} />
+                        </LeftContainer>
                     </>
                 }
             </ProductContainer>

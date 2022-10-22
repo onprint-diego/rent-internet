@@ -1,9 +1,9 @@
-import SuccessCancel from "../../components/succes-cancel/SuccessCancel"
+import Cancel from '../../components/cancel/Cancel'
 
-const Cancel = () => {
+const CancelPage = () => {
   return (
-    <SuccessCancel />
+    <Cancel />
   )
 }
 
-export default Cancel
+export default CancelPage

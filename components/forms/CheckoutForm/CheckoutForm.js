@@ -40,7 +40,7 @@ const CheckoutForm = ({ cart, setCart }) => {
     const placeholderCity = 'Ciudad'
     const placeholderCountry = 'País'
 
-    const cardMethodText = 'Tarjerta'
+    const cardMethodText = 'Tarjeta'
     const bankMethodText = 'Transferencia'
 
     const generalError = 'Obligatorio'

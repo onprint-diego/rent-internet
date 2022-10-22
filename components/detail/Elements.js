@@ -18,8 +18,9 @@ export const ProductContainer = styled.article`
 `
 
 export const LeftContainer = styled.div`
-    width: 25%;
-    margin-right: 3rem;
+    width: 30%;
+    /* margin-right: 3rem; */
+    margin-left: 2rem;
 `
 
 
@@ -29,6 +30,8 @@ export const RightContainer = styled.div`
     background-color: #ffffff;
     border-radius: 5px;
     box-shadow: var(--container-shadow);
+
+    margin-left: 5rem;
 `
 
 export const Title = styled.h1`
@@ -44,6 +47,14 @@ export const Description = styled.p`
 
 export const Error = styled.p`
 
+`
+
+export const CheckBoxContainer = styled.div`
+    width: 100%;
+    border-top: 1px solid var(--soft-lines-color);
+    border-bottom: 1px solid var(--soft-lines-color);
+    padding: 1rem 0;
+    margin-bottom: 2rem;
 `
 
 //SKELETON

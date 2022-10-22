@@ -21,7 +21,7 @@ const Summary = ({ cart, mainProduct }) => {
             </ImageContainer>
             <ReviewContainer>
                 <ReviewItem>
-                    <Bold>Modem: </Bold>
+                    <Bold>Modem </Bold>
                     <Soft>
                         u$d {cart.mainProductPrice} 
                         <Small>
@@ -30,13 +30,13 @@ const Summary = ({ cart, mainProduct }) => {
                     </Soft>
                 </ReviewItem>
                 <ReviewItem>
-                    <Bold>Depósito: </Bold>
+                    <Bold>Depósito </Bold>
                     <Soft>
                         u$d ...
                     </Soft>
                 </ReviewItem>
                 <ReviewItem>
-                    <Bold>Envío: </Bold>
+                    <Bold>Envío </Bold>
                     <Soft>
                         u$d {cart.shippingFee}
                     </Soft>
@@ -47,7 +47,7 @@ const Summary = ({ cart, mainProduct }) => {
                 {
                     cart.adapter.is === true &&
                     <ReviewItem>
-                        <Bold>Adaptador: </Bold>
+                        <Bold>Adaptador </Bold>
                         <Soft>
                             u$d {cart.adapter.product.price}
                         </Soft>
@@ -56,14 +56,14 @@ const Summary = ({ cart, mainProduct }) => {
                 {
                     cart.powerBank.is === true &&
                     <ReviewItem>
-                        <Bold>Cargador: </Bold>
+                        <Bold>Cargador </Bold>
                         <Soft>
                             u$d {cart.powerBank.product.price}
                         </Soft>
                     </ReviewItem>
                 }
                 <ReviewItem>
-                    <Bold>Total: </Bold>
+                    <Bold>Total </Bold>
                     <Soft>
                         u$d {cart.total}
                     </Soft>
