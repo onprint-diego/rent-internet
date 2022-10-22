@@ -5,7 +5,7 @@ export const Container = styled.section`
     width: 100%;
     position: relative;
     min-height: var(--section-min-height);
-    background-color: var(--soft-lines-color);
+    /* background-color: var(--soft-lines-color); */
     padding: 5rem 0;
     display: flex;
     justify-content: center;
