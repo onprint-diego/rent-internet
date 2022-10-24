@@ -19,7 +19,6 @@ export const ProductContainer = styled.article`
 
 export const LeftContainer = styled.div`
     width: 30%;
-    /* margin-right: 3rem; */
     margin-left: 2rem;
 `
 
@@ -30,7 +29,6 @@ export const RightContainer = styled.div`
     background-color: #ffffff;
     border-radius: 5px;
     box-shadow: var(--container-shadow);
-
     margin-left: 5rem;
 `
 

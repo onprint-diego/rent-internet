@@ -12,8 +12,6 @@ import {
 
 const Summary = ({ cart, mainProduct }) => {
 
-    console.log(mainProduct)
-
     return (
         <Sticky>
             <ImageContainer>

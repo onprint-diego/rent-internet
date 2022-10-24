@@ -19,7 +19,7 @@ const Checkout = () => {
 
     const { cart, setCart } = GetCartContext()
     const { products } = GetProductsContext()
-    const [ mainProduct, setMainProduct ] = useState({})
+    const [mainProduct, setMainProduct] = useState({})
 
     useEffect(() => {
         if (products.length !== 0) {
@@ -41,15 +41,15 @@ const Checkout = () => {
                             </EmptyCartInner>
                         </EmptyCartContainer> :
                         <>
+                            <RightContainer>
+                                <CheckoutForm cart={cart} setCart={setCart} />
+                            </RightContainer>
                             <LeftContainer>
                                 {
                                     Object.values(mainProduct).length !== 0 &&
                                     <Summary cart={cart} mainProduct={mainProduct} />
                                 }
                             </LeftContainer>
-                            <RightContainer>
-                                <CheckoutForm cart={cart} setCart={setCart} />
-                            </RightContainer>
                         </>
                 }
             </CheckoutContainer>
