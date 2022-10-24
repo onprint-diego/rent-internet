@@ -34,3 +34,11 @@ export const ButtonContainer = styled.div`
     display: flex;
     justify-content: flex-end;
 `
+
+// ORDER SUMMARY
+
+export const List = styled.ul``
+
+export const ListEl = styled.li``
+
+export const Txt = styled.p``
