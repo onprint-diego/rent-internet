@@ -1,4 +1,7 @@
 import { PrimaryButtonAction } from '../shared/PrimaryButton/PrimaryButton'
+import { GetCartContext } from '../../context/CartContext'
+// import { createTransferOrder } from '../../utils/createTransferOrder'
+import { CreateWooCommerceTransferOrder } from '../../pages/api/create-woo-transfer-order'
 import {
     ButtonContainer,
     Container,
@@ -9,9 +12,10 @@ import {
 
 const Transfer = () => {
 
+    const { cart } = GetCartContext()
+
     const placeOrder = () => {
-        console.log('escribir en db')
-        //escribir data en woo
+        CreateWooCommerceTransferOrder(cart)
     }
 
     return (
@@ -20,7 +24,7 @@ const Transfer = () => {
                 <MsjContainer>
                     <Msj>
                         Texto para transferencia.<br></br>
-                        Explica que la orden llega a la empresa una vez que da click al botón, pero no es efectiva hasta que no paga (queda pendiente), guacho
+                        Explica que la orden llega a la empresa una vez que da click al botón, pero no es efectiva hasta que no paga (queda pendiente). Inluir resumen de la reserva?
                     </Msj>
                     <ButtonContainer>
                         <PrimaryButtonAction event={placeOrder}>

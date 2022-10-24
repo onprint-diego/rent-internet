@@ -52,7 +52,17 @@ const CheckoutForm = ({ cart, setCart }) => {
     const formik = useFormik({
         initialValues: {
             name: '',
+            surname: '',
             email: '',
+            phone: '',
+            deliveryAddress: '',
+            deliveryCp: '',
+            deliveryCity: '',
+            deliveryCountry: '',
+            billingAddress: '',
+            billingCp: '',
+            billingCity: '',
+            billingCountry: '',
         },
         validationSchema: Yup.object({
             name: Yup.string().required(generalError).min(2, minGeneralError).max(20, maxGeneralError),
@@ -81,19 +91,21 @@ const CheckoutForm = ({ cart, setCart }) => {
                 billingAddress: values.billingAddress,
                 billingCp: values.billingCp,
                 billingCity: values.billingCity,
-                billlingCountry: values.billlingCountry, 
+                billingCountry: values.billingCountry, 
             }
+
+            setCart({
+                ...cart,
+                customerDetails: customer,
+            })
 
             setDisabledButton(true)
 
             paymentMethod ? 
             createCheckOutSession(cart, customer) :
             router.push('/bank-transfer')
-            
         }
     })
-
-    // console.log(paymentMethod)
 
     return (
         <Form onSubmit={formik.handleSubmit}>
@@ -200,7 +212,7 @@ const CheckoutForm = ({ cart, setCart }) => {
                     id="billingAddress"
                     name="billingAddress"
                     type="text"
-                    value={formik.values.billingAddress}
+                    value={formik.values.billingAddress || ''}
                     event={formik.handleChange}
                     placeholder={placeholderAdd}
                     touched={formik.touched}
@@ -211,7 +223,7 @@ const CheckoutForm = ({ cart, setCart }) => {
                     name="billingCp"
                     type="text"
                     pattern="[0-9]*"
-                    value={formik.values.billingCp}
+                    value={formik.values.billingCp || ''}
                     event={formik.handleChange}
                     placeholder={placeholderCp}
                     touched={formik.touched}
@@ -221,17 +233,17 @@ const CheckoutForm = ({ cart, setCart }) => {
                     id="billingCity"
                     name="billingCity"
                     type="text"
-                    value={formik.values.billingCity}
+                    value={formik.values.billingCity || ''}
                     event={formik.handleChange}
                     placeholder={placeholderCity}
                     touched={formik.touched}
                     error={formik.errors.billingCity}
                 />
                 <InputField
-                    id="billlingCountry"
-                    name="billlingCountry"
+                    id="billingCountry"
+                    name="billingCountry"
                     type="text"
-                    value={formik.values.billlingCountry}
+                    value={formik.values.billingCountry || ''}
                     event={formik.handleChange}
                     placeholder={placeholderCountry}
                     touched={formik.touched}
@@ -255,3 +267,65 @@ const CheckoutForm = ({ cart, setCart }) => {
 }
 
 export default CheckoutForm
+
+/*
+    const data = {
+        payment_method_title: "Transferencia bancaria",
+        status: 'pending',
+    }
+*/
+
+// const data = {
+//     payment_method: "bacs",
+//     payment_method_title: "Direct Bank Transfer",
+//     set_paid: true,
+//     billing: {
+//       first_name: "John",
+//       last_name: "Doe",
+//       address_1: "969 Market",
+//       address_2: "",
+//       city: "San Francisco",
+//       state: "CA",
+//       postcode: "94103",
+//       country: "US",
+//       email: "john.doe@example.com",
+//       phone: "(555) 555-5555"
+//     },
+//     shipping: {
+//       first_name: "John",
+//       last_name: "Doe",
+//       address_1: "969 Market",
+//       address_2: "",
+//       city: "San Francisco",
+//       state: "CA",
+//       postcode: "94103",
+//       country: "US"
+//     },
+//     line_items: [
+//       {
+//         product_id: 93,
+//         quantity: 2
+//       },
+//       {
+//         product_id: 22,
+//         variation_id: 23,
+//         quantity: 1
+//       }
+//     ],
+//     shipping_lines: [
+//       {
+//         method_id: "flat_rate",
+//         method_title: "Flat Rate",
+//         total: "10.00"
+//       }
+//     ]
+//   };
+  
+//   WooCommerce.post("orders", data)
+//     .then((response) => {
+//       console.log(response.data);
+//     })
+//     .catch((error) => {
+//       console.log(error.response.data);
+//     });
+  

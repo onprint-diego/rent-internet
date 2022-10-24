@@ -84,7 +84,7 @@ async function CreateStripeSession(req, res) {
         }
     });
 
-    res.json({ id: session.id });
+    res.json({ id: session.id })
 }
 
 export default CreateStripeSession

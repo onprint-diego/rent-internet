@@ -22,7 +22,6 @@ const Checkout = () => {
     const [ mainProduct, setMainProduct ] = useState({})
 
     useEffect(() => {
-        console.log(products)
         if (products.length !== 0) {
             setMainProduct(products.find(item => item.name === "Modem"))
         }

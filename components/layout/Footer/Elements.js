@@ -5,10 +5,9 @@ export const Container = styled.section`
     width: 100%;
     position: relative;
     min-height: var(--section-min-height);
-    /* background-color: var(--soft-lines-color); */
-    padding: 5rem 0;
+    padding: 8rem 0;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
 `
 
@@ -17,8 +16,20 @@ export const Inner = styled.div`
     width: 85%;
     max-width: var(--section-max-width);
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    justify-content: space-around;
+`
+
+export const InnerSection = styled.div`
+    width: 15%;
+    display: flex;
+    justify-content: center;
+    padding: 2.5rem 0;
+
+    &:nth-child(2) {
+        border-left: 1px solid var(--soft-lines-color);
+        border-right: 1px solid var(--soft-lines-color);
+        width: 35%;
+    }
 `
 
 export const Links = styled.ul``
@@ -35,8 +46,6 @@ export const LinkContainer = styled.li`
 
 export const SocialIcons = styled.ul`
     display: flex;
-    justify-content: center;
-    margin: 2rem 0;
 `
 
 export const IconContainer = styled.li`
@@ -59,7 +68,6 @@ export const LogoContainer = styled.div`
     position: relative;
     width: 7rem;
     height: 3rem;
-    margin-top: 1rem;
 `
 
 export const LogoImage = styled(Image)`
@@ -67,4 +75,12 @@ export const LogoImage = styled(Image)`
     height: 100%;
     margin: 0 auto;
     object-fit: cover;
+`
+
+export const CopyRight = styled.p`
+    text-align: center;
+    font-size: .8rem;
+    position: absolute;
+    bottom: .5rem;
+    width: 100%;
 `

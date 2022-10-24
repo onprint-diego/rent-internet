@@ -14,7 +14,6 @@ import HeroFeatures from '../components/home/Hero/HeroFeatures'
 //TODO> loading, cleanup en useEffect
 //TODO> pasar toda la logica representacional a un componente Home.js
 
-
 export default function Home(props) {
 
   const [ mounted, setMounted ] = useState(false)

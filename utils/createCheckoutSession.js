@@ -11,6 +11,9 @@ export const createCheckOutSession = async ( cart, customer ) => {
         stripe.redirectToCheckout({sessionId: id})
     }
 
+    //probar hacer el get products de woo que hay en create-stripe-session aca, y despues pasarle los
+    //productos para reducir el tiempo de la api call
+
     fetch('/api/create-stripe-session', {
         method: "POST",
         body: JSON.stringify({cart: cart, customer: customer }),

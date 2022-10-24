@@ -12,19 +12,28 @@ import {
     Links,
     LogoContainer,
     LogoImage,
+    InnerSection,
+    CopyRight,
 } from './Elements'
 
 const Footer = () => {
 
+    const year = new Date().getFullYear()
+
     const links = [
         {
             title: 'Políticas de privacidad',
-            to: '/',
+            to: '/privacy-policy',
         },
         {
             title: 'Términos y condiciones',
-            to: '/',
-        }]
+            to: '/terms-conditions',
+        },
+        {
+            title: 'Contacto',
+            to: '/'
+        },
+    ]
 
     const icons = [
         {
@@ -43,32 +52,39 @@ const Footer = () => {
     return (
         <Container>
             <Inner>
-                <Links>
-                    {
-                        links.map(link => {
-                            return (
-                                <LinkContainer key={link.title}>
-                                    <Link href={link.to}>{link.title}</Link>
-                                </LinkContainer>
-                            )
-                        })
-                    }
-                </Links>
-                <SocialIcons>
-                    {
-                        icons.map(icon => {
-                            return(
-                                <IconContainer key={icon.url}>
-                                    <Icon src={icon.src} alt={icon.alt} fill />
-                                </IconContainer>
-                            )
-                        })
-                    }
-                </SocialIcons>
-                <LogoContainer>
-                    <LogoImage src={Lg} alt='logo' fill />
-                </LogoContainer>
+                <InnerSection>
+                    <SocialIcons>
+                        {
+                            icons.map(icon => {
+                                return(
+                                    <IconContainer key={icon.url}>
+                                        <Icon src={icon.src} alt={icon.alt} fill />
+                                    </IconContainer>
+                                )
+                            })
+                        }
+                    </SocialIcons>
+                </InnerSection>
+                <InnerSection>
+                    <LogoContainer>
+                        <LogoImage src={Lg} alt='logo' fill />
+                    </LogoContainer>
+                </InnerSection>
+                <InnerSection>
+                    <Links>
+                        {
+                            links.map(link => {
+                                return (
+                                    <LinkContainer key={link.title}>
+                                        <Link href={link.to}>{link.title}</Link>
+                                    </LinkContainer>
+                                )
+                            })
+                        }
+                    </Links>
+                </InnerSection>
             </Inner>
+            <CopyRight>Rent Internet&#169;{year}</CopyRight>
         </Container>
     )
 }
