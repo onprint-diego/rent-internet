@@ -22,9 +22,9 @@ export async function CreateWooCommerceCardOrder(data) {
     // const formatedProducts = formatProducts()
 
     const order = {
-        payment_method: "Transferencia Bancaria",
-        payment_method_title: "Transferencia bancaria",
-        set_paid: false,
+        payment_method: "Pago con tarjeta de crédito",
+        payment_method_title: "Pago con tarjeta de crédito",
+        set_paid: true,
         // billing: {
         //     first_name: data.customerDetails.name,
         //     last_name: data.customerDetails.surname,
