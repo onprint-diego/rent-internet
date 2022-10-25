@@ -1,13 +1,11 @@
-import { buffer } from 'micro'
 import Stripe from 'stripe'
+import { buffer } from 'micro'
 import { sendCardMail } from '../../utils/sendCardMail'
 import { CreateWooCommerceCardOrder } from './create-woo-card-order'
-// import { setWooOrder } from '../../utils/setWooOrder'
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY)
 
 const endpointSecret = 'whsec_kVUevKPdbV63xZAz5Tny4zkbGX4iPn9Y'
-// const endpointSecret = 'whsec_a6d2c13640b5415b7f8a03b7d1deef1eead64b331f6d0b61024e72f5038777f3'
 
 export const config = {
     api: {
@@ -35,13 +33,13 @@ export default async function handler(req, res) {
 
             console.log(session)
 
-            CreateWooCommerceCardOrder(session)
+            //FUNCIONA PERO NO LE LLEGAN LOS DATOS
+            // CreateWooCommerceCardOrder(session)
 
-            // sendCardMail(session)
-            // sendCardOrderMail(session)
+            sendCardMail(session)
 
 
-            // setWooOrder(session)
+
             // const clientSecret = session.id
             // stripe.checkout.sessions.listLineItems(clientSecret) //Check bottom for structure of response object
             // .then( res => {

@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { ActionButton } from '../shared/ActionButton/ActionButton'
 import { GetCartContext } from '../../context/CartContext'
 import { CreateWooCommerceTransferOrder } from '../../pages/api/create-woo-transfer-order'
+import { sendTransferMail } from '../../utils/sendTransferMail'
 import {
     ButtonContainer,
     Container,
@@ -9,7 +10,6 @@ import {
     Msj,
     MsjContainer,
 } from './Elements'
-import { sendTransferMail } from '../../utils/sendTransferMail'
 
 const Transfer = () => {
 
@@ -22,10 +22,10 @@ const Transfer = () => {
         setDisabledButton(true)
 
         CreateWooCommerceTransferOrder(cart)
-            .then(res => {
+        .then(res => {
+                sendTransferMail(res.data)
                 setDisabledButton(false)
                 setOrderId(res.data.id)
-                sendTransferMail(res.data)
             })
             .catch(() => console.log('Error setting order in Woocommerce'))
     }

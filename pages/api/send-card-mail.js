@@ -3,19 +3,24 @@ import sgMail from '@sendgrid/mail'
 sgMail.setApiKey(process.env.SENDGRID_KEY);
 
 export default async (req, res) => {
-    //   const { email, subject, message, name } = req.body
-
+    const content = req.body
     const email = 'rent@rent-internet.com'
-    const to = 'diegoeliseoiovane@gmail.com'
-    const subject = 'Mail de Rent Internet'
-    const message = 'Un mensaje'
+    const subject = 'Confirmación de reserva de módem Rent Internet'
+
+    // const header = `
+    //     <h1>${customer.last_name} ${customer.first_name}, gracias</h1>
+    //     <p>El número de tu reserva es: ${content.id}</p>
+    // `
+    // const itemsList = content.line_items.map(item => `<p>${item.name} - u$d${item.total}</p>`).join('<br>')
+    // const footer = `Total $${content.total}`
+
+    // const html = header + itemsList + footer
 
     const msg = {
-        to: toolbar,
+        to: 'diegoeliseoiovane@gmail.com',
         from: email,
         subject,
-        name,
-        text: message,
+        html: `<h1>hola${content.customer_details.email}</h1><p>${content.id}</p>`,
     };
 
     try {

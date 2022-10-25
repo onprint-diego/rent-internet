@@ -1,5 +1,4 @@
 export const sendTransferMail = async (data) => {
-
     try {
         await fetch("/api/send-transfer-mail", {
             "method": "POST",
