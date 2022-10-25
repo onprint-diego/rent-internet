@@ -1,11 +1,9 @@
 import { loadStripe } from '@stripe/stripe-js'
 import { api } from './woocommerce'
 
-export const createCheckOutSession = async (cart, customer) => {
+export const createCheckOutSession = async (cart) => {
 
-    const publishableKey = process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
-
-    const stripePromise = loadStripe(publishableKey)
+    const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY)
 
     const redirect = async (id) => {
         const stripe = await stripePromise
@@ -23,11 +21,12 @@ export const createCheckOutSession = async (cart, customer) => {
             .catch(err => console.log('Error creating checkout: ' + err))
     }
 
+    //Better to get products within the api call, but api call timesout and client wont upgrade vercel
     api.get("products")
-    .then((res) => {
-      if (res.status === 200) {
-        createSession(res.data)
-      }
-    })
-    .catch(err => console.log(err))
+        .then((res) => {
+            if (res.status === 200) {
+                createSession(res.data)
+            }
+        })
+        .catch(err => console.log(err))
 }

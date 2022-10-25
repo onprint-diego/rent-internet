@@ -5,13 +5,13 @@ async function CreateStripeSession(req, res) {
 
     const customer = cart.customerDetails
     const modem = products.find(product => product.id === 132)
+    const modemPrice = parseInt(modem.price)
     const shippingFee = products.find(product => product.id === 629)
     const shippingFeePrice = parseInt(shippingFee.price)
     const adapter = products.find(product => product.id === 434)
     const adapterPrice = parseInt(adapter.price)
     const powerBank = products.find(product => product.id === 435)
     const powerBankPrice = parseInt(powerBank.price)
-    const subTotal = parseInt(modem.price)
 
     const items = []
     items.push({
@@ -20,9 +20,9 @@ async function CreateStripeSession(req, res) {
             product_data: {
                 name: modem.name,
             },
-            unit_amount: subTotal * 100,
+            unit_amount: modemPrice * 100,
         },
-        quantity: 1,
+        quantity: cart.qty,
     })
 
     items.push({
@@ -80,6 +80,7 @@ async function CreateStripeSession(req, res) {
             billingCp: customer.billingCp,
             billingCity: customer.billingCity,
             billingCountry: customer.billingCountry,
+            //AGREGAR FROM Y TO DESDE EL CART PARA PASAR COMO METADATA
         }
     });
 

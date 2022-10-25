@@ -1,11 +1,12 @@
 import { buffer } from 'micro'
 import Stripe from 'stripe'
-import { sendMail } from '../../utils/sendMail'
+import { sendCardMail } from '../../utils/sendCardMail'
+import { CreateWooCommerceCardOrder } from './create-woo-card-order'
 // import { setWooOrder } from '../../utils/setWooOrder'
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY)
 
-const endpointSecret = 'whsec_4GZuTKO7MA0xd2WhAmDiwlHSWl5R9AfB'
+const endpointSecret = 'whsec_kVUevKPdbV63xZAz5Tny4zkbGX4iPn9Y'
 // const endpointSecret = 'whsec_a6d2c13640b5415b7f8a03b7d1deef1eead64b331f6d0b61024e72f5038777f3'
 
 export const config = {
@@ -31,7 +32,15 @@ export default async function handler(req, res) {
 
         if (event.type === 'checkout.session.completed') {
             const session = event.data.object
-            sendMail(session)
+
+            console.log(session)
+
+            CreateWooCommerceCardOrder(session)
+
+            // sendCardMail(session)
+            // sendCardOrderMail(session)
+
+
             // setWooOrder(session)
             // const clientSecret = session.id
             // stripe.checkout.sessions.listLineItems(clientSecret) //Check bottom for structure of response object
@@ -43,6 +52,88 @@ export default async function handler(req, res) {
         }
     }
 }
+
+//THE SESSION OBJECT
+// "id": "cs_test_b1TynfVjoTZenP1bHpMPds3fo3HRi5FutYwQt1RnUKpRLK32Jkq4X2Nczo",
+// "object": "checkout.session",
+// "after_expiration": null,
+// "allow_promotion_codes": null,
+// "amount_subtotal": 8600,
+// "amount_total": 8600,
+// "automatic_tax": {
+//   "enabled": false,
+//   "status": null
+// },
+// "billing_address_collection": null,
+// "cancel_url": "https://rent-internet.com/cancel",
+// "client_reference_id": null,
+// "consent": null,
+// "consent_collection": null,
+// "created": 1666008898,
+// "currency": "usd",
+// "customer": null,
+// "customer_creation": "if_required",
+// "customer_details": {
+//   "address": {
+//     "city": null,
+//     "country": "CH",
+//     "line1": null,
+//     "line2": null,
+//     "postal_code": null,
+//     "state": null
+//   },
+//   "email": "florencia.bianco@onprint.ch",
+//   "name": "florencia prueba",
+//   "phone": null,
+//   "tax_exempt": "none",
+//   "tax_ids": [
+//   ]
+// },
+// "customer_email": null,
+// "expires_at": 1666095298,
+// "livemode": false,
+// "locale": null,
+// "metadata": {
+//   "deliveryAddress": "independencia",
+//   "customerSurname": "bianco",
+//   "deliveryCp": "8005",
+//   "deliveryCountry": "Germany",
+//   "customerName": "florencia",
+//   "deliveryCity": "Zurich",
+//   "customerEmail": "florencia.bianco@onprint.ch",
+//   "customerPhone": "3416120640"
+// },
+// "mode": "payment",
+// "payment_intent": "pi_3LtsEqHieiQtj1QL1b8nxMRA",
+// "payment_link": null,
+// "payment_method_collection": "always",
+// "payment_method_options": {
+// },
+// "payment_method_types": [
+//   "card"
+// ],
+// "payment_status": "paid",
+// "phone_number_collection": {
+//   "enabled": false
+// },
+// "recovered_from": null,
+// "setup_intent": null,
+// "shipping_address_collection": null,
+// "shipping_cost": null,
+// "shipping_details": null,
+// "shipping_options": [
+// ],
+// "status": "complete",
+// "submit_type": null,
+// "subscription": null,
+// "success_url": "https://rent-internet.com/succesful",
+// "total_details": {
+//   "amount_discount": 0,
+//   "amount_shipping": 0,
+//   "amount_tax": 0
+// },
+// "url": null
+// }
 
 //Response Object for listLineItems
 /*

@@ -51,8 +51,8 @@ const CheckoutForm = ({ cart, setCart }) => {
 
     const formik = useFormik({
         initialValues: {
-            name: 'asd',
-            surname: 'asd',
+            name: 'card',
+            surname: 'payment',
             email: 'diegoeliseoiovane@gmail.com',
             phone: '123',
             deliveryAddress: 'asd',
@@ -99,7 +99,7 @@ const CheckoutForm = ({ cart, setCart }) => {
                 customerDetails: customer,
             })
 
-            // setDisabledButton(true)
+            setDisabledButton(true)
 
             paymentMethod ? 
             createCheckOutSession(cart) :

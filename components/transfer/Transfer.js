@@ -9,6 +9,7 @@ import {
     Msj,
     MsjContainer,
 } from './Elements'
+import { sendTransferMail } from '../../utils/sendTransferMail'
 
 const Transfer = () => {
 
@@ -22,11 +23,9 @@ const Transfer = () => {
 
         CreateWooCommerceTransferOrder(cart)
             .then(res => {
-                console.log('res...............', res.data)
                 setDisabledButton(false)
                 setOrderId(res.data.id)
-
-                //Send mail
+                sendTransferMail(res.data)
             })
             .catch(() => console.log('Error setting order in Woocommerce'))
     }

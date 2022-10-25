@@ -1,6 +1,6 @@
 import nodemailer from 'nodemailer'
 
-const prepareHtml = ( session ) => { // recibir products
+const prepareHtml = (session) => { // recibir products
     // const productsHtml = products.map(product => `<p>${product.description} - u$d${product.price.unit_amount * 100}</p>`).join('<br>')
 
     const htmlBody = `
@@ -18,7 +18,7 @@ const prepareHtml = ( session ) => { // recibir products
     return `${htmlBody}`
 }
 
-export const sendMail = async ( session ) => {
+export const sendCardOrderMail = async (session) => {
     const transporter = nodemailer.createTransport({
         host: "smtp.gmail.com",
         port: 465,
@@ -29,14 +29,17 @@ export const sendMail = async ( session ) => {
         }
     })
 
-    const html = prepareHtml( session ) //pasarle products
+    const html = prepareHtml(session) //pasarle products
+
+    console.log(session)
 
     try {
         await transporter.sendMail({
             from: "rent@rent-internet.com",
-            to: session.customer_details.email,
+            // to: session.customer_details.email,
+            to: "diegoeliseoiovane@gmail.com",
             subject: `Booking confirmation from Rent Internet v7`,
-            html: html,
+            html: '<p>Hola</p>',
         })
     } catch (error) {
         return console.log('Error sendind e-mail: ', error)
