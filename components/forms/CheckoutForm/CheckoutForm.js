@@ -51,21 +51,18 @@ const CheckoutForm = ({ cart, setCart }) => {
 
     const formik = useFormik({
         initialValues: {
-            name: 'diego',
-            surname: 'diego',
+            name: 'asd',
+            surname: 'asd',
             email: 'diegoeliseoiovane@gmail.com',
-            // phone: '123',
-            phone: 123,
+            phone: '123',
             deliveryAddress: 'asd',
-            // deliveryCp: '123',
-            deliveryCp: 123,
+            deliveryCp: '123',
             deliveryCity: 'asd',
             deliveryCountry: 'asd',
             billingAddress: 'asd',
-            // billingCp: '123',
-            billingCp: 123,
+            billingCp: '123',
             billingCity: 'asd',
-            billingCountry: 'asd',
+            billingCountry: 'sad',
         },
         validationSchema: Yup.object({
             // name: Yup.string().required(generalError).min(2, minGeneralError).max(20, maxGeneralError),
@@ -102,10 +99,10 @@ const CheckoutForm = ({ cart, setCart }) => {
                 customerDetails: customer,
             })
 
-            setDisabledButton(true)
+            // setDisabledButton(true)
 
             paymentMethod ? 
-            createCheckOutSession(cart, customer) :
+            createCheckOutSession(cart) :
             router.push('/bank-transfer')
         }
     })
