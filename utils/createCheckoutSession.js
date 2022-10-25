@@ -2,6 +2,8 @@ import { loadStripe } from '@stripe/stripe-js'
 
 export const createCheckOutSession = async ( cart, customer ) => {
 
+    console.log('En createCheckoutSession cart............', cart)
+
     const publishableKey = process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY
 
     const stripePromise = loadStripe(publishableKey)

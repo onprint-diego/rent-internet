@@ -22,7 +22,7 @@ const Transfer = () => {
 
         CreateWooCommerceTransferOrder(cart)
             .then(res => {
-                console.log('res.....', res)
+                console.log('res...............', res.data)
                 setDisabledButton(false)
                 setOrderId(res.data.id)
 
