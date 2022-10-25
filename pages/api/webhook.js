@@ -1,7 +1,7 @@
 import { buffer } from 'micro'
 import Stripe from 'stripe'
 import { sendMail } from '../../utils/sendMail'
-import { setWooOrder } from '../../utils/setWooOrder'
+// import { setWooOrder } from '../../utils/setWooOrder'
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY)
 
@@ -32,7 +32,7 @@ export default async function handler(req, res) {
         if (event.type === 'checkout.session.completed') {
             const session = event.data.object
             sendMail(session)
-            setWooOrder(session)
+            // setWooOrder(session)
             // const clientSecret = session.id
             // stripe.checkout.sessions.listLineItems(clientSecret) //Check bottom for structure of response object
             // .then( res => {
