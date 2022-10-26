@@ -1,8 +1,8 @@
 import Stripe from 'stripe'
-import { buffer } from 'micro'
-import { CreateWooCommerceCardOrder } from './create-woo-card-order'
-
 import sgMail from '@sendgrid/mail'
+import { buffer } from 'micro'
+import { api } from "../../utils/woocommerce"
+import { CreateWooCommerceCardOrder } from './create-woo-card-order'
 
 sgMail.setApiKey(process.env.SENDGRID_KEY);
 
@@ -16,6 +16,7 @@ export const config = {
   },
 }
 
+// FUNCTION
 export default async function handler(req, res) {
   if (req.method === 'POST') {
     const reqBuffer = await buffer(req)
@@ -36,7 +37,47 @@ export default async function handler(req, res) {
       //FUNCIONA PERO NO LE LLEGAN LOS DATOS
       // CreateWooCommerceCardOrder(session)
 
-      // FUNCIONA
+      // SET ORDER IN WOOCOMMERCE
+      const stringTotal = parseInt(session.amount_total / 100)
+      // const stringDates = `Desde ${data.from} hasta ${data.to}`
+      // const formatedProducts = formatProducts()
+  
+      const order = {
+          payment_method: "Pago con tarjeta de crédito",
+          payment_method_title: "Pago con tarjeta de crédito",
+          set_paid: true,
+          // billing: {
+          //     first_name: data.customerDetails.name,
+          //     last_name: data.customerDetails.surname,
+          //     address_1: data.customerDetails.billingAddress,
+          //     city: data.customerDetails.billingCity,
+          //     postcode: data.customerDetails.billingCp,
+          //     country: data.customerDetails.billingCountry,
+          //     email: data.customerDetails.email,
+          //     phone: data.customerDetails.phone
+          // },
+          shipping: {
+              address_1: session.metadata.deliveryAddress,
+              city: session.metadata.deliveryCity,
+              postcode: session.metadata.deliveryCp,
+              country: session.metadata.deliveryCountry,
+              //use this to send dates information in form of string
+              // address_2: stringDates
+          },
+          // line_items: formatedProducts,
+          total: stringTotal,
+      }
+  
+  
+      try {
+          const response = await api.post("orders", order)
+          return response
+      } catch (error) {
+          console.log('ERROR placing order in woocommerce', error)
+          return error
+      }
+
+      // SEND MAIL
       const msg = {
         to: 'diegoeliseoiovane@gmail.com',
         from: 'rent@rent-internet.com',
