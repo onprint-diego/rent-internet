@@ -65,7 +65,7 @@ export default async function handler(req, res) {
               // address_2: stringDates
           },
           // line_items: formatedProducts,
-          total: '40',
+          total: 40,
       }
   
   
@@ -85,7 +85,10 @@ export default async function handler(req, res) {
         to: session.customer_details.email,
         from: 'rent@rent-internet.com',
         subject: 'Confirmación de reserva de módem Rent Internet',
-        html: `<h1>hola ${session.customer_details.email}</h1>`,
+        html: `
+          <h1>hola ${session.customer_details.email}</h1>
+          <p>${session.metadata.customerSurname}</p>
+          `,
       };
 
       try {
