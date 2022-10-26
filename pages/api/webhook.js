@@ -38,7 +38,7 @@ export default async function handler(req, res) {
       // CreateWooCommerceCardOrder(session)
 
       // SET ORDER IN WOOCOMMERCE
-      const stringTotal = parseInt(session.amount_total / 100)
+      // const stringTotal = parseInt(session.amount_total / 100)
       // const stringDates = `Desde ${data.from} hasta ${data.to}`
       // const formatedProducts = formatProducts()
   
@@ -57,31 +57,31 @@ export default async function handler(req, res) {
           //     phone: data.customerDetails.phone
           // },
           shipping: {
-              address_1: session.metadata.deliveryAddress,
-              city: session.metadata.deliveryCity,
-              postcode: session.metadata.deliveryCp,
-              country: session.metadata.deliveryCountry,
+              address_1: 'address jdfasl',
+              city: 'aldsfj',
+              // postcode: session.metadata.deliveryCp,
+              country: 'dsklfj',
               //use this to send dates information in form of string
               // address_2: stringDates
           },
           // line_items: formatedProducts,
-          total: stringTotal,
+          total: '40',
       }
   
   
       try {
           const response = await api.post("orders", order)
-          return response
+          // return response
       } catch (error) {
           console.log('ERROR placing order in woocommerce', error)
-          return error
+          // return error
       }
 
       // SEND MAIL
       const msg = {
-        to: 'diegoeliseoiovane@gmail.com',
+        to: session.customer_details.email,
         from: 'rent@rent-internet.com',
-        subject: 'hola',
+        subject: 'Confirmación de reserva de módem Rent Internet',
         html: `<h1>hola ${session.customer_details.email}</h1>`,
       };
 
