@@ -67,6 +67,12 @@ async function CreateStripeSession(req, res) {
         cancel_url: 'https://rent-internet.com/cancel',
         mode: 'payment',
         line_items: items,
+        customer_details: {
+            address: {
+                city: customer.billingCity,
+                line1: customer.billingAddress,
+            }
+        }
         metadata: {
             customerName: customer.name,
             customerSurname: customer.surname,
@@ -80,6 +86,7 @@ async function CreateStripeSession(req, res) {
             billingCp: customer.billingCp,
             billingCity: customer.billingCity,
             billingCountry: customer.billingCountry,
+            items: items,
             //AGREGAR FROM Y TO DESDE EL CART PARA PASAR COMO METADATA
         }
     });
