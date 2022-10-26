@@ -67,12 +67,12 @@ async function CreateStripeSession(req, res) {
         cancel_url: 'https://rent-internet.com/cancel',
         mode: 'payment',
         line_items: items,
-        customer_details: {
-            address: {
-                city: customer.billingCity,
-                line1: customer.billingAddress,
-            },
-        },
+        // customer_details: {
+        //     address: {
+        //         city: customer.billingCity,
+        //         line1: customer.billingAddress,
+        //     },
+        // },
         metadata: {
             customerName: customer.name,
             customerSurname: customer.surname,
