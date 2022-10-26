@@ -3,7 +3,7 @@ import sgMail from '@sendgrid/mail'
 sgMail.setApiKey(process.env.SENDGRID_KEY);
 
 export default async (req, res) => {
-    const content = req.body
+    // const content = req.body
     const email = 'rent@rent-internet.com'
     const subject = 'Confirmación de reserva de módem Rent Internet'
 
@@ -20,7 +20,7 @@ export default async (req, res) => {
         to: 'diegoeliseoiovane@gmail.com',
         from: email,
         subject,
-        html: `<h1>hola${content.customer_details.email}</h1><p>${content.id}</p>`,
+        html: `<h1>hola</h1>`,
     };
 
     try {

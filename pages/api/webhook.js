@@ -3,52 +3,66 @@ import { buffer } from 'micro'
 import { sendCardMail } from '../../utils/sendCardMail'
 import { CreateWooCommerceCardOrder } from './create-woo-card-order'
 
+import sgMail from '@sendgrid/mail'
+
+sgMail.setApiKey(process.env.SENDGRID_KEY);
+
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY)
 
 const endpointSecret = 'whsec_kVUevKPdbV63xZAz5Tny4zkbGX4iPn9Y'
 
 export const config = {
-    api: {
-        bodyParser: false,
-    },
+  api: {
+    bodyParser: false,
+  },
 }
 
 export default async function handler(req, res) {
-    if (req.method === 'POST') {
-        const reqBuffer = await buffer(req)
-        const payload = reqBuffer.toString()
-        const sig = req.headers["stripe-signature"]
+  if (req.method === 'POST') {
+    const reqBuffer = await buffer(req)
+    const payload = reqBuffer.toString()
+    const sig = req.headers["stripe-signature"]
 
-        let event
+    let event
 
-        try {
-            event = stripe.webhooks.constructEvent(payload, sig, endpointSecret)
-        } catch (err) {
-            console.log('Error', err.message)
-            return res.status(400).send(`Webhook error: ${err.message}`)
-        }
-
-        if (event.type === 'checkout.session.completed') {
-            const session = event.data.object
-
-            console.log(session)
-
-            //FUNCIONA PERO NO LE LLEGAN LOS DATOS
-            // CreateWooCommerceCardOrder(session)
-
-            sendCardMail(session)
-
-
-
-            // const clientSecret = session.id
-            // stripe.checkout.sessions.listLineItems(clientSecret) //Check bottom for structure of response object
-            // .then( res => {
-            //     products = res.data
-            //     sendConfirmationMail(session, products)
-            //     setOrderInWoo(session, products)
-            // })
-        }
+    try {
+      event = stripe.webhooks.constructEvent(payload, sig, endpointSecret)
+    } catch (err) {
+      console.log('Error', err.message)
+      return res.status(400).send(`Webhook error: ${err.message}`)
     }
+
+    if (event.type === 'checkout.session.completed') {
+      const session = event.data.object
+      //FUNCIONA PERO NO LE LLEGAN LOS DATOS
+      // CreateWooCommerceCardOrder(session)
+
+      // sendCardMail(session)
+      const msg = {
+        to: 'diegoeliseoiovane@gmail.com',
+        from: 'rent@rent-internet.com',
+        subject: 'hola',
+        html: `<h1>hola</h1>`,
+      };
+
+      try {
+        await sgMail.send(msg);
+        res.json({ message: `Email has been sent` })
+      } catch (error) {
+        res.status(500).json({ error: 'Error sending email' })
+      }
+
+
+
+      // const clientSecret = session.id
+      // stripe.checkout.sessions.listLineItems(clientSecret) //Check bottom for structure of response object
+      // .then( res => {
+      //     products = res.data
+      //     sendConfirmationMail(session, products)
+      //     setOrderInWoo(session, products)
+      // })
+    }
+  }
 }
 
 //THE SESSION OBJECT
