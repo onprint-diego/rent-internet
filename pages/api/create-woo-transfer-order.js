@@ -42,7 +42,7 @@ export async function CreateWooCommerceTransferOrder(data) {
             //use this to send dates information in form of string
             address_2: stringDates
         },
-        total: stringTotal,
+        // total: stringTotal,
         line_items: formatedProducts,
     }
 
