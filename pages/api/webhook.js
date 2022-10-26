@@ -70,12 +70,15 @@ export default async function handler(req, res) {
   
   
       try {
-          const response = await api.post("orders", order)
+          await api.post("orders", order)
+          res.json({ message: `Order posted to Woocommerce` })
           // return response
       } catch (error) {
           console.log('ERROR placing order in woocommerce', error)
           // return error
       }
+
+
 
       // SEND MAIL
       const msg = {
