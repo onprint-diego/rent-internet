@@ -72,7 +72,7 @@ async function CreateStripeSession(req, res) {
                 city: customer.billingCity,
                 line1: customer.billingAddress,
             }
-        }
+        },
         metadata: {
             customerName: customer.name,
             customerSurname: customer.surname,
