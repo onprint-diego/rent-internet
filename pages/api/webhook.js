@@ -37,22 +37,31 @@ export default async function handler(req, res) {
       //FUNCIONA PERO NO LE LLEGAN LOS DATOS
       // CreateWooCommerceCardOrder(session)
 
-      // sendCardMail(session)
-      const msg = {
-        to: 'diegoeliseoiovane@gmail.com',
-        from: 'rent@rent-internet.com',
-        subject: 'hola',
-        html: `<h1>hola</h1>`,
-      };
+      // FUNCIONA
+      // const msg = {
+      //   to: 'diegoeliseoiovane@gmail.com',
+      //   from: 'rent@rent-internet.com',
+      //   subject: 'hola',
+      //   html: `<h1>hola</h1>`,
+      // };
+
+      // try {
+      //   await sgMail.send(msg);
+      //   res.json({ message: `Email has been sent` })
+      // } catch (error) {
+      //   res.status(500).json({ error: 'Error sending email' })
+      // }
 
       try {
-        await sgMail.send(msg);
-        res.json({ message: `Email has been sent` })
+        await fetch("/api/send-card-mail", {
+          "method": "POST",
+          "headers": { "content-type": "application/json" },
+          "body": JSON.stringify(session)
+        })
+    
       } catch (error) {
-        res.status(500).json({ error: 'Error sending email' })
+        console.log(error)
       }
-
-
 
       // const clientSecret = session.id
       // stripe.checkout.sessions.listLineItems(clientSecret) //Check bottom for structure of response object

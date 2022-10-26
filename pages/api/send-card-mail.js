@@ -19,8 +19,8 @@ export default async (req, res) => {
     const msg = {
         to: 'diegoeliseoiovane@gmail.com',
         from: email,
-        subject,
-        html: `<h1>hola</h1>`,
+        subject: 'hola',
+        html: `<h1>hola este mail</h1>`,
     };
 
     try {
