@@ -16,7 +16,6 @@ export async function CreateWooCommerceTransferOrder(data) {
         return products
     }
 
-    const stringTotal = data.total.toString()
     const stringDates = `Desde ${data.from} hasta ${data.to}`
     const formatedProducts = formatProducts()
 
@@ -42,7 +41,6 @@ export async function CreateWooCommerceTransferOrder(data) {
             //use this to send dates information in form of string
             address_2: stringDates
         },
-        // total: stringTotal,
         line_items: formatedProducts,
     }
 

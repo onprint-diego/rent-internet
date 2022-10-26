@@ -33,11 +33,9 @@ export default async function handler(req, res) {
 
     if (event.type === 'checkout.session.completed') {
       const session = event.data.object
-      //FUNCIONA PERO NO LE LLEGAN LOS DATOS
-      // CreateWooCommerceCardOrder(session)
-
+      let wooId 
+      
       // SET ORDER IN WOOCOMMERCE
-      // const stringTotal = parseInt(session.amount_total / 100)
       // const stringDates = `Desde ${data.from} hasta ${data.to}`
       // const formatedProducts = formatProducts()
   
@@ -64,18 +62,16 @@ export default async function handler(req, res) {
               // address_2: stringDates
           },
           // line_items: formatedProducts,
-          // total: 40,
       }
   
   
       try {
-          await api.post("orders", order)
-          // res.json({ message: `Order posted to Woocommerce` })
+          const wooId = await api.post("orders", order)
+          res.json({ message: wooId })
           //USE RESPONSE TO GET ORDER ID
           // return response
       } catch (error) {
-          console.log('ERROR placing order in woocommerce', error)
-          // return error
+          res.json({ message: 'Error setting woo order'})
       }
 
 
