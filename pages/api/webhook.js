@@ -2,7 +2,6 @@ import Stripe from 'stripe'
 import sgMail from '@sendgrid/mail'
 import { buffer } from 'micro'
 import { api } from "../../utils/woocommerce"
-import { CreateWooCommerceCardOrder } from './create-woo-card-order'
 
 sgMail.setApiKey(process.env.SENDGRID_KEY);
 
@@ -71,7 +70,7 @@ export default async function handler(req, res) {
   
       try {
           await api.post("orders", order)
-          res.json({ message: `Order posted to Woocommerce` })
+          // res.json({ message: `Order posted to Woocommerce` })
           // return response
       } catch (error) {
           console.log('ERROR placing order in woocommerce', error)
@@ -93,6 +92,7 @@ export default async function handler(req, res) {
 
       try {
         await sgMail.send(msg);
+        res.status(200).json({message: 'Ok'})
         res.json({ message: `Email has been sent` })
       } catch (error) {
         res.status(500).json({ error: 'Error sending email' })
