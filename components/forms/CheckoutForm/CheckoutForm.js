@@ -51,18 +51,18 @@ const CheckoutForm = ({ cart, setCart }) => {
 
     const formik = useFormik({
         initialValues: {
-            name: 'card',
-            surname: 'payment',
+            name: 'Diego',
+            surname: 'Iovane',
             email: 'diegoeliseoiovane@gmail.com',
-            phone: '123',
-            deliveryAddress: 'asd',
-            deliveryCp: '123',
-            deliveryCity: 'asd',
-            deliveryCountry: 'asd',
-            billingAddress: 'asd',
-            billingCp: '123',
-            billingCity: 'asd',
-            billingCountry: 'sad',
+            phone: '123456789',
+            deliveryAddress: 'Calle 123',
+            deliveryCp: '1234',
+            deliveryCity: 'Ciudad',
+            deliveryCountry: 'Pais',
+            billingAddress: 'Direccion envio',
+            billingCp: '1234 Envio',
+            billingCity: 'Ciudad envio',
+            billingCountry: 'Pais envio',
         },
         validationSchema: Yup.object({
             // name: Yup.string().required(generalError).min(2, minGeneralError).max(20, maxGeneralError),
@@ -94,15 +94,18 @@ const CheckoutForm = ({ cart, setCart }) => {
                 billingCountry: values.billingCountry, 
             }
 
+            //set it on cart as to get it in the context when Transfer option
             setCart({
                 ...cart,
                 customerDetails: customer,
             })
 
+            const tempCart = {...cart, customerDetails: customer}
+
             setDisabledButton(true)
 
             paymentMethod ? 
-            createCheckOutSession(cart) :
+            createCheckOutSession(tempCart) :
             router.push('/bank-transfer')
         }
     })

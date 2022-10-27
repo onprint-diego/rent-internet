@@ -18,7 +18,7 @@ export const createCheckOutSession = async (cart) => {
         })
             .then(res => res.json())
             .then(json => redirect(json.id))
-            .catch(err => console.log('Error creating checkout: ' + err))
+            .catch(err => console.log('Error creating checkout session: ' + err))
     }
 
     //Better to get products within the api call, but api call timesout and client wont upgrade vercel

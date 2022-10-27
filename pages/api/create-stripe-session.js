@@ -13,12 +13,16 @@ async function CreateStripeSession(req, res) {
     const powerBank = products.find(product => product.id === 435)
     const powerBankPrice = parseInt(powerBank.price)
 
+    //FOLLOW STRIPE FORMAT for checkoutSession object
     const items = []
     items.push({
         price_data: {
             currency: 'usd',
             product_data: {
                 name: modem.name,
+                metadata: {
+                    'wooId': '132'
+                }
             },
             unit_amount: modemPrice * 100,
         },
@@ -30,18 +34,24 @@ async function CreateStripeSession(req, res) {
             currency: 'usd',
             product_data: {
                 name: "Envío",
+                metadata: {
+                    'wooId': '629'
+                }
             },
             unit_amount: shippingFeePrice * 100,
         },
         quantity: 1,
     })
 
-    if(cart.adapter.is) {
+    if (cart.adapter.is) {
         items.push({
             price_data: {
                 currency: 'usd',
                 product_data: {
                     name: "Adaptador",
+                    metadata: {
+                        'wooId': '434'
+                    }
                 },
                 unit_amount: adapterPrice * 100,
             },
@@ -49,12 +59,15 @@ async function CreateStripeSession(req, res) {
         })
     }
 
-    if(cart.powerBank.is) {
+    if (cart.powerBank.is) {
         items.push({
             price_data: {
                 currency: 'usd',
                 product_data: {
                     name: "Power Bank",
+                    metadata: {
+                        'wooId': '435'
+                    }
                 },
                 unit_amount: powerBankPrice * 100,
             },
@@ -62,36 +75,35 @@ async function CreateStripeSession(req, res) {
         })
     }
 
+    const metadata = {
+        'customerName': `${customer.name}`,
+        'customerSurname': `${customer.surname}`,
+        'customerEmail': `${customer.email}`,
+        'customerPhone': `${customer.phone}`,
+        'deliveryAddress': `${customer.deliveryAddress}`,
+        'deliveryCp': `${customer.deliveryCp}`,
+        'deliveryCity': `${customer.deliveryCity}`,
+        'deliveryCountry': `${customer.deliveryCountry}`,
+        'billingAddress': `${customer.billingAddress}`,
+        'billingCp': `${customer.billingCp}`,
+        'billingCity': `${customer.billingCity}`,
+        'billingCountry': `${customer.billingCountry}`,
+        'items': `${items}`,
+        'from': `${cart.from}`,
+        'to': `${cart.to}`
+    }
+
+
     const session = await stripe.checkout.sessions.create({
-        success_url: 'https://rent-internet.com/success',
+        success_url: 'http://localhost:3000',
+        // success_url: 'https://rent-internet.com/success',
         cancel_url: 'https://rent-internet.com/cancel',
         mode: 'payment',
         line_items: items,
-        // customer_details: {
-        //     address: {
-        //         city: 'a city',
-        //         line1: 'an address',
-        //     },
-        // },
-        metadata: {
-            customerName: customer.name,
-            customerSurname: customer.surname,
-            customerEmail: customer.email,
-            customerPhone: customer.phone,
-            deliveryAddress: customer.deliveryAddress,
-            deliveryCp: customer.deliveryCp,
-            deliveryCity: customer.deliveryCity,
-            deliveryCountry: customer.deliveryCountry,
-            billingAddress: customer.billingAddress,
-            billingCp: customer.billingCp,
-            billingCity: customer.billingCity,
-            billingCountry: customer.billingCountry,
-            // items: items,
-            //AGREGAR FROM Y TO DESDE EL CART PARA PASAR COMO METADATA
-        }
+        metadata: metadata,
     });
 
-    res.json({ id: session.id })
+    res.status(200).json({ id: session.id })
 }
 
 export default CreateStripeSession

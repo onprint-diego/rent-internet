@@ -7,7 +7,8 @@ sgMail.setApiKey(process.env.SENDGRID_KEY);
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY)
 
-const endpointSecret = 'whsec_kVUevKPdbV63xZAz5Tny4zkbGX4iPn9Y'
+// const endpointSecret = 'whsec_kVUevKPdbV63xZAz5Tny4zkbGX4iPn9Y'
+const endpointSecret = 'whsec_a6d2c13640b5415b7f8a03b7d1deef1eead64b331f6d0b61024e72f5038777f3'
 
 export const config = {
   api: {
@@ -15,7 +16,7 @@ export const config = {
   },
 }
 
-// FUNCTION
+// HOOK
 export default async function handler(req, res) {
   if (req.method === 'POST') {
     const reqBuffer = await buffer(req)
@@ -33,57 +34,84 @@ export default async function handler(req, res) {
 
     if (event.type === 'checkout.session.completed') {
       const session = event.data.object
-      let wooId 
-      
-      // SET ORDER IN WOOCOMMERCE
-      // const stringDates = `Desde ${data.from} hasta ${data.to}`
-      // const formatedProducts = formatProducts()
-  
+      const clientSecret = session.id
+      const orderDetails = session.metadata
+      const stringDates = `Desde ${orderDetails.from} hasta ${orderDetails.to}`
+      let completedOrder = {}
+      let itemsList = []
+      let wooOrderId
+
       const order = {
-          payment_method: "Pago con tarjeta de crédito",
-          payment_method_title: "Pago con tarjeta de crédito",
-          set_paid: true,
-          // billing: {
-          //     first_name: data.customerDetails.name,
-          //     last_name: data.customerDetails.surname,
-          //     address_1: data.customerDetails.billingAddress,
-          //     city: data.customerDetails.billingCity,
-          //     postcode: data.customerDetails.billingCp,
-          //     country: data.customerDetails.billingCountry,
-          //     email: data.customerDetails.email,
-          //     phone: data.customerDetails.phone
-          // },
-          shipping: {
-              address_1: 'address jdfasl',
-              city: 'aldsfj',
-              // postcode: session.metadata.deliveryCp,
-              country: 'dsklfj',
-              //use this to send dates information in form of string
-              // address_2: stringDates
-          },
-          // line_items: formatedProducts,
+        payment_method: "Pago con tarjeta de crédito",
+        payment_method_title: "Pago con tarjeta de crédito",
+        set_paid: true,
+        email: orderDetails.customerEmail,
+        billing: {
+          first_name: orderDetails.customerName,
+          last_name: orderDetails.customerSurname,
+          address_1: orderDetails.billingAddress,
+          city: orderDetails.billingCity,
+          postcode: orderDetails.billingCp,
+          country: orderDetails.billingCountry,
+          email: orderDetails.customerEmail,
+          phone: orderDetails.customerPhone
+        },
+        shipping: {
+          address_1: stringDates,
+          city: orderDetails.deliveryCity,
+          postcode: orderDetails.deliveryCp,
+          country: orderDetails.deliveryCountry,
+          address_2: orderDetails.deliveryAddress
+        },
       }
-  
-  
+
       try {
-          const wooId = await api.post("orders", order)
-          res.json({ message: wooId })
-          //USE RESPONSE TO GET ORDER ID
-          // return response
+
+        itemsList = await stripe.checkout.sessions.listLineItems(clientSecret, {
+          expand: ['data.price.product']
+        })
+
+        //FORMAT ITEMS TO WOOCOMMERCE FORMAT
+        const formatedItems = itemsList.data.map(item => {
+
+          // Product metadata ends in item.price.product.metadata)
+          const id = parseInt(item.price.product.metadata.wooId)
+
+          return {
+            quantity: item.quantity,
+            product_id: id, 
+          }
+
+        })
+
+        completedOrder = {...order, line_items: formatedItems}
+
       } catch (error) {
-          res.json({ message: 'Error setting woo order'})
+        res.json({ message: 'Error listing items as to place woocommerce order' })
       }
 
 
+      try {
+        // wooOrderId = await api.post("orders", completedOrder)
+        res.status(200).json({ message: 'Order placed in Woocommerce' })
+      } catch (error) {
+        res.json({ message: 'Error setting woo order' })
+      }
 
       // SEND MAIL
+      const formatItemsHtml = itemsList.data.map(item => {
+        return `<p>${item.description} x${item.quantity} - ${item.amount_total / 100}</p>`
+      }).join('<br>')
+
+      console.log(wooOrderId)
+
       const msg = {
         to: session.customer_details.email,
         from: 'rent@rent-internet.com',
         subject: 'Confirmación de reserva de módem Rent Internet',
         html: `
-          <h1>hola ${session.customer_details.email}</h1>
-          <p>${session.metadata.customerSurname}</p>
+          <h1>Gracias por la reserva</h1>
+          <h4>Número de órden: </h4>
           `,
       };
 
@@ -94,98 +122,10 @@ export default async function handler(req, res) {
         res.status(500).json({ error: 'Error sending email' })
       }
 
-      // const clientSecret = session.id
-      // stripe.checkout.sessions.listLineItems(clientSecret) //Check bottom for structure of response object
-      // .then( res => {
-      //     products = res.data
-      //     sendConfirmationMail(session, products)
-      //     setOrderInWoo(session, products)
-      // })
+
     }
   }
 }
-
-//THE SESSION OBJECT
-// "id": "cs_test_b1TynfVjoTZenP1bHpMPds3fo3HRi5FutYwQt1RnUKpRLK32Jkq4X2Nczo",
-// "object": "checkout.session",
-// "after_expiration": null,
-// "allow_promotion_codes": null,
-// "amount_subtotal": 8600,
-// "amount_total": 8600,
-// "automatic_tax": {
-//   "enabled": false,
-//   "status": null
-// },
-// "billing_address_collection": null,
-// "cancel_url": "https://rent-internet.com/cancel",
-// "client_reference_id": null,
-// "consent": null,
-// "consent_collection": null,
-// "created": 1666008898,
-// "currency": "usd",
-// "customer": null,
-// "customer_creation": "if_required",
-// "customer_details": {
-//   "address": {
-//     "city": null,
-//     "country": "CH",
-//     "line1": null,
-//     "line2": null,
-//     "postal_code": null,
-//     "state": null
-//   },
-//   "email": "florencia.bianco@onprint.ch",
-//   "name": "florencia prueba",
-//   "phone": null,
-//   "tax_exempt": "none",
-//   "tax_ids": [
-//   ]
-// },
-// "customer_email": null,
-// "expires_at": 1666095298,
-// "livemode": false,
-// "locale": null,
-// "metadata": {
-//   "deliveryAddress": "independencia",
-//   "customerSurname": "bianco",
-//   "deliveryCp": "8005",
-//   "deliveryCountry": "Germany",
-//   "customerName": "florencia",
-//   "deliveryCity": "Zurich",
-//   "customerEmail": "florencia.bianco@onprint.ch",
-//   "customerPhone": "3416120640"
-// },
-// "mode": "payment",
-// "payment_intent": "pi_3LtsEqHieiQtj1QL1b8nxMRA",
-// "payment_link": null,
-// "payment_method_collection": "always",
-// "payment_method_options": {
-// },
-// "payment_method_types": [
-//   "card"
-// ],
-// "payment_status": "paid",
-// "phone_number_collection": {
-//   "enabled": false
-// },
-// "recovered_from": null,
-// "setup_intent": null,
-// "shipping_address_collection": null,
-// "shipping_cost": null,
-// "shipping_details": null,
-// "shipping_options": [
-// ],
-// "status": "complete",
-// "submit_type": null,
-// "subscription": null,
-// "success_url": "https://rent-internet.com/succesful",
-// "total_details": {
-//   "amount_discount": 0,
-//   "amount_shipping": 0,
-//   "amount_tax": 0
-// },
-// "url": null
-// }
 
 //Response Object for listLineItems
 /*
