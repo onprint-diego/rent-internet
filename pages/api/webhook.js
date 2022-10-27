@@ -16,7 +16,6 @@ export const config = {
   },
 }
 
-// HOOK
 export default async function handler(req, res) {
   if (req.method === 'POST') {
     const reqBuffer = await buffer(req)
@@ -92,7 +91,7 @@ export default async function handler(req, res) {
 
 
       try {
-        // wooOrderId = await api.post("orders", completedOrder)
+        wooOrderId = await api.post("orders", completedOrder)
         res.status(200).json({ message: 'Order placed in Woocommerce' })
       } catch (error) {
         res.json({ message: 'Error setting woo order' })
