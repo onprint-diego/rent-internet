@@ -7,8 +7,8 @@ sgMail.setApiKey(process.env.SENDGRID_KEY);
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY)
 
-const endpointSecret = 'whsec_kVUevKPdbV63xZAz5Tny4zkbGX4iPn9Y'
-// const endpointSecret = 'whsec_a6d2c13640b5415b7f8a03b7d1deef1eead64b331f6d0b61024e72f5038777f3'
+// const endpointSecret = 'whsec_kVUevKPdbV63xZAz5Tny4zkbGX4iPn9Y'
+const endpointSecret = 'whsec_a6d2c13640b5415b7f8a03b7d1deef1eead64b331f6d0b61024e72f5038777f3'
 
 export const config = {
   api: {
@@ -91,18 +91,16 @@ export default async function handler(req, res) {
 
 
       try {
-        wooOrderId = await api.post("orders", completedOrder)
+        // wooOrderId = await api.post("orders", completedOrder)
         res.status(200).json({ message: 'Order placed in Woocommerce' })
       } catch (error) {
         res.json({ message: 'Error setting woo order' })
       }
 
       // SEND MAIL
-      const formatItemsHtml = itemsList.data.map(item => {
+      const formatedItemsHtml = itemsList.data.map(item => {
         return `<p>${item.description} x${item.quantity} - ${item.amount_total / 100}</p>`
       }).join('<br>')
-
-      console.log(wooOrderId)
 
       const msg = {
         to: session.customer_details.email,
@@ -110,12 +108,13 @@ export default async function handler(req, res) {
         subject: 'Confirmación de reserva de módem Rent Internet',
         html: `
           <h1>Gracias por la reserva</h1>
-          <h4>Número de órden: </h4>
+          <h4>Número de órden: ${wooOrderId.data.id}</h4>
+          ${formatedItemsHtml}
           `,
       };
 
       try {
-        await sgMail.send(msg);
+        // await sgMail.send(msg);
         res.status(200).json({message: 'Email has been sent'})
       } catch (error) {
         res.status(500).json({ error: 'Error sending email' })
