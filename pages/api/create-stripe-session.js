@@ -96,8 +96,7 @@ async function CreateStripeSession(req, res) {
 
 
     const session = await stripe.checkout.sessions.create({
-        success_url: 'http://localhost:3000',
-        // success_url: 'https://rent-internet.com/success',
+        success_url: 'https://rent-internet.com/success',
         cancel_url: 'https://rent-internet.com/cancel',
         mode: 'payment',
         line_items: items,

@@ -5,7 +5,6 @@ async function CreateStripeSession(req, res) {
 
     const productName = cart.product.name 
     const productPrice = parseInt(cart.product.price) 
-    const productMetadata = {'wooId': '132' }
 
     //FOLLOW STRIPE FORMAT for checkoutSession object
     const items = [{
@@ -28,8 +27,7 @@ async function CreateStripeSession(req, res) {
 
 
     const session = await stripe.checkout.sessions.create({
-        success_url: 'http://localhost:3000',
-        // success_url: 'https://rent-internet.com/success',
+        success_url: 'https://rent-internet.com/success',
         cancel_url: 'https://rent-internet.com/cancel',
         mode: 'payment',
         line_items: items,
