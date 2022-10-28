@@ -3,6 +3,8 @@ const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY)
 async function CreateStripeSession(req, res) {
     const { cart, products } = req.body;
 
+    console.log('DATA......................................', cart, products)
+
     const customer = cart.customerDetails
     const modem = products.find(product => product.id === 132)
     const modemPrice = parseInt(modem.price)
@@ -88,7 +90,6 @@ async function CreateStripeSession(req, res) {
         'billingCp': `${customer.billingCp}`,
         'billingCity': `${customer.billingCity}`,
         'billingCountry': `${customer.billingCountry}`,
-        'items': `${items}`,
         'from': `${cart.from}`,
         'to': `${cart.to}`
     }

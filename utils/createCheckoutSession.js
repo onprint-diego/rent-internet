@@ -1,5 +1,6 @@
 import { loadStripe } from '@stripe/stripe-js'
 import { api } from './woocommerce'
+import { GetCartContext } from '../context/CartContext'
 
 export const createCheckOutSession = async (cart) => {
 
@@ -10,8 +11,8 @@ export const createCheckOutSession = async (cart) => {
         stripe.redirectToCheckout({ sessionId: id })
     }
 
-    const createSession = (products) => {
-        fetch('/api/create-stripe-session', {
+    const createSession = (products, url) => {
+        fetch(`/api/${url}`, {
             method: "POST",
             body: JSON.stringify({ cart: cart, products: products }),
             headers: { "Content-type": "application/json; charset=UTF-8" }
@@ -25,7 +26,11 @@ export const createCheckOutSession = async (cart) => {
     api.get("products")
         .then((res) => {
             if (res.status === 200) {
-                createSession(res.data)
+                if(cart.isRecharge) {
+                    createSession(res.data, 'create-stripe-recharge-session')
+                } else {
+                    createSession(res.data, 'create-stripe-session')
+                }
             }
         })
         .catch(err => console.log(err))

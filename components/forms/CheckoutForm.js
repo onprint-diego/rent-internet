@@ -101,7 +101,7 @@ const CheckoutForm = ({ cart, setCart }) => {
                 isRecharge: false,
             })
 
-            const tempCart = {...cart, customerDetails: customer}
+            const tempCart = {...cart, customerDetails: customer, isRecharge: false}
 
             setDisabledButton(true)
 

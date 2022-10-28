@@ -43,9 +43,11 @@ const RechargeForm = ({ cart, setCart, data }) => {
                 email: values.email,
             }
 
-            //set it on cart as to get it in the context when Transfer option
-
-            const tempCart = {...cart, customerDetails: customer}
+            const tempCart = {
+                ...cart, 
+                customerDetails: customer, 
+                isRecharge: true
+            }
 
             setCart({
                 ...cart,
@@ -55,11 +57,9 @@ const RechargeForm = ({ cart, setCart, data }) => {
 
             setDisabledButton(true)
 
-            // paymentMethod ? 
-            // createCheckOutSession(tempCart) :
+            paymentMethod ? 
+            createCheckOutSession(tempCart) :
             router.push('/bank-transfer')
-
-            // CreateWooCommerceTransferRechargeOrder(tempCart, setDisabledButton)
         }
     })
 
