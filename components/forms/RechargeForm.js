@@ -96,7 +96,7 @@ const RechargeForm = ({ cart, setCart, data }) => {
             <LabelText>Seleccione la cantidad de GB para recargar</LabelText>
             <MethodSelectContainer>
                 <RechargeMethodBox shift={shift} />
-                <Method onClick={handleClick} value={data.smallProduct.id}>25GB</Method>
+                <Method onClick={handleClick} value={data.smallProduct.id}>25GB</Method> 
                 <Method onClick={handleClick} value={data.largeProduct.id}>50GB</Method>
             </MethodSelectContainer>
             <LabelText>Seleccione el método de pago</LabelText>

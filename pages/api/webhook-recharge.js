@@ -8,7 +8,6 @@ sgMail.setApiKey(process.env.SENDGRID_KEY);
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY)
 
 const endpointSecret = process.env.STRIPE_RECHARGE_WEBHOOK_SECRET_HEROKU_DEV
-// const endpointSecret = 'whsec_a6d2c13640b5415b7f8a03b7d1deef1eead64b331f6d0b61024e72f5038777f3'
 
 export const config = {
   api: {
@@ -45,6 +44,7 @@ export default async function handler(req, res) {
         set_paid: true,
         email: orderDetails.customerEmail,
         billing: {
+          first_name: orderDetails.customerEmail,
           email: orderDetails.customerEmail,
         },
       }
@@ -73,8 +73,6 @@ export default async function handler(req, res) {
       } catch (error) {
         res.json({ message: 'Error listing items as to place woocommerce order' })
       }
-
-      console.log('COMPLETED.........................................', completedOrder)
 
       try {
         wooOrderId = await api.post("orders", completedOrder)
