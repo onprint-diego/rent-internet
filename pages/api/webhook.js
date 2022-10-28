@@ -7,8 +7,8 @@ sgMail.setApiKey(process.env.SENDGRID_KEY);
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY)
 
-// const endpointSecret = 'whsec_kVUevKPdbV63xZAz5Tny4zkbGX4iPn9Y'
-const endpointSecret = 'whsec_a6d2c13640b5415b7f8a03b7d1deef1eead64b331f6d0b61024e72f5038777f3'
+const endpointSecret = 'whsec_kVUevKPdbV63xZAz5Tny4zkbGX4iPn9Y'
+// const endpointSecret = 'whsec_a6d2c13640b5415b7f8a03b7d1deef1eead64b331f6d0b61024e72f5038777f3'
 
 export const config = {
   api: {

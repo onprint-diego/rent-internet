@@ -2,7 +2,9 @@ import { useState } from 'react'
 import { ActionButton } from '../shared/ActionButton/ActionButton'
 import { GetCartContext } from '../../context/CartContext'
 import { CreateWooCommerceTransferOrder } from '../../pages/api/create-woo-transfer-order'
+import { CreateWooCommerceTransferRechargeOrder } from '../../pages/api/create-woo-transfer-recharge-order'
 import { sendTransferMail } from '../../utils/sendTransferMail'
+import { sendRechargeTransferMail } from '../../utils/sendRechargeTransferMail'
 import {
     ButtonContainer,
     Container,
@@ -10,7 +12,6 @@ import {
     Msj,
     MsjContainer,
 } from './Elements'
-import { CreateWooCommerceTransferRechargeOrder } from '../../pages/api/create-woo-transfer-recharge-order'
 
 const Transfer = () => {
 
@@ -25,11 +26,11 @@ const Transfer = () => {
         if (cart.isRecharge) {
             CreateWooCommerceTransferRechargeOrder(cart)
                 .then(res => {
-                    // sendTransferMail(res.data)  Crear uno especifico - no funciona metadata
+                    sendRechargeTransferMail(res.data)
                     setDisabledButton(false)
                     setOrderId(res.data.id)
                 })
-                .catch(() => console.log('Error setting order in Woocommerce'))
+                .catch(err => console.log('Error setting order in Woocommerce', err))
         } else {
             CreateWooCommerceTransferOrder(cart)
                 .then(res => {
