@@ -37,11 +37,9 @@ const Detail = ({ data }) => {
             const subtotal = mainProductPrice
             const total = subtotal + shippingFee
 
-            console.log(adapter)
-
             //SET MAIN PRODUCT BY DEFAULT IN CART
             setCart({
-                ...cart,
+                // ...cart,
                 id: mainProduct.id,
                 name: mainProduct.name,
                 image: mainProduct.images[0].src,

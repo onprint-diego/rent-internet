@@ -91,7 +91,7 @@ export default async function handler(req, res) {
 
 
       try {
-        // wooOrderId = await api.post("orders", completedOrder)
+        wooOrderId = await api.post("orders", completedOrder)
         res.status(200).json({ message: 'Order placed in Woocommerce' })
       } catch (error) {
         res.json({ message: 'Error setting woo order' })
@@ -114,7 +114,7 @@ export default async function handler(req, res) {
       };
 
       try {
-        // await sgMail.send(msg);
+        await sgMail.send(msg);
         res.status(200).json({message: 'Email has been sent'})
       } catch (error) {
         res.status(500).json({ error: 'Error sending email' })

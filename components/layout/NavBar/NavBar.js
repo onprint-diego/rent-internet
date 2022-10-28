@@ -39,7 +39,7 @@ const NavBar = () => {
                             </Link>
                         </LinkContainer>
                         <LinkContainer>
-                            <Link href='/'>
+                            <Link href='/recharge-checkout'>
                                 Recargas
                             </Link>
                         </LinkContainer>

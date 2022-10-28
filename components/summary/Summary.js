@@ -43,7 +43,7 @@ const Summary = ({ cart, mainProduct }) => {
                         <Bold>Subtotal:</Bold> u$d {cart.subtotal}
                     </ReviewItem> */}
                 {
-                    cart.adapter.is === true &&
+                    cart.adapter?.is === true &&
                     <ReviewItem>
                         <Bold>Adaptador </Bold>
                         <Soft>
@@ -52,7 +52,7 @@ const Summary = ({ cart, mainProduct }) => {
                     </ReviewItem>
                 }
                 {
-                    cart.powerBank.is === true &&
+                    cart.powerBank?.is === true &&
                     <ReviewItem>
                         <Bold>Cargador </Bold>
                         <Soft>

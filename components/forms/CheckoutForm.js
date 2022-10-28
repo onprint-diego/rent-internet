@@ -2,8 +2,8 @@ import { useState } from 'react'
 import { useRouter } from 'next/router'
 import * as Yup from 'yup'
 import { useFormik } from 'formik'
-import { CheckoutButton } from '../../shared/CheckoutButton/CheckoutButton'
-import { createCheckOutSession } from '../../../utils/createCheckoutSession'
+import { CheckoutButton } from '../shared/CheckoutButton/CheckoutButton'
+import { createCheckOutSession } from '../../utils/createCheckoutSession'
 import InputField from './InputField'
 import {
     Form,
@@ -65,18 +65,18 @@ const CheckoutForm = ({ cart, setCart }) => {
             billingCountry: 'Pais envio',
         },
         validationSchema: Yup.object({
-            // name: Yup.string().required(generalError).min(2, minGeneralError).max(20, maxGeneralError),
-            // surname: Yup.string().required(generalError).min(2, minGeneralError).max(20, maxGeneralError),
-            // email: Yup.string().email(emailError).required(generalError),
-            // phone: Yup.number(numGeneralError).required(generalError),
-            // deliveryAddress: Yup.string().required(generalError).min(2, minGeneralError).max(50, maxGeneralError),
-            // deliveryCp: Yup.string().required(generalError).min(2, minGeneralError).max(20, maxGeneralError),
-            // deliveryCity: Yup.string().required(generalError).min(2, minGeneralError).max(30, maxGeneralError),
-            // deliveryCountry: Yup.string().required(generalError).min(2, minGeneralError).max(30, maxGeneralError),
-            // billingAddress: Yup.string().min(2, minGeneralError).max(50, maxGeneralError),
-            // billingCp: Yup.string().min(2, minGeneralError).max(20, maxGeneralError),
-            // billingCity: Yup.string().min(2, minGeneralError).max(30, maxGeneralError),
-            // billingCountry: Yup.string().min(2, minGeneralError).max(30, maxGeneralError),
+            name: Yup.string().required(generalError).min(2, minGeneralError).max(20, maxGeneralError),
+            surname: Yup.string().required(generalError).min(2, minGeneralError).max(20, maxGeneralError),
+            email: Yup.string().email(emailError).required(generalError),
+            phone: Yup.number(numGeneralError).required(generalError),
+            deliveryAddress: Yup.string().required(generalError).min(2, minGeneralError).max(50, maxGeneralError),
+            deliveryCp: Yup.string().required(generalError).min(2, minGeneralError).max(20, maxGeneralError),
+            deliveryCity: Yup.string().required(generalError).min(2, minGeneralError).max(30, maxGeneralError),
+            deliveryCountry: Yup.string().required(generalError).min(2, minGeneralError).max(30, maxGeneralError),
+            billingAddress: Yup.string().min(2, minGeneralError).max(50, maxGeneralError),
+            billingCp: Yup.string().min(2, minGeneralError).max(20, maxGeneralError),
+            billingCity: Yup.string().min(2, minGeneralError).max(30, maxGeneralError),
+            billingCountry: Yup.string().min(2, minGeneralError).max(30, maxGeneralError),
         }),
         onSubmit: (values) => {
             const customer = {
@@ -98,6 +98,7 @@ const CheckoutForm = ({ cart, setCart }) => {
             setCart({
                 ...cart,
                 customerDetails: customer,
+                isRecharge: false,
             })
 
             const tempCart = {...cart, customerDetails: customer}

@@ -10,6 +10,7 @@ import {
     Msj,
     MsjContainer,
 } from './Elements'
+import { CreateWooCommerceTransferRechargeOrder } from '../../pages/api/create-woo-transfer-recharge-order'
 
 const Transfer = () => {
 
@@ -21,13 +22,23 @@ const Transfer = () => {
         if (Object.entries(cart).length === 0) return console.log('No items in cart')
         setDisabledButton(true)
 
-        CreateWooCommerceTransferOrder(cart)
-        .then(res => {
-                sendTransferMail(res.data)
-                setDisabledButton(false)
-                setOrderId(res.data.id)
-            })
-            .catch(() => console.log('Error setting order in Woocommerce'))
+        if (cart.isRecharge) {
+            CreateWooCommerceTransferRechargeOrder(cart)
+                .then(res => {
+                    // sendTransferMail(res.data)  Crear uno especifico - no funciona metadata
+                    setDisabledButton(false)
+                    setOrderId(res.data.id)
+                })
+                .catch(() => console.log('Error setting order in Woocommerce'))
+        } else {
+            CreateWooCommerceTransferOrder(cart)
+                .then(res => {
+                    sendTransferMail(res.data)
+                    setDisabledButton(false)
+                    setOrderId(res.data.id)
+                })
+                .catch(() => console.log('Error setting order in Woocommerce'))
+        }
     }
 
     return (
@@ -36,15 +47,15 @@ const Transfer = () => {
                 <MsjContainer>
                     <Msj>
                         {
-                            orderId === 0 ?    
-                            <>
-                                ***Texto para transferencia.<br></br>
-                                Explica que la orden llega a la empresa una vez que da click al botón, pero no es efectiva hasta que no paga (queda pendiente). Inluir resumen de la reserva?
-                            </> :
-                            <>
-                                ***La orden fue recibida con éxito...<br></br>
-                                Número de orden (id) es {orderId}
-                            </>
+                            orderId === 0 ?
+                                <>
+                                    ***Texto para transferencia.<br></br>
+                                    Explica que la orden llega a la empresa una vez que da click al botón, pero no es efectiva hasta que no paga (queda pendiente). Inluir resumen de la reserva?
+                                </> :
+                                <>
+                                    ***La orden fue recibida con éxito...<br></br>
+                                    Número de orden (id) es {orderId}
+                                </>
                         }
                     </Msj>
                     {

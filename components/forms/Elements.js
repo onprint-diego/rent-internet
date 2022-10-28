@@ -71,6 +71,7 @@ export const MethodSelectContainer = styled.div`
     align-items: center;
     border: 1px solid var(--soft-lines-color);
     border-radius: 5px;
+    margin-bottom: 1rem;
 `
 
 export const Method = styled.p`
@@ -99,4 +100,23 @@ export const CheckoutBtnContainer = styled.div`
     display: flex;
     justify-content: flex-end;
     margin-top: 1.5rem;
+`
+
+// RECHARGE
+
+export const RechargeMethodBox = styled.div`
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 50%;
+    transform: ${({shift}) => !shift ? 'translateX(0)' : 'translateX(100%)'};
+    border-radius: ${({shift}) => !shift ? '5px 0 0 5px' : '0 5px 5px 0'};
+    background-color: var(--soft-lines-color);
+    transition: transform .2s ease-in-out;
+`
+
+export const LabelText = styled.p`
+    font-size: .9rem;
+    margin-bottom: .8rem;
 `

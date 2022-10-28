@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { GetCartContext } from '../../context/CartContext'
 import { GetProductsContext } from '../../context/ProductsContext'
-import CheckoutForm from '../forms/CheckoutForm/CheckoutForm'
+import CheckoutForm from '../forms/CheckoutForm'
 import Summary from '../summary/Summary'
 import { PrimaryButton } from '../shared/PrimaryButton/PrimaryButton'
 import {

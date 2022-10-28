@@ -21,3 +21,13 @@ export const getProductDetails = (setter, loader) => {
     .catch(err => console.log(err))
     .finally(() => loader(false))
 }
+
+export const getProducts = (setter) => {
+  api.get("products")
+  .then((res) => {
+    if (res.status === 200) {
+      setter(res.data)
+    }
+  })
+  .catch(err => console.log(err))
+}

@@ -34,12 +34,12 @@ export async function CreateWooCommerceTransferOrder(data) {
             phone: data.customerDetails.phone
         },
         shipping: {
-            address_1: data.customerDetails.deliveryAddress,
+            address_1: stringDates,
             city: data.customerDetails.deliveryCity,
             postcode: data.customerDetails.deliveryCp,
             country: data.customerDetails.deliveryCountry,
             //use this to send dates information in form of string
-            address_2: stringDates
+            address_2: data.customerDetails.deliveryAddress
         },
         line_items: formatedProducts,
     }
