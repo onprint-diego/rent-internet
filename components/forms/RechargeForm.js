@@ -4,7 +4,6 @@ import * as Yup from 'yup'
 import { useFormik } from 'formik'
 import { CheckoutButton } from '../shared/CheckoutButton/CheckoutButton'
 import { createCheckOutSession } from '../../utils/createCheckoutSession'
-import { CreateWooCommerceTransferRechargeOrder } from '../../pages/api/create-woo-transfer-recharge-order'
 import InputField from './InputField'
 import {
     Form,
@@ -21,7 +20,7 @@ const RechargeForm = ({ cart, setCart, data }) => {
 
     const router = useRouter()
     const [shift, setShift] = useState(false)
-    const [paymentMethod, setPaymentMethod] = useState(true) //true = card, false = bank
+    const [paymentMethod, setPaymentMethod] = useState(true)
     const [disabledButton, setDisabledButton] = useState(false)
 
     const buttonText = 'Recargar'

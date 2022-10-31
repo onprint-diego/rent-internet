@@ -1,37 +1,35 @@
 import {
-    SkeletonContainer,
+    SkContainer,
     ProductContainer,
-    ImageContainer,
+    SkLeftContainer,
+    SkTitle,
+    SkTitleSk,
     RightContainer,
-    Title,
-    Description,
-    LeftContainer,
-    ReviewContainer,
-    ReviewItem,
-    Sticky,
+    SkSummary,
+    SkImgContainer,
+    SkReviewItem,
 } from './Elements'
 
 const Skeleton = () => {
     return (
-        <SkeletonContainer>
-            {/* <ProductContainer>
-                <LeftContainer>
-                    <Sticky>
-                        <ImageContainer></ImageContainer>
-                        <ReviewContainer>
-                            <ReviewItem></ReviewItem>
-                            <ReviewItem></ReviewItem>
-                            <ReviewItem></ReviewItem>
-                            <ReviewItem></ReviewItem>
-                        </ReviewContainer>
-                    </Sticky>
-                </LeftContainer>
+        <SkContainer>
+            <ProductContainer>
+                <SkLeftContainer>
+                    <SkTitle>
+                        <SkTitleSk />
+                    </SkTitle>
+                </SkLeftContainer>
                 <RightContainer>
-                    <Title></Title>
-                    <Description></Description>
+                    <SkSummary>
+                        <SkImgContainer />
+                        <SkReviewItem />
+                        <SkReviewItem />
+                        <SkReviewItem />
+                        <SkReviewItem />
+                    </SkSummary>
                 </RightContainer>
-            </ProductContainer> */}
-        </SkeletonContainer>
+            </ProductContainer>
+        </SkContainer>
     )
 }
 

@@ -20,7 +20,7 @@ import {
 //TODO inhabilitar el boton de Rent si no selecciono fechas
 //TODO el check de los checkbox customizarlo y que dependa del estado, porque tiene un bug
 
-const Detail = ({ data }) => {
+const Detail = ({ data, loading }) => {
 
     const { cart, setCart } = GetCartContext()
     const [mainProduct, setMainProduct] = useState({})
@@ -98,8 +98,7 @@ const Detail = ({ data }) => {
                     Object.entries(mainProduct).length !== 0 && 
                     Object.entries(cart).length !== 0 &&
                     <>
-                    {console.log(cart)}
-                        <RightContainer>
+                        <LeftContainer>
                             <Title>{mainProduct.attributes[1].options[0]}</Title>
                             <Description>{mainProduct.attributes[5].options[0]}</Description>
                             <Calendar
@@ -121,10 +120,10 @@ const Detail = ({ data }) => {
                             <PrimaryButton to="/checkout">
                                 {mainProduct.attributes[6].options[0]}
                             </PrimaryButton>
-                        </RightContainer>
-                        <LeftContainer>
-                            <Summary cart={cart} mainProduct={mainProduct} />
                         </LeftContainer>
+                        <RightContainer>
+                            <Summary cart={cart} mainProduct={mainProduct} />
+                        </RightContainer>
                     </>
                 }
             </ProductContainer>

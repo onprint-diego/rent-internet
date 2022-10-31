@@ -19,6 +19,7 @@ const ProductDetail = () => {
                 loading ? <Skeleton />: <Detail data={products} />
             }
         </>
+        // <Skeleton />
     )
 }
 
