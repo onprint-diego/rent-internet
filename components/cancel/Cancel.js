@@ -9,14 +9,13 @@ import {
 
 const Cancel = () => {
 
+    const text = 'Lo sentimos... Ha ocurrido un error y no hemos podido procesar su reserva. Intentalo nuevamente o ponte en contacto con nuestro equipo de servicio al cliente.'
+
     return (
         <Container>
             <Inner>
                 <MsjContainer>
-                    <Msj>
-                        Ocurrió un error procesando tu compra..
-                        Contactar a la empresa, o algo así.
-                    </Msj>
+                    <Msj>{text}</Msj>
                     <ButtonContainer>
                         <SecondaryButton to="/">
                             Volver al Home

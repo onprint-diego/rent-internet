@@ -17,15 +17,13 @@ import {
     CheckBoxContainer,
 } from './Elements'
 
-//TODO inhabilitar el boton de Rent si no selecciono fechas
-//TODO el check de los checkbox customizarlo y que dependa del estado, porque tiene un bug
-
 const Detail = ({ data, loading }) => {
 
     const { cart, setCart } = GetCartContext()
     const [mainProduct, setMainProduct] = useState({})
     const [adapter, setAdapter] = useState({ product: {}, is: false })
     const [powerBank, setPowerBank] = useState({ product: {}, is: false })
+    const [disabled, setDisabled] = useState(true)
     const [error, setError] = useState(false)
 
     useEffect(() => {
@@ -105,6 +103,7 @@ const Detail = ({ data, loading }) => {
                                 cart={cart}
                                 setCart={setCart}
                                 text="Seleccione una fecha"
+                                setDisabled={setDisabled}
                             />
                             <Select
                                 options={mainProduct.attributes[4].options}
@@ -117,7 +116,7 @@ const Detail = ({ data, loading }) => {
                                 <CheckBox label="Agregar un adaptador de viaje" cart={cart} setCart={setCart} extraProductData={adapter} value="adapter" />
                                 <CheckBox label="Agregar Power Bank" cart={cart} setCart={setCart} extraProductData={powerBank} value="powerBank" />
                             </CheckBoxContainer>
-                            <PrimaryButton to="/checkout">
+                            <PrimaryButton to="/checkout" disabled={disabled} onClick={() => console.log('hola')}>
                                 {mainProduct.attributes[6].options[0]}
                             </PrimaryButton>
                         </LeftContainer>

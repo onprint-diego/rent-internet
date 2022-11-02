@@ -8,13 +8,9 @@ import {
     Label,
 } from './Elements'
 
-const Calendar = ({ setQty, cart, setCart, text }) => {
+const Calendar = ({ cart, setCart, text = '', setDisabled }) => {
 
     const [ range, setRange ] = useState()
-
-    const css={
-
-    }
 
     const handleSelect = (date) =>{
         setRange(date)
@@ -38,6 +34,8 @@ const Calendar = ({ setQty, cart, setCart, text }) => {
                 subtotal: updatedSubtotal,
                 total: updatedSubtotal + cart.shippingFee,
             })
+
+            setDisabled(false)
         }
     }, [range])
 

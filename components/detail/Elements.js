@@ -84,10 +84,82 @@ export const SkTitle = styled.div`
     margin-bottom: .5rem;
 `
 
-export const SkTitleSk = styled.div`
+export const SkTitleFill = styled.div`
     position: relative;
     width: 60%;
     height: 2.5rem;
+    overflow: hidden;
+    border-radius: 5px;
+
+    &:before {
+        content: '';
+        display: block;
+        position: absolute;
+        top: 0;
+        left: -100%;
+        height: 100%;
+        width: 100%;
+        background: linear-gradient(to right, transparent 0%,  #F4F4F4 45%, #EFEFEF 75%, transparent 100%);
+        animation: ${load} 1.3s cubic-bezier(0.4, 0.0, 0.2, 1) infinite;
+    }
+`
+
+export const SkDescription = styled.div``
+
+
+export const SkDescriptionFill = styled.div`
+    position: relative;
+    width: 95%;
+    height: 2.5rem;
+    overflow: hidden;
+    border-radius: 5px;
+
+    &:before {
+        content: '';
+        display: block;
+        position: absolute;
+        top: 0;
+        left: -100%;
+        height: 100%;
+        width: 100%;
+        background: linear-gradient(to right, transparent 0%,  #F4F4F4 45%, #EFEFEF 75%, transparent 100%);
+        animation: ${load} 1.3s cubic-bezier(0.4, 0.0, 0.2, 1) infinite;
+    }
+`
+
+export const SkLabel = styled.div`
+    margin-top: 2.5rem;
+`
+
+export const SkLabelFill = styled.div`
+    position: relative;
+    width: 15rem;
+    height: 1.5rem;
+    overflow: hidden;
+    border-radius: 5px;
+
+    &:before {
+        content: '';
+        display: block;
+        position: absolute;
+        top: 0;
+        left: -100%;
+        height: 100%;
+        width: 100%;
+        background: linear-gradient(to right, transparent 0%,  #F4F4F4 45%, #EFEFEF 75%, transparent 100%);
+        animation: ${load} 1.3s cubic-bezier(0.4, 0.0, 0.2, 1) infinite;
+    }
+`
+
+export const SkCalendar = styled.div`
+    margin-top: 2.5rem;
+`
+
+export const SkCalendarFill = styled.div`
+    position: relative;
+    border-radius: 5px;
+    width: 20rem;
+    height: 25rem;
     overflow: hidden;
 
     &:before {
@@ -101,7 +173,6 @@ export const SkTitleSk = styled.div`
         background: linear-gradient(to right, transparent 0%,  #F4F4F4 45%, #EFEFEF 75%, transparent 100%);
         animation: ${load} 1.3s cubic-bezier(0.4, 0.0, 0.2, 1) infinite;
     }
-
 `
 
 export const SkSummary = styled.div`
@@ -136,10 +207,23 @@ export const SkImgContainer = styled.div`
 `
 
 export const SkReviewItem = styled.div`
+    margin-top: .5rem;
+`
+
+export const SkReviewTotalItem = styled.div`
+    margin-top: .5rem;
+    margin-bottom: 1.4rem;
+    padding-top: .7rem;
+    height: 1.6rem;
+    border-top: 1px solid var(--soft-lines-color);
+`
+
+export const SkReviewItemFill = styled.div`
     position: relative;
-    margin-top: .7rem;
     overflow-x: hidden;
-    min-height: 1.6rem;
+    min-height: 1.5rem;
+    height: 100%;
+    border-radius: 2px;
     
     &:before {
         content: '';

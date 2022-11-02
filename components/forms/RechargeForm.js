@@ -80,7 +80,7 @@ const RechargeForm = ({ cart, setCart, data }) => {
     return (
         <Form onSubmit={formik.handleSubmit}>
             <FormSection>
-                <LabelText>Ingrese el correo con el que ha alquilado su módem</LabelText>
+                <LabelText>Correo con el que ha alquilado su módem</LabelText>
                 <InputField
                     id="email"
                     name="email"
@@ -92,13 +92,13 @@ const RechargeForm = ({ cart, setCart, data }) => {
                     error={formik.errors.email}
                 />
             </FormSection>
-            <LabelText>Seleccione la cantidad de GB para recargar</LabelText>
+            <LabelText>Cantidad de GB para recargar</LabelText>
             <MethodSelectContainer>
                 <RechargeMethodBox shift={shift} />
-                <Method onClick={handleClick} value={data.smallProduct.id}>25GB</Method> 
-                <Method onClick={handleClick} value={data.largeProduct.id}>50GB</Method>
+                <Method onClick={handleClick} value={data.smallProduct.id}>25GB - 25 USD</Method> 
+                <Method onClick={handleClick} value={data.largeProduct.id}>50GB - 35 USD</Method>
             </MethodSelectContainer>
-            <LabelText>Seleccione el método de pago</LabelText>
+            <LabelText>Método de pago</LabelText>
             <MethodSelectContainer>
                 <MethodBox paymentMethod={paymentMethod} />
                 <Method onClick={() => setPaymentMethod(true)}>{cardMethodText}</Method>

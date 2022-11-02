@@ -3,11 +3,19 @@ import {
     ProductContainer,
     SkLeftContainer,
     SkTitle,
-    SkTitleSk,
+    SkTitleFill,
+    SkDescription,
+    SkDescriptionFill,
+    SkLabel,
+    SkLabelFill,
+    SkCalendar,
+    SkCalendarFill,
     RightContainer,
     SkSummary,
     SkImgContainer,
     SkReviewItem,
+    SkReviewItemFill,
+    SkReviewTotalItem
 } from './Elements'
 
 const Skeleton = () => {
@@ -15,17 +23,18 @@ const Skeleton = () => {
         <SkContainer>
             <ProductContainer>
                 <SkLeftContainer>
-                    <SkTitle>
-                        <SkTitleSk />
-                    </SkTitle>
+                    <SkTitle><SkTitleFill /></SkTitle>
+                    <SkDescription><SkDescriptionFill /></SkDescription>
+                    <SkLabel><SkLabelFill /></SkLabel>
+                    <SkCalendar><SkCalendarFill /></SkCalendar>
                 </SkLeftContainer>
                 <RightContainer>
                     <SkSummary>
                         <SkImgContainer />
-                        <SkReviewItem />
-                        <SkReviewItem />
-                        <SkReviewItem />
-                        <SkReviewItem />
+                        <SkReviewItem><SkReviewItemFill /></SkReviewItem>
+                        <SkReviewItem><SkReviewItemFill /></SkReviewItem>
+                        <SkReviewItem><SkReviewItemFill /></SkReviewItem>
+                        <SkReviewTotalItem><SkReviewItemFill /></SkReviewTotalItem>
                     </SkSummary>
                 </RightContainer>
             </ProductContainer>

@@ -16,7 +16,7 @@ const Recharge = ({ data }) => {
     <Container>
       <InnerContainer>
         <Title>Recargas</Title>
-        <Text>Texto que explique el tema de las recargas, etc.</Text>
+        <Text>Complete el siguiente formulario para solicitar una recarga.</Text>
         <RechargeForm cart={cart} setCart={setCart} data={data} />
       </InnerContainer>
     </Container>

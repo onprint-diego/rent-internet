@@ -39,6 +39,7 @@ const CheckoutForm = ({ cart, setCart }) => {
     const placeholderCp = 'Código postal'
     const placeholderCity = 'Ciudad'
     const placeholderCountry = 'País'
+    const billingNeededText = 'Agregar dirección de facturación'
 
     const cardMethodText = 'Tarjeta'
     const bankMethodText = 'Transferencia'
@@ -208,7 +209,7 @@ const CheckoutForm = ({ cart, setCart }) => {
                     value="billing"
                     onChange={() => setBillingNeeded(!billingNeeded)}
                 />
-                <Label htmlFor="billing">Billing address different</Label>
+                <Label htmlFor="billing">{billingNeededText}</Label>
             </CheckBoxContainer>
             <BillingSection billingNeeded={billingNeeded}>
                 <SectionTitle>{billingTitle}</SectionTitle>

@@ -1,4 +1,4 @@
-import { ButtonPrimaryLink } from '../../shared/ButtonPrimary/ButtonPrimary'
+import { PrimaryButton } from '../../shared/PrimaryButton/PrimaryButton'
 import {
     Container,
     Inner,
@@ -20,9 +20,9 @@ const Recharge = ({ content }) => {
                         <Content>
                             <Title>{content.title}</Title>
                             <Text>{content.text}</Text>
-                            <ButtonPrimaryLink to="/recharge-checkout">
+                            <PrimaryButton to="/recharge-checkout">
                                 Recargar
-                            </ButtonPrimaryLink>
+                            </PrimaryButton>
                         </Content>
                         <ImageContainer>
                             <SideImage src={content.img.src} alt={content.img.alt} fill/>

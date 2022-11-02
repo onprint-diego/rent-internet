@@ -2,7 +2,7 @@ import Link from 'next/link'
 import styled from 'styled-components'
 
 //Styles
-const Button = styled.span`
+const Button = styled.button`
     width: var(--button-width);
     height: var(--button-height);
     display: flex;

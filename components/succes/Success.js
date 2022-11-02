@@ -9,14 +9,13 @@ import {
 
 const Success = () => {
 
+    const text = 'Muchas gracias por su reserva. La reserva de un router WIFI portátil Rent Internet ha sido exitosa. En su correo electrónico estará recibiendo más información y detalles sobre su reserva.'
+
     return (
         <Container>
             <Inner>
                 <MsjContainer>
-                    <Msj>
-                        La compra fue exitosa. 
-                        Mail en casilla.
-                    </Msj>
+                    <Msj>{text}</Msj>
                     <ButtonContainer>
                         <SecondaryButton to="/">
                             Ir al Home

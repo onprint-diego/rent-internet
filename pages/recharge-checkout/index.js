@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import Recharge from "../../components/recharge/Recharge"
+import Skeleton from '../../components/recharge/Skeleton'
 import { getProducts } from "../../utils/woocommerce"
 
 const RechargePage = () => {
@@ -27,8 +28,7 @@ const RechargePage = () => {
   return (
     <>
     {
-        // loading ? <Skeleton />: <Recharge data={products} />
-        Object.entries(products).length === 0 ? 'loading' : <Recharge data={products} />
+        Object.entries(products).length === 0 ? <Skeleton /> : <Recharge data={products} />
     }
 </>
   )

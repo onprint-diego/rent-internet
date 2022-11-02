@@ -99,7 +99,9 @@ export const MethodBox = styled.div`
 export const CheckoutBtnContainer = styled.div`
     display: flex;
     justify-content: flex-end;
-    margin-top: 1.5rem;
+    margin-top: .5rem;
+    padding-top: .9rem;
+    border-top: 1px solid var(--soft-lines-color);
 `
 
 // RECHARGE
@@ -118,5 +120,5 @@ export const RechargeMethodBox = styled.div`
 
 export const LabelText = styled.p`
     font-size: .9rem;
-    margin-bottom: .8rem;
+    margin-bottom: .5rem;
 `

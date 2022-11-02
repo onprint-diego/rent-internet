@@ -2,7 +2,7 @@ import Link from 'next/link'
 import styled from 'styled-components'
 
 //Styles
-const Button = styled.span`
+const Button = styled.button`
     width: var(--button-width);
     height: var(--button-height);
     display: flex;
@@ -14,19 +14,20 @@ const Button = styled.span`
     color: #ffffff;
     font-size: 1rem;
     font-weight: 500;
-    cursor: pointer;
+    cursor: ${({disabled}) => !disabled && 'pointer'};
     transition: opacity .2s ease-in-out;
+    opacity: ${({disabled}) => disabled ? .4 : 1};
 
     &:hover {
-        opacity: .7;
+        opacity: ${({disabled}) => !disabled && '.7'};
     }
 `
 
 //Component
-export const PrimaryButton = ({ children, to }) => {
+export const PrimaryButton = ({ children, to, disabled = false }) => {
     return (
         <Link href={to}>
-            <Button>{children}</Button>
+            <Button disabled={disabled} dis={disabled}>{children}</Button>
         </Link>
     )
 }
