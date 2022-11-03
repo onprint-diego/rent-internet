@@ -14,6 +14,7 @@ import {
 const NavBar = () => {
 
     const router = useRouter()
+    const pathname = router.pathname
 
     const toTop = () => scrollTo(top)
 
@@ -21,7 +22,7 @@ const NavBar = () => {
         <Container>
             <Inner>
                 {
-                    router.pathname === '/' ?
+                    pathname === '/' ?
                     <LogoContainer onClick={toTop}>
                         <Logo src={Lg} alt='logo' />
                     </LogoContainer> :
@@ -33,18 +34,18 @@ const NavBar = () => {
                 }
                 <Nav>
                     <Links>
-                        <LinkContainer>
+                        <LinkContainer isSelected={pathname === '/product-detail'}>
                             <Link href='/product-detail'>
-                                Rentar
+                                Alquilar
                             </Link>
                         </LinkContainer>
-                        <LinkContainer>
+                        <LinkContainer isSelected={pathname === '/recharge-checkout'}>
                             <Link href='/recharge-checkout'>
                                 Recargas
                             </Link>
                         </LinkContainer>
                         {
-                            router.pathname === '/' &&
+                            pathname === '/' &&
                             <LinkContainer>
                                 <a href='#faq-section'>FAQ</a>
                             </LinkContainer>

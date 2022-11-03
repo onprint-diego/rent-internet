@@ -23,6 +23,7 @@ const Detail = ({ data, loading }) => {
     const [mainProduct, setMainProduct] = useState({})
     const [adapter, setAdapter] = useState({ product: {}, is: false })
     const [powerBank, setPowerBank] = useState({ product: {}, is: false })
+    const [deposit, setDeposit] = useState({})
     const [disabled, setDisabled] = useState(true)
     const [error, setError] = useState(false)
 
@@ -32,18 +33,19 @@ const Detail = ({ data, loading }) => {
 
             const shippingFee = parseInt(mainProduct.attributes[0].options[0])
             const mainProductPrice = parseInt(mainProduct.price)
+            const depositFee = parseInt(deposit.price)
             const subtotal = mainProductPrice
-            const total = subtotal + shippingFee
+            const total = subtotal + shippingFee + depositFee
 
             //SET MAIN PRODUCT BY DEFAULT IN CART
             setCart({
-                // ...cart,
                 id: mainProduct.id,
                 name: mainProduct.name,
                 image: mainProduct.images[0].src,
                 mainProductPrice: mainProductPrice,
                 qty: 1,
                 shippingFee: shippingFee,
+                deposit: depositFee,
                 subtotal: subtotal,
                 total: total,
                 adapter: adapter,
@@ -57,7 +59,7 @@ const Detail = ({ data, loading }) => {
     useEffect(() => {
 
         const getMainProduct = () => {
-            const product = data.find(item => item.name === "Modem")
+            const product = data.find(item => item.slug === "modem")
             setMainProduct(product)
         }
 
@@ -71,10 +73,18 @@ const Detail = ({ data, loading }) => {
             setPowerBank({ ...powerBank, product })
         }
 
+        const getDeposit = () => {
+            const product = data.find(item => item.slug === "deposito")
+            setDeposit(product)
+        }
+
+        getDeposit()
         getMainProduct()
         getAdapter()
         getPowerBank()
     }, [])
+
+    // console.log(data)
 
     // //TODO chequear si puedo refactorizarlo inhabilitando el boton
     // useEffect(() => {
@@ -86,8 +96,6 @@ const Detail = ({ data, loading }) => {
     //     //Remove error msg if any
     //     error && setError(!error)
     // }, [qty])
-
-    // console.log(cart)
 
     return (
         <Container>

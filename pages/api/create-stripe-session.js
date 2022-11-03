@@ -12,6 +12,8 @@ async function CreateStripeSession(req, res) {
     const adapterPrice = parseInt(adapter.price)
     const powerBank = products.find(product => product.id === 435)
     const powerBankPrice = parseInt(powerBank.price)
+    const deposit = products.find(product => product.id === 790)
+    const depositPrice = parseInt(deposit.price)
 
     //FOLLOW STRIPE FORMAT for checkoutSession object
     const items = []
@@ -39,6 +41,20 @@ async function CreateStripeSession(req, res) {
                 }
             },
             unit_amount: shippingFeePrice * 100,
+        },
+        quantity: 1,
+    })
+
+    items.push({
+        price_data: {
+            currency: 'usd',
+            product_data: {
+                name: "Depósito",
+                metadata: {
+                    'wooId': '790'
+                }
+            },
+            unit_amount: depositPrice * 100,
         },
         quantity: 1,
     })

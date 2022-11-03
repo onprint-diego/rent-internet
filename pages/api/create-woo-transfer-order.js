@@ -2,6 +2,8 @@ import { api } from "../../utils/woocommerce"
 
 export async function CreateWooCommerceTransferOrder(data) {
 
+    //TODO set api call to get products details
+
     const formatProducts = () => {
         const products = []
         //Main product
@@ -12,6 +14,8 @@ export async function CreateWooCommerceTransferOrder(data) {
         if(data.powerBank.is) products.push({product_id: data.powerBank.product.id , quantity: 1})
         //Shipping fee
         products.push({product_id: 629 , quantity: 1})
+        //Deposit fee
+        products.push({product_id: 790 , quantity: 1})
 
         return products
     }

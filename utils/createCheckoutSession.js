@@ -1,6 +1,5 @@
 import { loadStripe } from '@stripe/stripe-js'
 import { api } from './woocommerce'
-import { GetCartContext } from '../context/CartContext'
 
 export const createCheckOutSession = async (cart) => {
 
@@ -22,7 +21,7 @@ export const createCheckOutSession = async (cart) => {
             .catch(err => console.log('Error creating checkout session: ' + err))
     }
 
-    //Better to get products within the api call, but api call timesout and client wont upgrade vercel
+    //Better to get products within the api call?
     api.get("products")
         .then((res) => {
             if (res.status === 200) {

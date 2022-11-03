@@ -100,7 +100,7 @@ const Faq = () => {
         {
             id: 16,
             q: '¿Debo abonar un depósito?',
-            a: ' ',
+            a: 'Sí, junto con el pago del alquiler de su dispositivo Rent Internet y accesorios, deberá abonar un depósito equivalente a USD 100. El mismo será devuelto inmediatamente, habiendo verificado que tanto el router como sus accesorios han sido devueltos en perfecto estado y funcionamiento.  Ni bien recibamos el Router por correo, y esté  completamente en funcionamiento, le reembolsaremos el depósito correspondiente. En caso de que el router o sus accesorios estén dañados o averiados, y éste no se pueda reparar, estaremos obligados a descontar el monto del depósito, parcial o totalmente.',
         },
         {
             id: 17,

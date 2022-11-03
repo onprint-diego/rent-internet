@@ -14,7 +14,7 @@ const RechargePage = () => {
 
   useEffect(() => {
 
-    if(wooProducts.length !== 0) {
+    if (wooProducts.length !== 0) {
       const largeProduct = wooProducts.find(product => product.slug === '50gb-extra')
       const smallProduct = wooProducts.find(product => product.slug === '25gb-extra')
       setProducts({
@@ -27,10 +27,10 @@ const RechargePage = () => {
 
   return (
     <>
-    {
+      {
         Object.entries(products).length === 0 ? <Skeleton /> : <Recharge data={products} />
-    }
-</>
+      }
+    </>
   )
 }
 

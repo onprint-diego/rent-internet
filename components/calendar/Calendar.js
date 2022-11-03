@@ -20,19 +20,19 @@ const Calendar = ({ cart, setCart, text = '', setDisabled }) => {
         if(range?.from && range?.to) {
             const rangeInTime = range.to.getTime() - range.from.getTime() 
             // Add one day to include initial day
-            const rangeInDays = rangeInTime / (1000 * 3600 * 24) + 1
+            const rangeInDays = rangeInTime / (1000 * 3600 * 24)
             // Every 14 days add 1 qty and round always up
-            const qty = Math.ceil(rangeInDays / 14)
+            const qty = Math.ceil(rangeInDays / 7)
 
-            const updatedSubtotal = cart.mainProductPrice * qty
+            const updatedMainProductPrice = cart.mainProductPrice * qty
 
             setCart({
                 ...cart,
                 qty: qty,
                 from: format(range.from, 'dd/MM/yyyy'),
                 to: format(range.to, 'dd/MM/yyyy'),
-                subtotal: updatedSubtotal,
-                total: updatedSubtotal + cart.shippingFee,
+                subtotal: updatedMainProductPrice,
+                total: updatedMainProductPrice + cart.shippingFee + cart.deposit,
             })
 
             setDisabled(false)
