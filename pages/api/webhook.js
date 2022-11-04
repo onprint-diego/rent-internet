@@ -94,68 +94,6 @@ export default async function handler(req, res) {
 
       try {
         wooOrderId = await api.post("orders", completedOrder)
-
-        // SEND MAIL
-        const htmlItemsList = completedOrder.line_items.map(item => `<tr><td style="border: 1px solid #dfdfe2;text-align: left;padding: 1rem;">${item.name}</td><td style="border: 1px solid #dfdfe2;text-align: center;padding: 1rem;">${item.quantity}</td><td style="border: 1px solid #dfdfe2;text-align: left;padding: 1rem;">USD ${item.total}</td>`).join('</tr>')
-
-        const html = `
-          <div style="width: 75%;background-color: #f7f7f7;padding-bottom: 10rem;margin: 0 auto;border-radius: 4px; overflow: hidden;">
-            <div style="background-color: #ffffff;width: 90%;max-width: 550px;margin: 0 auto;border-radius: 3px;border;1px solid #e0e0e0;overflow: hidden;">
-            <div style="background-color: #1966d1;padding: 2rem;color: #ffffff;">
-                <h1>Gracias por su reserva</h1>
-            </div>
-            <div style="padding: 2rem;">
-                <p>Hemos recibido tu orden de reserva. El número de orden es:</p>
-                <p style="text-align: center;font-size: 4rem;font-weight: bold;margin: 2rem 0;color: #1966d1;">${wooOrderId}</p>
-                <table style="border-collapse: collapse;border-spacing: 0;margin-top: 1rem;width: 95%;border-radius: 4px;">
-                    <thead style="background-color: #dfdfe2;">
-                        <tr>
-                            <th style="border: 1px solid #dfdfe2;text-align: left;padding: 1rem;">Producto</th>
-                            <th style="border: 1px solid #dfdfe2;text-align: left;padding: 1rem;">Cantidad</th>
-                            <th style="border: 1px solid #dfdfe2;text-align: left;padding: 1rem;">Precio</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        ${htmlItemsList}
-                        <tr>
-                            <td style="border: 1px solid #dfdfe2;text-align: left;padding: 1rem;" colspan="3">${completedOrder.shipping.address_1}</td>
-                        </tr>
-                        <tr>
-                            <td style="border: 1px solid #dfdfe2;text-align: left;padding: 1rem;" colspan="2">Total</td>
-                            <td style="border: 1px solid #dfdfe2;text-align: left;padding: 1rem;">USD </td>
-                        </tr>
-                    </tbody>
-                </table>
-                <div style="margin-top: 2rem;">
-                    <p style="font-weight: bold;">Método de pago</p>
-                    <p>${completedOrder.payment_method}</p>
-                </div>
-                <div style="margin-top: 2rem;">
-                    <p style="font-weight: bold;">Dirección de envío</p>
-                    <p>${completedOrder.deliveryAddress}, CP${completedOrder.deliveryCp}, ${completedOrder.deliveryCity}, ${completedOrder.deliveryCountry} </p>
-                </div>
-            </div>
-            <div id="footer>
-            </div>
-            </div>
-        </div>
-      `
-
-
-        const msg = {
-          to: session.customer_details.email,
-          from: 'rent@rent-internet.com',
-          subject: 'Confirmación de reserva de módem Rent Internet',
-          html: html,
-        };
-
-        try {
-          await sgMail.send(msg);
-          res.status(200).json({ message: 'Email has been sent' })
-        } catch (error) {
-          res.status(500).json({ error: 'Error sending email' })
-        }
-
         res.status(200).json({ message: 'Order placed in Woocommerce' })
       } catch (error) {
         res.json({ message: 'Error setting woo order' })
