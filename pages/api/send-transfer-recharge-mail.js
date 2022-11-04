@@ -6,7 +6,7 @@ export default async (req, res) => {
     const content = req.body
     const email = 'rent@rent-internet.com'
     const name = 'Rent Internet'
-    const subject = 'Confirmación de reserva de módem Rent Internet'
+    const subject = 'Confirmación de recarga de módem Rent Internet'
 
     const html = `
           <div style="width: 75%;background-color: #f7f7f7;padding-bottom: 10rem;margin: 0 auto;border-radius: 4px; overflow: hidden;">
