@@ -76,17 +76,17 @@ export default async function handler(req, res) {
         return res.json({ message: 'Error listing items as to place woocommerce order' })
       }
 
-      // try {
-      //   wooOrderId = await api.post("orders", completedOrder)
+      try {
+        wooOrderId = await api.post("orders", completedOrder)
 
-      //   const html = `<div>hola</div>`
+        const html = `<div>hola</div>`
 
-      //   const msg = {
-      //     to: completedOrder.email,
-      //     from: 'rent@rent-internet.com',
-      //     subject: 'Confirmación de reserva de módem Rent Internet - v2',
-      //     html: html,
-      //   }
+        const msg = {
+          to: completedOrder.email,
+          from: 'rent@rent-internet.com',
+          subject: 'Confirmación de reserva de módem Rent Internet - v2',
+          html: html,
+        }
   
       //   try {
       //     await sgMail.send(msg);
