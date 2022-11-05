@@ -79,23 +79,23 @@ export default async function handler(req, res) {
       try {
         wooOrderId = await api.post("orders", completedOrder)
 
-        const html = `<div>hola</div>`
+        // const html = `<div>hola</div>`
 
-        const msg = {
-          to: completedOrder.email,
-          from: 'rent@rent-internet.com',
-          subject: 'Confirmación de reserva de módem Rent Internet - v2',
-          html: html,
-        }
+        // const msg = {
+        //   to: completedOrder.email,
+        //   from: 'rent@rent-internet.com',
+        //   subject: 'Confirmación de reserva de módem Rent Internet - v2',
+        //   html: html,
+        // }
   
-        try {
-          await sgMail.send(msg);
-          return res.status(200).json({ message: 'Email has been sent' })
-        } catch (error) {
-          return res.status(500).json({ error: 'Error sending email' })
-        }
+        // try {
+        //   await sgMail.send(msg);
+        //   return res.status(200).json({ message: 'Email has been sent' })
+        // } catch (error) {
+        //   return res.status(500).json({ error: 'Error sending email' })
+        // }
 
-        // res.status(200).json({ message: 'Order placed in Woocommerce' })
+        res.status(200).json({ message: 'Order placed in Woocommerce' })
       } catch (error) {
         return res.json({ message: 'Error setting woo order' })
       }
