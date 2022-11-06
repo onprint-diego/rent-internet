@@ -31,7 +31,7 @@ const Hero = ({ content }) => {
 
     return (
         <Container>
-            <BackgroundImage src={Bg} fill ref={object} />
+            <BackgroundImage alt="modem portatil de bolsillo" src={Bg} fill />
             {
                 Object.entries(content).length !== 0 &&
                 <Inner>
