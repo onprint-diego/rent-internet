@@ -80,7 +80,6 @@ export default async function handler(req, res) {
             quantity: item.quantity,
             product_id: id,
             name: item.price.product.name,
-            // total: (item.amount_total / 100) * item.quantity,
           }
 
         })
@@ -91,8 +90,6 @@ export default async function handler(req, res) {
         res.json({ message: 'Error listing items as to place woocommerce order' })
       }
 
-      console.log('COMPLETED............................................', completedOrder)
-
       //SET ORDER IN WOO
       try {
         wooOrderId = await api.post("orders", completedOrder)
@@ -101,8 +98,11 @@ export default async function handler(req, res) {
         res.json({ message: 'Error setting woo order' })
       }
 
-      //SEND MAIL
-      const htmlItemsList = completedOrder.line_items.map(item => `<tr><td style="border: 1px solid #dfdfe2;text-align: left;padding: 1rem;">${item.name}</td><td style="border: 1px solid #dfdfe2;text-align: center;padding: 1rem;">${item.quantity}</td><td style="border: 1px solid #dfdfe2;text-align: left;padding: 1rem;">USD ${item.total}</td>`).join('</tr>')
+      // SEND MAIL
+      const htmlItemsList = itemsList.data.map(item => `<tr><td style="border: 1px solid #dfdfe2;text-align: left;padding: 1rem;">${item.description}</td><td style="border: 1px solid #dfdfe2;text-align: center;padding: 1rem;">${item.quantity}</td><td style="border: 1px solid #dfdfe2;text-align: left;padding: 1rem;">USD ${item.amount_total / 100}</td>`).join('</tr>')
+      
+      const totalArray = itemsList.data.map(item => item.amount_total / 100)
+      const total = totalArray.reduce((prev, curr) => prev + curr , 0)
 
       const html = `
           <div style="width: 75%;background-color: #f7f7f7;padding-bottom: 10rem;margin: 0 auto;border-radius: 4px; overflow: hidden;">
@@ -128,7 +128,7 @@ export default async function handler(req, res) {
                         </tr>
                         <tr>
                             <td style="border: 1px solid #dfdfe2;text-align: left;padding: 1rem;" colspan="2">Total</td>
-                            <td style="border: 1px solid #dfdfe2;text-align: left;padding: 1rem;">USD </td>
+                            <td style="border: 1px solid #dfdfe2;text-align: left;padding: 1rem;">USD ${total}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -138,7 +138,7 @@ export default async function handler(req, res) {
                 </div>
                 <div style="margin-top: 2rem;">
                     <p style="font-weight: bold;">Dirección de envío</p>
-                    <p>${completedOrder.address_2}, CP${completedOrder.postcode}, ${completedOrder.city}, ${completedOrder.country} </p>
+                    <p>${completedOrder.shipping.address_2}, CP${completedOrder.shipping.postcode}, ${completedOrder.shipping.city}, ${completedOrder.shipping.country} </p>
                 </div>
             </div>
             </div>
@@ -149,7 +149,7 @@ export default async function handler(req, res) {
       const msg = {
         to: orderDetails.customerEmail,
         from: 'rent@rent-internet.com',
-        subject: 'Confirmación de reserva de módem Rent Internet - v2',
+        subject: 'Confirmación de reserva de módem Rent Internet - v10',
         html: html,
       };
 
