@@ -110,11 +110,10 @@ async function CreateStripeSession(req, res) {
 
 
     const session = await stripe.checkout.sessions.create({
-        success_url: 'http://localhost:3000',
-        // success_url: 'https://rent-internet-app-v2.herokuapp.com/',
+        success_url: 'https://rent-internet-app-v2.herokuapp.com/success',
+        cancel_url: 'https://rent-internet-app-v2.herokuapp.com/cancel',
         // success_url: 'https://rent-internet.com/success',
-        cancel_url: 'https://rent-internet.com/cancel',
-        // cancel_url: 'https://rent-internet-app-v2.herokuapp.com/',
+        // cancel_url: 'https://rent-internet.com/cancel',
         mode: 'payment',
         line_items: items,
         metadata: metadata,
