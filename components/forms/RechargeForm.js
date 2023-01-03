@@ -56,6 +56,8 @@ const RechargeForm = ({ cart, setCart, data }) => {
 
             setDisabledButton(true)
 
+            console.log(paymentMethod)
+
             paymentMethod ? 
             createCheckOutSession(tempCart) :
             router.push('/bank-transfer')

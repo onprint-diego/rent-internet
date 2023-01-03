@@ -106,12 +106,9 @@ const CheckoutForm = ({ cart, setCart }) => {
 
             setDisabledButton(true)
 
-            console.log(tempCart)
-            createCheckOutSession(tempCart)
-
-            // paymentMethod ? 
-            // createCheckOutSession(tempCart) :
-            // router.push('/bank-transfer')
+            paymentMethod ? 
+            createCheckOutSession(tempCart) :
+            router.push('/bank-transfer')
         }
     })
 
