@@ -1,4 +1,3 @@
-import { useEffect, useRef } from 'react'
 import Bg from '/public/hero-back.png'
 import { AltPrimaryButton } from '../../shared/AltPrimaryButton/AltPrimaryButton'
 import { AltSecondaryButtonScroll } from '../../shared/AltSecondaryButton/AltSecondaryButton'
@@ -15,19 +14,6 @@ import {
 } from './Elements'
 
 const Hero = ({ content }) => {
-
-    const object = useRef()
-
-    // element.style.position = "absolute";
-    // element.style.left = e.clientX - heightEl + 'px'; // position-div-"id" = positionMoveMouse"x" and "y" like bottom - height"let heightEl"
-    // element.style.top = e.clientY - widthEl + 'px';
-
-    // const handleMouseMove = e => {
-    //     console.log(object)
-    //     // object.current.style.top = e.clinetX - 500
-    // }
-
-    // <Container onMouseMove={handleMouseMove}>
 
     return (
         <Container>

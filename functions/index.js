@@ -1,5 +1,7 @@
 const functions = require("firebase-functions")
 const sgMail = require("@sendgrid/mail")
+const stripe = require("stripe")(functions.config().stripe.test.key)
+const endpointSecret = functions.config().stripe.webhooks.checkout
 
 ///////////////////////////////////////////////////////
 //CUSTOMER RECHARGE TRANSFER MAIL//////////////////////
@@ -411,23 +413,8 @@ exports.stripeCreateCheckoutSession = functions.https.onCall(async (data, contex
 //////////////////////////////////////////////////////
 exports.checkoutWebhook = functions.https.onRequest(async (request, response) => {
 
-    // const sgMail = require("@sendgrid/mail")
-    const WooCommerceRestApi = require("@woocommerce/woocommerce-rest-api")
-    const stripe = require("stripe")(functions.config().stripe.test.key)
-    const endpointSecret = functions.config().stripe.webhooks.checkout
     let sig = request.headers["stripe-signature"];
     let event
-
-    const api = new WooCommerceRestApi({
-        url: "https://db.rent-internet.com",
-        consumerKey: "ck_017b4787d243489633c45153b29a045418a17c3a",
-        consumerSecret: "cs_fdaedbaaeaf92e273946236cef7f011bf56335d7",
-        version: "wc/v3",
-        queryStringAuth: true,
-        axiosConfig: {
-            headers: { 'Content-Type': 'application/json' },
-        }
-    })
 
     try {
         event = stripe.webhooks.constructEvent(request.rawBody, sig, endpointSecret);
@@ -435,35 +422,34 @@ exports.checkoutWebhook = functions.https.onRequest(async (request, response) =>
         return response.status(400).end();
     }
 
+    functions.logger.log('ACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA')
+
     if (event.type === 'checkout.session.completed') {
         const session = event.data.object
         const clientSecret = session.id
 
-
         //WRITE WOO ORDER
-        const dummyOrder = {
-            payment_method: "Pago con tarjeta de crédito",
-            payment_method_title: "Pago con tarjeta de crédito",
-            set_paid: true,
-            email: orderDetails.customerEmail,
-            billing: {
-                first_name: orderDetails.customerEmail,
-                email: orderDetails.customerEmail,
-            },
-            line_items: [{
-                quantity: 1,
-                product_id: 432,
-            }]
-        }
+        // const dummyOrder = {
+        //     payment_method: "Pago con tarjeta de crédito",
+        //     payment_method_title: "Pago con tarjeta de crédito",
+        //     set_paid: true,
+        //     email: orderDetails.customerEmail,
+        //     billing: {
+        //         first_name: orderDetails.customerEmail,
+        //         email: orderDetails.customerEmail,
+        //     },
+        //     line_items: [{
+        //         quantity: 1,
+        //         product_id: 432,
+        //     }]
+        // }
 
-        try {
-            wooOrderId = await api.post("orders", dummyOrder)
-            res.status(200).json({ message: 'Order placed in Woocommerce' })
-        } catch (error) {
-            res.json({ message: 'Error setting woo order' })
-        }
-
-
+        // try {
+        //     wooOrderId = await api.post("orders", dummyOrder)
+        //     res.status(200).json({ message: 'Order placed in Woocommerce' })
+        // } catch (error) {
+        //     res.json({ message: 'Error setting woo order' })
+        // }
 
 
         // //SEND MAIL

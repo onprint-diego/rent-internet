@@ -5,7 +5,7 @@ export const GetLanguageContext = useContext(LanguageContext)
 
 const LanguageCtx = ({ children }) => {
 
-    const [ language, setLaguage ] = useState({})
+    const [ language, setLanguage ] = useState({})
 
 
     return (

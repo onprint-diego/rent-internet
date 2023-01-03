@@ -3,8 +3,8 @@ import { ActionButton } from '../shared/ActionButton/ActionButton'
 import { GetCartContext } from '../../context/CartContext'
 import { CreateWooCommerceTransferOrder } from '../../pages/api/create-woo-transfer-order'
 import { CreateWooCommerceTransferRechargeOrder } from '../../pages/api/create-woo-transfer-recharge-order'
-import { sendTransferMail } from '../../utils/sendTransferMail'
-import { sendRechargeTransferMail } from '../../utils/sendRechargeTransferMail'
+import { httpsCallable } from 'firebase/functions'
+import { cloudFunctions } from '../../utils/firebase'
 import {
     ButtonContainer,
     Container,
@@ -13,11 +13,17 @@ import {
     MsjContainer,
 } from './Elements'
 
+
 const Transfer = () => {
 
     const { cart } = GetCartContext()
     const [disabledButton, setDisabledButton] = useState(false)
     const [orderId, setOrderId] = useState(0)
+    const sendEmail = httpsCallable(cloudFunctions, 'sendEmail')
+    const sendCustomerRechargeTransferMail = httpsCallable(cloudFunctions, 'sendCustomerRechargeTransferMail')
+    const sendCompanyRechargeTransferMail = httpsCallable(cloudFunctions, 'sendCompanyRechargeTransferMail')
+    const sendCustomerBookingTransferMail = httpsCallable(cloudFunctions, 'sendCustomerBookingTransferMail')
+    const sendCompanyBookingTransferMail = httpsCallable(cloudFunctions, 'sendCompanyBookingTransferMail')
 
     const placeOrder = () => {
         if (Object.entries(cart).length === 0) return console.log('No items in cart')
@@ -26,7 +32,9 @@ const Transfer = () => {
         if (cart.isRecharge) {
             CreateWooCommerceTransferRechargeOrder(cart)
                 .then(res => {
-                    sendRechargeTransferMail(res.data)
+
+                    sendCustomerRechargeTransferMail(res.data)
+                    sendCompanyRechargeTransferMail(res.data)
                     setDisabledButton(false)
                     setOrderId(res.data.id)
                 })
@@ -34,7 +42,9 @@ const Transfer = () => {
         } else {
             CreateWooCommerceTransferOrder(cart)
                 .then(res => {
-                    sendTransferMail(res.data)
+
+                    sendCustomerBookingTransferMail(res.data)
+                    sendCompanyBookingTransferMail(res.data)
                     setDisabledButton(false)
                     setOrderId(res.data.id)
                 })

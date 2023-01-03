@@ -1,34 +1,29 @@
 import { loadStripe } from '@stripe/stripe-js'
 import { api } from './woocommerce'
+import { httpsCallable } from 'firebase/functions'
+import { cloudFunctions } from './firebase'
 
 export const createCheckOutSession = async (cart) => {
 
-    const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY)
+    const stripePromise = loadStripe('pk_test_51LkAFuHieiQtj1QLE4R8QafLiQaeNYhlFxO0mcCOS6pbRkDlXJfAP01MxopRDHIIFYQBex9XM4XAeRncF36pJsx000o4CnQfe0')
+    const stripeCreateCheckoutSession = httpsCallable(cloudFunctions, 'stripeCreateCheckoutSession')
 
     const redirect = async (id) => {
         const stripe = await stripePromise
         stripe.redirectToCheckout({ sessionId: id })
     }
 
-    const createSession = (products, url) => {
-        fetch(`/api/${url}`, {
-            method: "POST",
-            body: JSON.stringify({ cart: cart, products: products }),
-            headers: { "Content-type": "application/json; charset=UTF-8" }
-        })
-            .then(res => res.json())
-            .then(json => redirect(json.id))
-            .catch(err => console.log('Error creating checkout session: ' + err))
-    }
-
-    //Better to get products within the api call?
     api.get("products")
         .then((res) => {
+
             if (res.status === 200) {
                 if(cart.isRecharge) {
-                    createSession(res.data, 'create-stripe-recharge-session')
+                    // createSession(res.data)
                 } else {
-                    createSession(res.data, 'create-stripe-session')
+                    const products = res.data
+                    stripeCreateCheckoutSession({cart, products})
+                    .then(res => redirect(res.data.id))
+                    .catch(err => console.log(err.code, err.message, err.details))
                 }
             }
         })

@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, { keyframes } from 'styled-components'
 import Image from 'next/future/image'
 
 export const Container = styled.section`
@@ -19,6 +19,12 @@ export const Inner = styled.div`
     z-index: 2;
 `
 
+const floatingAnimation = keyframes`
+    100% {
+        transform: translateY(25px);
+    }
+`
+
 export const ObjectContainer = styled.div`
     position: absolute;
     right: 0;
@@ -26,6 +32,7 @@ export const ObjectContainer = styled.div`
     height: 32rem;
     width: 32rem;
     aspect-ratio: 16/9;
+    animation: ${floatingAnimation} 1.6s infinite alternate ease-in-out;
 `
 
 export const ObjectImg = styled(Image)`

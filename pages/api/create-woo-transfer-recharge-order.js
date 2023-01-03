@@ -12,7 +12,6 @@ export async function CreateWooCommerceTransferRechargeOrder(data) {
         line_items: [{product_id: data.product.id, quantity: 1}],
     }
 
-
     try {
         const response = await api.post("orders", order)
         return response
@@ -20,5 +19,4 @@ export async function CreateWooCommerceTransferRechargeOrder(data) {
         console.log('ERROR placing recharge order in woocommerce', error)
         return error
     }
-
 }

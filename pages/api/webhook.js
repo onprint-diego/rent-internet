@@ -8,7 +8,6 @@ sgMail.setApiKey(process.env.SENDGRID_KEY);
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY)
 
 const endpointSecret = process.env.STRIPE_WEBHOOK_SECRET_HEROKU_DEV
-// const endpointSecret = "whsec_a6d2c13640b5415b7f8a03b7d1deef1eead64b331f6d0b61024e72f5038777f3"
 
 export const config = {
   api: {
@@ -149,7 +148,7 @@ export default async function handler(req, res) {
       const msg = {
         to: orderDetails.customerEmail,
         from: 'rent@rent-internet.com',
-        subject: 'Confirmación de reserva de módem Rent Internet - v10',
+        subject: 'Confirmación de reserva de módem Rent Internet',
         html: html,
       };
 
