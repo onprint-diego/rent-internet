@@ -2,8 +2,31 @@ const functions = require("firebase-functions")
 const sgMail = require("@sendgrid/mail")
 const stripe = require("stripe")(functions.config().stripe.test.key)
 const endpointSecret = functions.config().stripe.webhooks.checkout
+// const WooCommerceAPI = require('woocommerce-api')
 const rechargeEndpointSecret = functions.config().stripe.webhooks.checkoutrecharge
 sgMail.setApiKey(functions.config().sendgrid.key)
+const WooCommerceRestApi = require('@woocommerce/woocommerce-rest-api').default
+// import pkg from '@woocommerce/woocommerce-rest-api'
+// const WooCommerceRestApi = pkg.default
+
+const api = new WooCommerceRestApi({
+    url: "https://db.rent-internet.com",
+    consumerKey: 'ck_017b4787d243489633c45153b29a045418a17c3a',
+    consumerSecret: 'cs_fdaedbaaeaf92e273946236cef7f011bf56335d7',
+    version: "wc/v3",
+    queryStringAuth: true,
+    axiosConfig: {
+          headers: {'Content-Type': 'application/json'},
+    }
+})
+
+// const WooCommerce = new WoocommerceAPI({
+//     url: 'https://db.rent-internet.com',
+//     consumerKey: 'ck_017b4787d243489633c45153b29a045418a17c3a',
+//     consumerSecret: 'cs_fdaedbaaeaf92e273946236cef7f011bf56335d7',
+//     wpAPI: true,
+//     version: 'wc/v1'
+// })
 
 ///////////////////////////////////////////////////////
 //CUSTOMER RECHARGE TRANSFER MAIL//////////////////////
@@ -394,7 +417,8 @@ exports.stripeCreateCheckoutSession = functions.https.onCall(async (data, contex
         'billingCity': `${customer.billingCity}`,
         'billingCountry': `${customer.billingCountry}`,
         'from': `${cart.from}`,
-        'to': `${cart.to}`
+        'to': `${cart.to}`,
+        'isRecharge': `${isRecharge}`,
     }
 
     const session = await stripe.checkout.sessions.create({
@@ -411,7 +435,51 @@ exports.stripeCreateCheckoutSession = functions.https.onCall(async (data, contex
 })
 
 ///////////////////////////////////////////////////////
-//CREATE STRIPE CHECKOUT SESSION///////////////////////
+//CREATE STRIPE RECHARGE CHECKOUT SESSION/////////////
+//////////////////////////////////////////////////////
+exports.stripeCreateRechargeCheckoutSession = functions.https.onCall(async (data, context) => {
+
+    const stripe = require("stripe")(functions.config().stripe.test.key)
+    const { cart } = data
+
+    const productName = cart.product.name
+    const productPrice = parseInt(cart.product.price)
+
+    //FOLLOW STRIPE FORMAT for checkoutSession object
+    const items = [{
+        price_data: {
+            currency: 'usd',
+            product_data: {
+                name: productName,
+                metadata: {
+                    'wooId': `${cart.product.id}`
+                }
+            },
+            unit_amount: productPrice * 100,
+        },
+        quantity: 1,
+    }]
+
+    const metadata = {
+        'customerEmail': `${cart.customerDetails.email}`,
+        'isRecharge': `${isRecharge}`,
+    }
+
+    const session = await stripe.checkout.sessions.create({
+        success_url: 'https://rent-internet.com/',
+        cancel_url: 'https://rent-internet.com/',
+        mode: 'payment',
+        line_items: items,
+        metadata: metadata,
+    })
+
+    return {
+        id: session.id
+    }
+})
+
+///////////////////////////////////////////////////////
+//STRIPE CHECKOUT WEBHOOK/////////////////////////////
 //////////////////////////////////////////////////////
 exports.checkoutWebhook = functions.https.onRequest(async (request, response) => {
 
@@ -458,27 +526,33 @@ exports.checkoutWebhook = functions.https.onRequest(async (request, response) =>
         }
 
         //WRITE WOO ORDER
-        // const dummyOrder = {
-        //     payment_method: "Pago con tarjeta de crédito",
-        //     payment_method_title: "Pago con tarjeta de crédito",
-        //     set_paid: true,
-        //     email: orderDetails.customerEmail,
-        //     billing: {
-        //         first_name: orderDetails.customerEmail,
-        //         email: orderDetails.customerEmail,
-        //     },
-        //     line_items: [{
-        //         quantity: 1,
-        //         product_id: 432,
-        //     }]
-        // }
+        const dummyOrder = {
+            payment_method: "Pago con tarjeta de crédito",
+            payment_method_title: "Pago con tarjeta de crédito",
+            set_paid: true,
+            email: orderDetails.customerEmail,
+            billing: {
+                first_name: orderDetails.customerEmail,
+                email: orderDetails.customerEmail,
+            },
+            line_items: [{
+                quantity: 1,
+                product_id: 432,
+            }]
+        }
 
-        // try {
-        //     wooOrderId = await api.post("orders", dummyOrder)
-        //     res.status(200).json({ message: 'Order placed in Woocommerce' })
-        // } catch (error) {
-        //     res.json({ message: 'Error setting woo order' })
-        // }
+        // WooCommerce.putAsync('orders', dummyOrder)
+        // .then(() => {
+        //     functions.logger.log('holo')
+        // })
+        // .catch(err => functions.logger.log(err))
+
+        try {
+            wooOrderId = await api.post("orders", dummyOrder)
+            response.status(200).json({ message: 'Order placed in Woocommerce' })
+        } catch (error) {
+            response.json({ message: 'Error setting woo order' })
+        }
 
 
         try {
@@ -507,14 +581,72 @@ exports.checkoutWebhook = functions.https.onRequest(async (request, response) =>
             res.json({ message: 'Error listing items as to place woocommerce order' })
         }
 
-        //SEND MAIL
         const htmlItemsList = itemsList.data.map(item => `<tr><td style="border: 1px solid #dfdfe2;text-align: left;padding: 1rem;">${item.description}</td><td style="border: 1px solid #dfdfe2;text-align: center;padding: 1rem;">${item.quantity}</td><td style="border: 1px solid #dfdfe2;text-align: left;padding: 1rem;">USD ${item.amount_total / 100}</td>`).join('</tr>')
 
         const totalArray = itemsList.data.map(item => item.amount_total / 100)
         const total = totalArray.reduce((prev, curr) => prev + curr, 0)
 
+        //SEND COMPANY MAIL
+        const cHtml = `
+                <div style="width: 75%;background-color: #f7f7f7;padding-bottom: 10rem;margin: 0 auto;border-radius: 4px; overflow: hidden;">
+                <div style="background-color: #ffffff;width: 90%;max-width: 550px;margin: 0 auto;border-radius: 3px;border;1px solid #e0e0e0;overflow: hidden;">
+                <div style="background-color: #1966d1;padding: 2rem;color: #ffffff;">
+                    <h1>Nueva reserva</h1>
+                </div>
+                <div style="padding: 2rem;">
+                    <p>El número de orden es:</p>
+                    <p style="text-align: center;font-size: 4rem;font-weight: bold;margin: 2rem 0;color: #1966d1;">wooOrderId.data.id</p>
+                    <table style="border-collapse: collapse;border-spacing: 0;margin-top: 1rem;width: 95%;border-radius: 4px;">
+                        <thead style="background-color: #dfdfe2;">
+                            <tr>
+                                <th style="border: 1px solid #dfdfe2;text-align: left;padding: 1rem;">Producto</th>
+                                <th style="border: 1px solid #dfdfe2;text-align: left;padding: 1rem;">Cantidad</th>
+                                <th style="border: 1px solid #dfdfe2;text-align: left;padding: 1rem;">Precio</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${htmlItemsList}
+                            <tr>
+                                <td style="border: 1px solid #dfdfe2;text-align: left;padding: 1rem;" colspan="3">${completedOrder.shipping.address_1}</td>
+                            </tr>
+                            <tr>
+                                <td style="border: 1px solid #dfdfe2;text-align: left;padding: 1rem;" colspan="2">Total</td>
+                                <td style="border: 1px solid #dfdfe2;text-align: left;padding: 1rem;">USD ${total}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div style="margin-top: 2rem;">
+                        <p style="font-weight: bold;">Método de pago</p>
+                        <p>${completedOrder.payment_method}</p>
+                    </div>
+                    <div style="margin-top: 2rem;">
+                        <p style="font-weight: bold;">Dirección de envío</p>
+                        <p>${completedOrder.shipping.address_2}, CP${completedOrder.shipping.postcode}, ${completedOrder.shipping.city}, ${completedOrder.shipping.country} </p>
+                    </div>
+                </div>
+                </div>
+            </div>
+        `
 
-        const html = `
+        const cMsg = {
+            to: orderDetails.customerEmail,
+            from: 'orders@rent-internet.com',
+            subject: 'Confirmación de reserva de módem - Rent Internet',
+            html: cHtml,
+        }
+
+        try {
+            await sgMail.send(cMsg)
+            return response.status(200).json({ message: 'Email has been sent' })
+        } catch (error) {
+            response.status(500).json({ error: 'Error sending email' })
+        }
+
+        //SEND CUSTOMER MAIL
+        let html
+
+        if (!orderDetails.isRecharge) {
+            html = `
                 <div style="width: 75%;background-color: #f7f7f7;padding-bottom: 10rem;margin: 0 auto;border-radius: 4px; overflow: hidden;">
                 <div style="background-color: #ffffff;width: 90%;max-width: 550px;margin: 0 auto;border-radius: 3px;border;1px solid #e0e0e0;overflow: hidden;">
                 <div style="background-color: #1966d1;padding: 2rem;color: #ffffff;">
@@ -553,7 +685,42 @@ exports.checkoutWebhook = functions.https.onRequest(async (request, response) =>
                 </div>
                 </div>
             </div>
+            `
+        } else {
+            html = `
+                <div style="width: 75%;background-color: #f7f7f7;padding-bottom: 10rem;margin: 0 auto;border-radius: 4px; overflow: hidden;">
+                <div style="background-color: #ffffff;width: 90%;max-width: 550px;margin: 0 auto;border-radius: 3px;border;1px solid #e0e0e0;overflow: hidden;">
+                <div style="background-color: #1966d1;padding: 2rem;color: #ffffff;">
+                    <h1>Gracias por su reserva</h1>
+                </div>
+                <div style="padding: 2rem;">
+                    <p>Hemos recibido tu orden de reserva. El número de orden es:</p>
+                    <p style="text-align: center;font-size: 4rem;font-weight: bold;margin: 2rem 0;color: #1966d1;">wooOrderId.data.id</p>
+                    <table style="border-collapse: collapse;border-spacing: 0;margin-top: 1rem;width: 95%;border-radius: 4px;">
+                        <thead style="background-color: #dfdfe2;">
+                            <tr>
+                                <th style="border: 1px solid #dfdfe2;text-align: left;padding: 1rem;">Producto</th>
+                                <th style="border: 1px solid #dfdfe2;text-align: left;padding: 1rem;">Cantidad</th>
+                                <th style="border: 1px solid #dfdfe2;text-align: left;padding: 1rem;">Precio</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${htmlItemsList}
+                            <tr>
+                                <td style="border: 1px solid #dfdfe2;text-align: left;padding: 1rem;" colspan="2">Total</td>
+                                <td style="border: 1px solid #dfdfe2;text-align: left;padding: 1rem;">USD ${total}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div style="margin-top: 2rem;">
+                        <p style="font-weight: bold;">Método de pago</p>
+                        <p>${completedOrder.payment_method}</p>
+                    </div>
+                </div>
+                </div>
+            </div>
         `
+        }
 
         const msg = {
             to: orderDetails.customerEmail,
@@ -572,7 +739,7 @@ exports.checkoutWebhook = functions.https.onRequest(async (request, response) =>
 })
 
 ///////////////////////////////////////////////////////
-//CREATE RECHARGE STRIPE CHECKOUT SESSION/////////////
+//RECHARGE STRIPE CHECKOUT WEBHOOK////////////////////
 //////////////////////////////////////////////////////
 exports.checkoutRechargeWebhook = functions.https.onRequest(async (request, response) => {
 
@@ -600,10 +767,10 @@ exports.checkoutRechargeWebhook = functions.https.onRequest(async (request, resp
             set_paid: true,
             email: orderDetails.customerEmail,
             billing: {
-              first_name: orderDetails.customerEmail,
-              email: orderDetails.customerEmail,
+                first_name: orderDetails.customerEmail,
+                email: orderDetails.customerEmail,
             },
-          }
+        }
 
         //WRITE WOO ORDER
         // const dummyOrder = {
@@ -632,35 +799,83 @@ exports.checkoutRechargeWebhook = functions.https.onRequest(async (request, resp
         try {
 
             itemsList = await stripe.checkout.sessions.listLineItems(clientSecret, {
-              expand: ['data.price.product']
+                expand: ['data.price.product']
             })
-    
+
             //FORMAT ITEMS TO WOOCOMMERCE FORMAT
             const formatedItems = itemsList.data.map(item => {
-    
-              // Product metadata ends in item.price.product.metadata)
-              const id = parseInt(item.price.product.metadata.wooId)
-    
-              return {
-                quantity: 1,
-                product_id: id,
-              }
-    
-            })
-    
-            completedOrder = { ...order, line_items: formatedItems }
-    
-          } catch (error) {
-            res.json({ message: 'Error listing items as to place woocommerce order' })
-          }
 
-        //SEND MAIL
+                // Product metadata ends in item.price.product.metadata)
+                const id = parseInt(item.price.product.metadata.wooId)
+
+                return {
+                    quantity: 1,
+                    product_id: id,
+                }
+
+            })
+
+            completedOrder = { ...order, line_items: formatedItems }
+
+        } catch (error) {
+            res.json({ message: 'Error listing items as to place woocommerce order' })
+        }
+
         const htmlItemsList = itemsList.data.map(item => `<tr><td style="border: 1px solid #dfdfe2;text-align: left;padding: 1rem;">${item.description}</td><td style="border: 1px solid #dfdfe2;text-align: center;padding: 1rem;">${item.quantity}</td><td style="border: 1px solid #dfdfe2;text-align: left;padding: 1rem;">USD ${item.amount_total / 100}</td>`).join('</tr>')
 
         const totalArray = itemsList.data.map(item => item.amount_total / 100)
         const total = totalArray.reduce((prev, curr) => prev + curr, 0)
 
+        //SEND COMPANY MAIL
+        const cHtml = `
+        <div style="width: 75%;background-color: #f7f7f7;padding-bottom: 10rem;margin: 0 auto;border-radius: 4px; overflow: hidden;">
+        <div style="background-color: #ffffff;width: 90%;max-width: 550px;margin: 0 auto;border-radius: 3px;border;1px solid #e0e0e0;overflow: hidden;">
+          <div style="background-color: #1966d1;padding: 2rem;color: #ffffff;">
+              <h1>Nueva reserva</h1>
+          </div>
+          <div style="padding: 2rem;">
+                <p>El número de orden es:</p>
+                <p style="text-align: center;font-size: 4rem;font-weight: bold;margin: 2rem 0;color: #1966d1;">wooOrderId.data.id</p>
+                <table style="border-collapse: collapse;border-spacing: 0;margin-top: 1rem;width: 95%;border-radius: 4px;">
+                    <thead style="background-color: #dfdfe2;">
+                        <tr>
+                            <th style="border: 1px solid #dfdfe2;text-align: left;padding: 1rem;">Producto</th>
+                            <th style="border: 1px solid #dfdfe2;text-align: left;padding: 1rem;">Cantidad</th>
+                            <th style="border: 1px solid #dfdfe2;text-align: left;padding: 1rem;">Precio</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    ${htmlItemsList}
+                        <tr>
+                            <td style="border: 1px solid #dfdfe2;text-align: left;padding: 1rem;" colspan="2">Total</td>
+                            <td style="border: 1px solid #dfdfe2;text-align: left;padding: 1rem;">USD ${total}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div style="margin-top: 2rem;">
+                <p style="font-weight: bold;">Método de pago</p>
+                <p>${completedOrder.payment_method}</p>
+                </div>
+            </div>
+            </div>
+        </div>
+        `
 
+        const cMsg = {
+            to: 'orders@rent-internet.com',
+            from: 'orders@rent-internet.com',
+            subject: 'Confirmación de recarga - Rent Internet',
+            html: cHtml,
+        }
+
+        try {
+            await sgMail.send(cMsg)
+            return response.status(200).json({ message: 'Email has been sent' })
+        } catch (error) {
+            response.status(500).json({ error: 'Error sending email' })
+        }
+
+        //SEND CUSTOMER MAIL
         const html = `
         <div style="width: 75%;background-color: #f7f7f7;padding-bottom: 10rem;margin: 0 auto;border-radius: 4px; overflow: hidden;">
         <div style="background-color: #ffffff;width: 90%;max-width: 550px;margin: 0 auto;border-radius: 3px;border;1px solid #e0e0e0;overflow: hidden;">
@@ -679,7 +894,7 @@ exports.checkoutRechargeWebhook = functions.https.onRequest(async (request, resp
                         </tr>
                     </thead>
                     <tbody>
-                    ${htmlItemsList }
+                    ${htmlItemsList}
                         <tr>
                             <td style="border: 1px solid #dfdfe2;text-align: left;padding: 1rem;" colspan="2">Total</td>
                             <td style="border: 1px solid #dfdfe2;text-align: left;padding: 1rem;">USD ${total}</td>

@@ -19,7 +19,6 @@ const Transfer = () => {
     const { cart } = GetCartContext()
     const [disabledButton, setDisabledButton] = useState(false)
     const [orderId, setOrderId] = useState(0)
-    const sendEmail = httpsCallable(cloudFunctions, 'sendEmail')
     const sendCustomerRechargeTransferMail = httpsCallable(cloudFunctions, 'sendCustomerRechargeTransferMail')
     const sendCompanyRechargeTransferMail = httpsCallable(cloudFunctions, 'sendCompanyRechargeTransferMail')
     const sendCustomerBookingTransferMail = httpsCallable(cloudFunctions, 'sendCustomerBookingTransferMail')

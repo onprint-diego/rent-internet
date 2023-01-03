@@ -25,7 +25,6 @@ async function CreateStripeSession(req, res) {
         'customerEmail': `${cart.customerDetails.email}`,
     }
 
-
     const session = await stripe.checkout.sessions.create({
         success_url: 'https://rent-internet.com/success',
         cancel_url: 'https://rent-internet.com/cancel',
