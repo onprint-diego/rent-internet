@@ -29,7 +29,7 @@ const CheckoutForm = ({ cart, setCart }) => {
     const detailsTitle = 'Datos personales'
     const deliveryTitle = 'Datos de envío'
     const billingTitle = 'Datos de facturación'
-    const buttonText = 'Rentar'
+    const buttonText = 'Alquilar'
 
     const placeholderName = 'Nombre' //si es ingles 'Name', etc
     const placeholderSurname = 'Apellido'

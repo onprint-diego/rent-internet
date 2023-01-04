@@ -5,6 +5,7 @@ import {
     Content,
     Title,
     Text,
+    ImageSide,
     ImageContainer,
     SideImage,
 } from './Elements'
@@ -17,6 +18,11 @@ const Recharge = ({ content }) => {
                 Object.entries(content).length !== 0 &&
                 <>
                     <Inner>
+                        <ImageSide>
+                            <ImageContainer>
+                                <SideImage src={content.img.src} alt={content.img.alt} fill/>
+                            </ImageContainer>
+                        </ImageSide>
                         <Content>
                             <Title>{content.title}</Title>
                             <Text>{content.text}</Text>
@@ -24,9 +30,6 @@ const Recharge = ({ content }) => {
                                 Recargar
                             </PrimaryButton>
                         </Content>
-                        <ImageContainer>
-                            <SideImage src={content.img.src} alt={content.img.alt} fill/>
-                        </ImageContainer>
                     </Inner>
                 </>
             }

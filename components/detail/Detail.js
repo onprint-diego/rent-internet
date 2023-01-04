@@ -3,6 +3,7 @@ import Calendar from '../calendar/Calendar'
 import Select from '../select/Select'
 import CheckBox from '../checkbox/CheckBox'
 import Summary from '../summary/Summary'
+import MobileSummary from '../summary/MobileSummary'
 import { PrimaryButton } from '../shared/PrimaryButton/PrimaryButton'
 import { GetCartContext } from '../../context/CartContext'
 import {
@@ -15,11 +16,13 @@ import {
     LinkSpan,
     LeftContainer,
     CheckBoxContainer,
+    FixedContainer,
 } from './Elements'
 
 const Detail = ({ data, loading }) => {
 
     const { cart, setCart } = GetCartContext()
+    const [mounted,setMounted] = useState(false)
     const [mainProduct, setMainProduct] = useState({})
     const [adapter, setAdapter] = useState({ product: {}, is: false })
     const [powerBank, setPowerBank] = useState({ product: {}, is: false })
@@ -84,18 +87,9 @@ const Detail = ({ data, loading }) => {
         getPowerBank()
     }, [])
 
-    // console.log(data)
+    useEffect(() => setMounted(true), [])
 
-    // //TODO chequear si puedo refactorizarlo inhabilitando el boton
-    // useEffect(() => {
-    //     //Por ejemplo, si cambia la cantidad y hay cantidad,
-    //     //disabled(false), else disabled(true) y pasar estado
-    //     //al boton
-
-
-    //     //Remove error msg if any
-    //     error && setError(!error)
-    // }, [qty])
+    if(!mounted) return null
 
     return (
         <Container>
@@ -124,13 +118,14 @@ const Detail = ({ data, loading }) => {
                                 <CheckBox label="Agregar un adaptador de viaje" cart={cart} setCart={setCart} extraProductData={adapter} value="adapter" />
                                 <CheckBox label="Agregar Power Bank" cart={cart} setCart={setCart} extraProductData={powerBank} value="powerBank" />
                             </CheckBoxContainer>
-                            <PrimaryButton to="/checkout" disabled={disabled} onClick={() => console.log('hola')}>
+                            <PrimaryButton to="/checkout" disabled={disabled}>
                                 {mainProduct.attributes[6].options[0]}
                             </PrimaryButton>
                         </LeftContainer>
                         <RightContainer>
                             <Summary cart={cart} mainProduct={mainProduct} />
                         </RightContainer>
+                        <MobileSummary cart={cart} mainProduct={mainProduct} />
                     </>
                 }
             </ProductContainer>

@@ -20,8 +20,16 @@ export const ProductContainer = styled.article`
 export const RightContainer = styled.div`
     width: 30%;
     margin-left: 2rem;
-`
 
+    @media all and (max-width: 1024px) {
+        width: 35%;
+        margin-left: 1rem;
+    }
+
+    @media all and (max-width: 768px) {
+        display: none;
+    }
+`
 
 export const LeftContainer = styled.div`
     width: 60%;
@@ -30,6 +38,15 @@ export const LeftContainer = styled.div`
     border-radius: 5px;
     box-shadow: var(--container-shadow);
     margin-left: 5rem;
+
+    @media all and (max-width: 1024px) {
+        margin-left: 1rem;
+    }
+
+    @media all and (max-width: 768px) {
+        width: 85%;
+        margin: 0 auto;
+    }
 `
 
 export const Title = styled.h1`
@@ -55,6 +72,22 @@ export const CheckBoxContainer = styled.div`
     margin-bottom: 2rem;
 `
 
+//MOBILE
+export const FixedContainer = styled.div`
+    position: fixed;
+    bottom: -5rem;
+    left: 0;
+    width: 100%;
+    padding: 2rem;
+    /* transform: translateX(-50%); */
+    display: none;
+    background-color: #ffffff;
+
+    @media all and (max-width: 768px) {
+        display: block;
+    }
+`
+
 //SKELETON
 const load = keyframes`
     from { left: -100%}
@@ -75,6 +108,10 @@ export const SkLeftContainer = styled.div`
     border-radius: 5px;
     box-shadow: var(--container-shadow);
     margin-left: 5rem;
+
+    @media all and (max-width: 1024px) {
+        margin-left: 1rem;
+    }
 `
 
 export const SkTitle = styled.div`

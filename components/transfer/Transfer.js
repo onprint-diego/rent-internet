@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { ActionButton } from '../shared/ActionButton/ActionButton'
+import { PrimaryButton } from '../shared/PrimaryButton/PrimaryButton'
 import { GetCartContext } from '../../context/CartContext'
 import { CreateWooCommerceTransferOrder } from '../../pages/api/create-woo-transfer-order'
 import { CreateWooCommerceTransferRechargeOrder } from '../../pages/api/create-woo-transfer-recharge-order'
@@ -58,27 +59,28 @@ const Transfer = () => {
                     <Msj>
                         {
                             orderId === 0 ?
-                                <>
-                                    ***Texto para transferencia.<br></br>
-                                    Explica que la orden llega a la empresa una vez que da click al botón, pero no es efectiva hasta que no paga (queda pendiente). Inluir resumen de la reserva?
-                                </> :
-                                <>
-                                    ***La orden fue recibida con éxito...<br></br>
-                                    Número de orden (id) es {orderId}
-                                </>
+                                <p>
+                                    Las transferencias bancarias pueden tardar hasta 48 horas hábiles. Nos  pondremos en contacto con usted a la brevedad vía correo electrónico una vez efectuada la transferencia.
+                                </p> :
+                                <p>
+                                    Su orden #{orderId} ha sido procesada con éxito. A la brevedad, recibirá en su correo electrónico el proceso detallado para realizar el pago a través de Transferencia bancaria. Muchas gracias por elegir Rent Internet.
+                                </p>
                         }
                     </Msj>
-                    {
-                        orderId === 0 &&
-                        <ButtonContainer>
-                            <ActionButton
-                                type="Button"
-                                event={placeOrder}
-                                disabled={disabledButton}
-                                text="Alquilar"
-                            />
-                        </ButtonContainer>
-                    }
+                    <ButtonContainer>
+                        {
+                            orderId === 0 ?
+                                <ActionButton
+                                    type="Button"
+                                    event={placeOrder}
+                                    disabled={disabledButton}
+                                    text="Alquilar"
+                                /> :
+                                <PrimaryButton to='/'>
+                                    Volver
+                                </PrimaryButton>
+                        }
+                    </ButtonContainer>
                 </MsjContainer>
             </Inner>
         </Container>

@@ -17,6 +17,10 @@ export const Inner = styled.div`
     max-width: var(--section-max-width);
     height: 37rem;
     z-index: 2;
+
+    @media all and (max-width: 1030px) {
+        width: 95%;
+    }
 `
 
 const floatingAnimation = keyframes`
@@ -33,6 +37,10 @@ export const ObjectContainer = styled.div`
     width: 32rem;
     aspect-ratio: 16/9;
     animation: ${floatingAnimation} 1.6s infinite alternate ease-in-out;
+
+    @media all and (max-width: 1030px) {
+        width: 30rem;
+    }
 `
 
 export const ObjectImg = styled(Image)`
@@ -44,6 +52,11 @@ export const Content = styled.div`
     position: relative;
     top: 6.5rem;
     width: 70%;
+
+    @media all and (max-width: 1030px) {
+        width: 60%;
+        top: 5.5rem;
+    }
 `
 
 export const Copy = styled.h1`

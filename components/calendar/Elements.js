@@ -20,4 +20,6 @@ export const CalendarContainer = styled.div`
 
 export const Label = styled.p`
     margin-bottom: .5rem;
+    font-weight: bold;
+    border-bottom: 1px solid var(--soft-lines-color);
 `

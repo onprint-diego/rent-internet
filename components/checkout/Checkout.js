@@ -36,7 +36,7 @@ const Checkout = () => {
                             <EmptyCartInner>
                                 <Msj>No has hecho ninguna reserva</Msj>
                                 <ButtonContainer>
-                                    <PrimaryButton to='product-detail'>Rentar</PrimaryButton>
+                                    <PrimaryButton to='product-detail'>Alquilar</PrimaryButton>
                                 </ButtonContainer>
                             </EmptyCartInner>
                         </EmptyCartContainer> :

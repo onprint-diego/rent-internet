@@ -8,6 +8,10 @@ export const Container = styled.section`
     min-height: var(--section-min-height);
     position: relative;
     padding-top: 3.5rem;
+
+    @media all and (max-width: 1030px) {
+        width: 95%;
+    }
 `
 
 export const Grid = styled.div`
@@ -16,6 +20,10 @@ export const Grid = styled.div`
     justify-content: center;
     width: 80%;
     margin: 0 auto;
+
+    @media all and (max-width: 1030px) {
+        width: 100%;
+    }
 `
 
 export const Item = styled.div`

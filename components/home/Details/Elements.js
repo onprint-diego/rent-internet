@@ -46,5 +46,5 @@ export const Title = styled.h2`
 export const Text = styled.p`
     color: #ffffff;
     margin-top: 1rem;
-    font-size: 1.2rem;
+    font-size: 1rem;
 `

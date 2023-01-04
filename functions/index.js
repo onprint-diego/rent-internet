@@ -2,12 +2,9 @@ const functions = require("firebase-functions")
 const sgMail = require("@sendgrid/mail")
 const stripe = require("stripe")(functions.config().stripe.test.key)
 const endpointSecret = functions.config().stripe.webhooks.checkout
-// const WooCommerceAPI = require('woocommerce-api')
 const rechargeEndpointSecret = functions.config().stripe.webhooks.checkoutrecharge
 sgMail.setApiKey(functions.config().sendgrid.key)
 const WooCommerceRestApi = require('@woocommerce/woocommerce-rest-api').default
-// import pkg from '@woocommerce/woocommerce-rest-api'
-// const WooCommerceRestApi = pkg.default
 
 const api = new WooCommerceRestApi({
     url: "https://db.rent-internet.com",
@@ -20,13 +17,6 @@ const api = new WooCommerceRestApi({
     }
 })
 
-// const WooCommerce = new WoocommerceAPI({
-//     url: 'https://db.rent-internet.com',
-//     consumerKey: 'ck_017b4787d243489633c45153b29a045418a17c3a',
-//     consumerSecret: 'cs_fdaedbaaeaf92e273946236cef7f011bf56335d7',
-//     wpAPI: true,
-//     version: 'wc/v1'
-// })
 
 ///////////////////////////////////////////////////////
 //CUSTOMER RECHARGE TRANSFER MAIL//////////////////////
@@ -418,7 +408,6 @@ exports.stripeCreateCheckoutSession = functions.https.onCall(async (data, contex
         'billingCountry': `${customer.billingCountry}`,
         'from': `${cart.from}`,
         'to': `${cart.to}`,
-        'isRecharge': `${isRecharge}`,
     }
 
     const session = await stripe.checkout.sessions.create({
@@ -462,7 +451,6 @@ exports.stripeCreateRechargeCheckoutSession = functions.https.onCall(async (data
 
     const metadata = {
         'customerEmail': `${cart.customerDetails.email}`,
-        'isRecharge': `${isRecharge}`,
     }
 
     const session = await stripe.checkout.sessions.create({
@@ -526,35 +514,6 @@ exports.checkoutWebhook = functions.https.onRequest(async (request, response) =>
         }
 
         //WRITE WOO ORDER
-        const dummyOrder = {
-            payment_method: "Pago con tarjeta de crédito",
-            payment_method_title: "Pago con tarjeta de crédito",
-            set_paid: true,
-            email: orderDetails.customerEmail,
-            billing: {
-                first_name: orderDetails.customerEmail,
-                email: orderDetails.customerEmail,
-            },
-            line_items: [{
-                quantity: 1,
-                product_id: 432,
-            }]
-        }
-
-        // WooCommerce.putAsync('orders', dummyOrder)
-        // .then(() => {
-        //     functions.logger.log('holo')
-        // })
-        // .catch(err => functions.logger.log(err))
-
-        try {
-            wooOrderId = await api.post("orders", dummyOrder)
-            response.status(200).json({ message: 'Order placed in Woocommerce' })
-        } catch (error) {
-            response.json({ message: 'Error setting woo order' })
-        }
-
-
         try {
 
             itemsList = await stripe.checkout.sessions.listLineItems(clientSecret, {
@@ -578,9 +537,17 @@ exports.checkoutWebhook = functions.https.onRequest(async (request, response) =>
             completedOrder = { ...order, line_items: formatedItems }
 
         } catch (error) {
-            res.json({ message: 'Error listing items as to place woocommerce order' })
+            return response.json({ message: 'Error listing items as to place woocommerce order' })
         }
 
+        try {
+            wooOrderId = await api.post("orders", completedOrder)
+            response.status(200).json({ message: 'Order placed in Woocommerce' })
+        } catch (error) {
+            return response.json({ message: 'Error setting woo order' })
+        }
+
+        //SEND MAILS
         const htmlItemsList = itemsList.data.map(item => `<tr><td style="border: 1px solid #dfdfe2;text-align: left;padding: 1rem;">${item.description}</td><td style="border: 1px solid #dfdfe2;text-align: center;padding: 1rem;">${item.quantity}</td><td style="border: 1px solid #dfdfe2;text-align: left;padding: 1rem;">USD ${item.amount_total / 100}</td>`).join('</tr>')
 
         const totalArray = itemsList.data.map(item => item.amount_total / 100)
@@ -595,7 +562,7 @@ exports.checkoutWebhook = functions.https.onRequest(async (request, response) =>
                 </div>
                 <div style="padding: 2rem;">
                     <p>El número de orden es:</p>
-                    <p style="text-align: center;font-size: 4rem;font-weight: bold;margin: 2rem 0;color: #1966d1;">wooOrderId.data.id</p>
+                    <p style="text-align: center;font-size: 4rem;font-weight: bold;margin: 2rem 0;color: #1966d1;">${wooOrderId.data.id}</p>
                     <table style="border-collapse: collapse;border-spacing: 0;margin-top: 1rem;width: 95%;border-radius: 4px;">
                         <thead style="background-color: #dfdfe2;">
                             <tr>
@@ -654,7 +621,7 @@ exports.checkoutWebhook = functions.https.onRequest(async (request, response) =>
                 </div>
                 <div style="padding: 2rem;">
                     <p>Hemos recibido tu orden de reserva. El número de orden es:</p>
-                    <p style="text-align: center;font-size: 4rem;font-weight: bold;margin: 2rem 0;color: #1966d1;">wooOrderId.data.id</p>
+                    <p style="text-align: center;font-size: 4rem;font-weight: bold;margin: 2rem 0;color: #1966d1;">${wooOrderId.data.id}</p>
                     <table style="border-collapse: collapse;border-spacing: 0;margin-top: 1rem;width: 95%;border-radius: 4px;">
                         <thead style="background-color: #dfdfe2;">
                             <tr>

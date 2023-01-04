@@ -99,9 +99,9 @@ export default async function handler(req, res) {
 
       // SEND MAIL
       const htmlItemsList = itemsList.data.map(item => `<tr><td style="border: 1px solid #dfdfe2;text-align: left;padding: 1rem;">${item.description}</td><td style="border: 1px solid #dfdfe2;text-align: center;padding: 1rem;">${item.quantity}</td><td style="border: 1px solid #dfdfe2;text-align: left;padding: 1rem;">USD ${item.amount_total / 100}</td>`).join('</tr>')
-      
+
       const totalArray = itemsList.data.map(item => item.amount_total / 100)
-      const total = totalArray.reduce((prev, curr) => prev + curr , 0)
+      const total = totalArray.reduce((prev, curr) => prev + curr, 0)
 
       const html = `
           <div style="width: 75%;background-color: #f7f7f7;padding-bottom: 10rem;margin: 0 auto;border-radius: 4px; overflow: hidden;">

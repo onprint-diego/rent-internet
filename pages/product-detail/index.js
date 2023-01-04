@@ -13,8 +13,6 @@ const ProductDetail = () => {
         getProductDetails(setProducts, setLoading)
     }, [])
 
-    console.log(products)
-
     return (
         <>
             {

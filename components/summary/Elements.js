@@ -95,3 +95,28 @@ export const TooltipMsj = styled.p`
     font-size: .7rem;
     color: #ffffff;
 `
+
+
+// MOBILE
+export const Fixed = styled.div`
+    position: fixed;
+    bottom: -5rem;
+    left: 0;
+    z-index: 100;
+    width: 100%;
+`
+
+export const MobileImageContainer = styled.div`
+    position: relative;
+    width: 55%;
+    margin: 0 auto;
+    padding: 1rem 0;
+`
+
+export const TotalItem = styled.p`
+    margin-bottom: .5rem;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--soft-lines-color);
+    font-size: 1.2rem;
+`
