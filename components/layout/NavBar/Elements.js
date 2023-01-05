@@ -36,6 +36,10 @@ export const Logo = styled(Image)`
 `
 
 export const Nav = styled.nav`
+
+    @media all and (max-width: 450px) {
+        display: none;
+    }
 `
 
 export const Links = styled.ul`
@@ -48,8 +52,8 @@ export const LinkContainer = styled.li`
     padding-left: 2.5rem;
     transition: opacity .2s ease-in-out;
     font-size: .9rem;
-    ${({isSelected}) => isSelected && 'opacity: .5'};
-    ${({isSelected}) => isSelected && 'pointer-events: none'};
+    ${({ isSelected }) => isSelected && 'opacity: .5'};
+    ${({ isSelected }) => isSelected && 'pointer-events: none'};
     
     &:hover {
         opacity: .7;
