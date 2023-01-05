@@ -5,6 +5,10 @@ export const Container = styled.section`
     width: 100%;
     position: relative;
     min-height: var(--section-min-height);
+
+    @media all and (max-width: 450px) {  
+        padding: 2rem 0;
+    }
 `
 
 export const BackgroundImage = styled(Image)`
@@ -21,6 +25,14 @@ export const BackgroundOverlay = styled.div`
     background-color: var(--primary-color);
     opacity: .7;
     z-index: 1;
+
+    @media all and (max-width: 768px) {  
+        opacity: .8;
+    }
+
+    @media all and (max-width: 450px) {  
+        opacity: .9;
+    }
 `
 
 export const Inner = styled.div`
@@ -36,11 +48,35 @@ export const Inner = styled.div`
 
 export const Content = styled.div`
     width: 50%;
+
+    @media all and (max-width: 1020px) {  
+        width: 70%;
+    }
+
+    @media all and (max-width: 768px) {  
+        width: 85%;
+    }
+
+    @media all and (max-width: 650px) {  
+        width: 90%;
+    }
+    
+    @media all and (max-width: 450px) {  
+        width: 100%;
+    }
 `
 
 export const Title = styled.h2`
     color: #ffffff;
     font-size: 3rem;
+
+    @media all and (max-width: 768px) {  
+        font-size: 2rem;
+    }
+
+    @media all and (max-width: 450px) {  
+        font-size: 1.7rem;
+    }
 `
 
 export const Text = styled.p`
