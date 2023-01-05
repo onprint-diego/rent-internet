@@ -28,8 +28,6 @@ export default function Home(props) {
       backgroundimage: props.page.description.descriptionbackgroundimg.sourceUrl,
     })
 
-    console.log(props.page.homepagehero)
-
     setHeroContent({
       title: props.page.homepagehero.title, 
       subtitle: props.page.homepagehero.subtitle,

@@ -2,8 +2,6 @@ import { useState } from 'react'
 import { ActionButton } from '../shared/ActionButton/ActionButton'
 import { PrimaryButton } from '../shared/PrimaryButton/PrimaryButton'
 import { GetCartContext } from '../../context/CartContext'
-import { CreateWooCommerceTransferOrder } from '../../pages/api/create-woo-transfer-order'
-import { CreateWooCommerceTransferRechargeOrder } from '../../pages/api/create-woo-transfer-recharge-order'
 import { httpsCallable } from 'firebase/functions'
 import { cloudFunctions } from '../../utils/firebase'
 import {
@@ -26,31 +24,31 @@ const Transfer = () => {
     const sendCompanyRechargeTransferMail = httpsCallable(cloudFunctions, 'sendCompanyRechargeTransferMail')
     const sendCustomerBookingTransferMail = httpsCallable(cloudFunctions, 'sendCustomerBookingTransferMail')
     const sendCompanyBookingTransferMail = httpsCallable(cloudFunctions, 'sendCompanyBookingTransferMail')
+    const createWooCommerceRechargeTransferOrder = httpsCallable(cloudFunctions, 'createWooCommerceRechargeTransferOrder')
+    const createWooOrder = httpsCallable(cloudFunctions, 'createWooOrder')
 
     const placeOrder = () => {
         if (Object.entries(cart).length === 0) return console.log('No items in cart')
         setDisabledButton(true)
 
         if (cart.isRecharge) {
-            CreateWooCommerceTransferRechargeOrder(cart)
+            createWooCommerceRechargeTransferOrder(cart)
                 .then(res => {
-
-                    sendCustomerRechargeTransferMail(res.data)
-                    sendCompanyRechargeTransferMail(res.data)
+                    sendCustomerRechargeTransferMail(res.data.res)
+                    sendCompanyRechargeTransferMail(res.data.res)
                     setDisabledButton(false)
-                    setOrderId(res.data.id)
+                    setOrderId(res.data.res.id)
                 })
-                .catch(err => console.log('Error setting order in Woocommerce', err))
+                .catch(err => console.log(err))
         } else {
-            CreateWooCommerceTransferOrder(cart)
+            createWooOrder(cart)
                 .then(res => {
-
-                    sendCustomerBookingTransferMail(res.data)
-                    sendCompanyBookingTransferMail(res.data)
+                    sendCustomerBookingTransferMail(res.data.res)
+                    sendCompanyBookingTransferMail(res.data.res)
                     setDisabledButton(false)
-                    setOrderId(res.data.id)
+                    setOrderId(res.data.res.id)
                 })
-                .catch(() => console.log('Error setting order in Woocommerce'))
+                .catch(err => console.log(err))
         }
     }
 

@@ -115,8 +115,6 @@ const Faq = () => {
         setIsOpenId( id !== isOpenId ? id : null)
     }
 
-    console.log(isOpenId)
-
     return (
         <Container id="faq-section">
             <Inner>

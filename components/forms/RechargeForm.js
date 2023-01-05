@@ -32,7 +32,7 @@ const RechargeForm = ({ cart, setCart, data }) => {
 
     const formik = useFormik({
         initialValues: {
-            email: 'diegoeliseoiovane@gmail.com',
+            email: '',
         },
         validationSchema: Yup.object({
             email: Yup.string().email(emailError).required(generalError),
@@ -55,8 +55,6 @@ const RechargeForm = ({ cart, setCart, data }) => {
             })
 
             setDisabledButton(true)
-
-            console.log(paymentMethod)
 
             paymentMethod ? 
             createCheckOutSession(tempCart) :

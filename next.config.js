@@ -6,26 +6,20 @@ const nextConfig = {
     domains: ['db.rent-internet.com'],
     unoptimized: true,
   },
-  // exportPathMap: async function (
-  //   defaultPathMap,
-  //   { dev, dir, outDir, distDir, buildId }
-  // ) {
-  //   return {
-  //     '/': { page: '/'},
-  //     '/product-detail': { page: '/product-detail'},
-  //     '/checkout': { page: '/checkout'},
-  //     '/recharge-checkout': { page: '/recharge-checkout'}
-  //   }
-  // },
-  // async exportPathMap(defaultPathMap) {
-  //   const pathMap = {
-  //     '/': { page: '/' },
-  //     '/product-detail': { page: '/product-detail' },
-  //     '/checkout': { page: '/checkout' },
-  //     '/recharge-checkout': { page: '/recharge-checkout' }
-  //   }
-  //   return pathMap
-  // }
+  trailingSlash: true,
+  exportPathMap: async function () {
+    return {
+      '/': { page: '/'},
+      '/product-detail': { page: '/product-detail'},
+      '/bank-transfer': { page: '/bank-transfer'},
+      '/checkout': { page: '/checkout'},
+      '/recharge-checkout': { page: '/recharge-checkout'},
+      '/privacy-policy': { page: '/privacy-policy'},
+      '/terms-conditions': { page: '/terms-conditions'},
+      '/success': { page: '/success'},
+      '/cancel': { page: '/cancel'},
+    }
+  },
 }
 
 module.exports = nextConfig

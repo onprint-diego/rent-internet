@@ -25,7 +25,7 @@ const Conditions = () => {
         {
             id: 2,
             q: 'DESCRIPCIÓN DE LOS SERVICIOS',
-            a: 'RENT INTERNET alquila puntos de acceso móviles 4G/LTE (dispositivos) para su uso en Suiza, Europa y Estados Unidos (en los países cubiertos). Los datos incluidos mientras dure el alquiler dependen del plan solicitado (25gb o 50gb). Cada dispositivo puede mantener hasta 5 conexiones simultáneas.',
+            a: 'RENT INTERNET alquila puntos de acceso móviles 4G/LTE (dispositivos) para su uso en Europa y Estados Unidos (en los países cubiertos). Los datos incluidos, dependiendo del paquete adquirido por ud., pueden ser utilizados mientras dure el alquiler dependen del plan solicitado. Los datos que no se utilizen, no serán descontados del plan comprado, ni devueltos, ni podrán ser reclamados. Cada dispositivo puede mantener hasta 5 conexiones simultáneas.',
         },
         {
             id: 3,

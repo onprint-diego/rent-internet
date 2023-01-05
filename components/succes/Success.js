@@ -9,7 +9,7 @@ import {
 
 const Success = () => {
 
-    const text = 'Muchas gracias por su reserva. La reserva de un router WIFI portátil Rent Internet ha sido exitosa. En su correo electrónico estará recibiendo más información y detalles sobre su reserva.'
+    const text = 'Muchas gracias por su reserva. La reserva de un router WIFI portátil Rent Internet ha sido exitosa. En su correo electrónico estará recibiendo más información y detalles sobre su orden.'
 
     return (
         <Container>
@@ -18,7 +18,7 @@ const Success = () => {
                     <Msj>{text}</Msj>
                     <ButtonContainer>
                         <SecondaryButton to="/">
-                            Ir al Home
+                            Volver al Home
                         </SecondaryButton>
                     </ButtonContainer>
                 </MsjContainer>
