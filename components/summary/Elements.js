@@ -33,11 +33,13 @@ export const ReviewItem = styled.p`
     display: flex;
     justify-content: space-between;
 
-    &:last-child {
-        border-top: 1px solid var(--soft-lines-color);
-        padding-top: .5rem;
-        margin-top: .7rem;
-        font-size: 1.2rem;
+    @media all and (min-width: 768px) {
+        &:last-child {
+            border-top: 1px solid var(--soft-lines-color);
+            padding-top: .5rem;
+            margin-top: .7rem;
+            font-size: 1.2rem;
+        }
     }
 `
 
@@ -100,10 +102,15 @@ export const TooltipMsj = styled.p`
 // MOBILE
 export const Fixed = styled.div`
     position: fixed;
-    bottom: -5rem;
+    bottom: -1.5rem;
     left: 0;
     z-index: 100;
     width: 100%;
+    cursor: pointer;
+
+    @media all and (min-width: 768px) {
+        display: none;
+    }
 `
 
 export const MobileImageContainer = styled.div`
@@ -119,4 +126,10 @@ export const TotalItem = styled.p`
     justify-content: space-between;
     border-bottom: 1px solid var(--soft-lines-color);
     font-size: 1.2rem;
+`
+
+export const Body = styled.div`
+    max-height: ${({open}) => open ? '100rem' : '0rem'};
+    transition: all .3s ease-in-out;
+    overflow: hidden;
 `

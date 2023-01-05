@@ -36,6 +36,10 @@ export const Logo = styled(Image)`
 `
 
 export const Nav = styled.nav`
+
+    @media all and (max-width: 450px) {
+        display: none;
+    }
 `
 
 export const Links = styled.ul`

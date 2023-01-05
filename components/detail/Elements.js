@@ -13,8 +13,16 @@ export const ProductContainer = styled.article`
     max-width: var(--section-max-width);
     min-height: var(--section-min-height);
     position: relative;
-    padding-top: 4.5rem;
+    padding-top: 3.5rem;
     display: flex;
+
+    @media all and (max-width: 768px) {
+        padding-top: 2.5rem;
+    }
+
+    @media all and (max-width: 450px) {
+        padding-top: 1.5rem;
+    }
 `
 
 export const RightContainer = styled.div`
@@ -47,6 +55,14 @@ export const LeftContainer = styled.div`
         width: 85%;
         margin: 0 auto;
     }
+
+    @media all and (max-width: 550px) {
+        width: 99%;
+    }
+
+    @media all and (max-width: 450px) {
+        padding: 1rem;
+    }
 `
 
 export const Title = styled.h1`
@@ -54,10 +70,16 @@ export const Title = styled.h1`
     font-size: 2.5rem;
     padding-bottom: .7rem;
     margin-bottom: .5rem;
+
+    @media all and (max-width: 450px) {
+        font-size: 2rem;
+    }
 `
 
 export const Description = styled.p`
-
+    @media all and (max-width: 450px) {
+        font-size: .9rem;
+    }
 `
 
 export const Error = styled.p`
@@ -79,7 +101,6 @@ export const FixedContainer = styled.div`
     left: 0;
     width: 100%;
     padding: 2rem;
-    /* transform: translateX(-50%); */
     display: none;
     background-color: #ffffff;
 
@@ -111,6 +132,19 @@ export const SkLeftContainer = styled.div`
 
     @media all and (max-width: 1024px) {
         margin-left: 1rem;
+    }
+
+    @media all and (max-width: 768px) {
+        width: 85%;
+        margin: 0 auto;
+    }
+
+    @media all and (max-width: 550px) {
+        width: 99%;
+    }
+
+    @media all and (max-width: 450px) {
+        padding: 1rem;
     }
 `
 
@@ -209,6 +243,10 @@ export const SkCalendarFill = styled.div`
         width: 100%;
         background: linear-gradient(to right, transparent 0%,  #F4F4F4 45%, #EFEFEF 75%, transparent 100%);
         animation: ${load} 1.3s cubic-bezier(0.4, 0.0, 0.2, 1) infinite;
+    }
+
+    @media all and (max-width: 450px) {
+        width: 100%;
     }
 `
 

@@ -20,6 +20,10 @@ export const InputContainer = styled.div`
     margin: 1rem 0;
     width: 22rem;
     position: relative;
+
+    @media all and (max-width: 768px) {
+        width: 100%;
+    }
 `
 
 export const Input = styled.input`
@@ -44,7 +48,9 @@ export const CheckBox = styled.input`
 `
 
 export const Label = styled.label`
-
+    @media all and (max-width: 450px) {
+        font-size: .8rem;
+    }
 `
 
 export const BillingSection = styled.div`
@@ -72,6 +78,10 @@ export const MethodSelectContainer = styled.div`
     border: 1px solid var(--soft-lines-color);
     border-radius: 5px;
     margin-bottom: 1rem;
+
+    @media all and (max-width: 450px) {
+        width: 100%;
+    }
 `
 
 export const Method = styled.p`

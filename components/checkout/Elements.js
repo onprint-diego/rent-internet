@@ -14,13 +14,28 @@ export const CheckoutContainer = styled.article`
     position: relative;
     padding-top: 4.5rem;
     display: flex;
+
+    @media all and (max-width: 768px) {
+        padding-top: 2.5rem;
+    }
+
+    @media all and (max-width: 450px) {
+        padding-top: 1.5rem;
+    }
 `
 
 export const LeftContainer = styled.div`
-    width: 30%;
+    width: 35%;
     margin-left: 2rem;
-`
 
+    @media all and (max-width: 1024px) {
+        margin-left: 1rem;
+    }
+
+    @media all and (max-width: 768px) {
+        display: none;
+    }
+`
 
 export const RightContainer = styled.div`
     width: 60%;
@@ -29,6 +44,23 @@ export const RightContainer = styled.div`
     border-radius: 5px;
     box-shadow: var(--container-shadow);
     margin-left: 5rem;
+
+    @media all and (max-width: 1024px) {
+        margin-left: 1rem;
+    }
+
+    @media all and (max-width: 768px) {
+        width: 85%;
+        margin: 0 auto;
+    }
+
+    @media all and (max-width: 550px) {
+        width: 99%;
+    }
+
+    @media all and (max-width: 450px) {
+        padding: 1rem;
+    }
 `
 
 export const EmptyCartContainer = styled.div`
