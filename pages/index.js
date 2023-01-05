@@ -28,14 +28,16 @@ export default function Home(props) {
       backgroundimage: props.page.description.descriptionbackgroundimg.sourceUrl,
     })
 
+    console.log(props.page.homepagehero)
+
     setHeroContent({
       title: props.page.homepagehero.title, 
       subtitle: props.page.homepagehero.subtitle,
       rentbutton: props.page.homepagehero.rentbutton,
       detailsbutton: props.page.homepagehero.detailsbutton,
       heroimage: {
-        src: props.page.homepagehero.heroimage.sourceUrl,
-        alt: props.page.homepagehero.heroimage.altText,
+        src: props.page.homepagehero.heroimagealt.sourceUrl,
+        alt: props.page.homepagehero.heroimagealt.altText,
       },
       icons: [
         {
@@ -152,6 +154,10 @@ export async function getStaticProps() {
               heroimage {
                 altText
                 sourceUrl
+              }
+              heroimagealt {
+                sourceUrl
+                altText
               }
             }
             icons {
