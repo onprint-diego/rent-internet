@@ -31,7 +31,7 @@ const CheckoutForm = ({ cart, setCart }) => {
     const billingTitle = 'Datos de facturación'
     const buttonText = 'Alquilar'
 
-    const placeholderName = 'Nombre' //si es ingles 'Name', etc
+    const placeholderName = 'Nombre'
     const placeholderSurname = 'Apellido'
     const placeholderEmail = 'Correo electrónico'
     const placeholderPhone = 'Celular'
@@ -52,18 +52,18 @@ const CheckoutForm = ({ cart, setCart }) => {
 
     const formik = useFormik({
         initialValues: {
-            name: 'Diego',
-            surname: 'Iovane',
-            email: 'diegoeliseoiovane@gmail.com',
-            phone: '123456789',
-            deliveryAddress: 'Dorrego 123',
-            deliveryCp: '1234',
-            deliveryCity: 'Buenos Aires',
-            deliveryCountry: 'Argentina',
-            billingAddress: 'Mi calle facturacion',
-            billingCp: '1234',
-            billingCity: 'Ciudad de facturacion',
-            billingCountry: 'Pais de facturacion',
+            name: '',
+            surname: '',
+            email: '',
+            phone: '',
+            deliveryAddress: '',
+            deliveryCp: '',
+            deliveryCity: '',
+            deliveryCountry: '',
+            billingAddress: '',
+            billingCp: '',
+            billingCity: '',
+            billingCountry: '',
         },
         validationSchema: Yup.object({
             name: Yup.string().required(generalError).min(2, minGeneralError).max(20, maxGeneralError),

@@ -9,7 +9,7 @@ import Hero from '../components/home/Hero/Hero'
 import Process from '../components/home/Process/Process'
 import Recharge from '../components/home/Recharge/Recharge'
 import Faq from '../components/home/Faq/Faq'
-import HeroFeatures from '../components/home/Hero/HeroFeatures'
+import SmallFeatures from '../components/home/SmallFeatures/SmallFeatures'
 
 export default function Home(props) {
 
@@ -28,14 +28,16 @@ export default function Home(props) {
       backgroundimage: props.page.description.descriptionbackgroundimg.sourceUrl,
     })
 
+    console.log(props.page.homepagehero)
+
     setHeroContent({
       title: props.page.homepagehero.title, 
       subtitle: props.page.homepagehero.subtitle,
       rentbutton: props.page.homepagehero.rentbutton,
       detailsbutton: props.page.homepagehero.detailsbutton,
       heroimage: {
-        src: props.page.homepagehero.heroimage.sourceUrl,
-        alt: props.page.homepagehero.heroimage.altText,
+        src: props.page.homepagehero.heroimagealt.sourceUrl,
+        alt: props.page.homepagehero.heroimagealt.altText,
       },
       icons: [
         {
@@ -132,7 +134,7 @@ export default function Home(props) {
       <Details content={detailsContent} />
       <Recharge content={rechargeContent} />
       <Process content={processContent} />
-      <HeroFeatures content={heroContent} />
+      <SmallFeatures content={heroContent} />
       <Faq />
     </>
   )
@@ -152,6 +154,10 @@ export async function getStaticProps() {
               heroimage {
                 altText
                 sourceUrl
+              }
+              heroimagealt {
+                sourceUrl
+                altText
               }
             }
             icons {

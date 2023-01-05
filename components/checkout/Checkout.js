@@ -3,6 +3,7 @@ import { GetCartContext } from '../../context/CartContext'
 import { GetProductsContext } from '../../context/ProductsContext'
 import CheckoutForm from '../forms/CheckoutForm'
 import Summary from '../summary/Summary'
+import MobileSummary from '../summary/MobileSummary'
 import { PrimaryButton } from '../shared/PrimaryButton/PrimaryButton'
 import {
     Container,
@@ -50,6 +51,7 @@ const Checkout = () => {
                                     <Summary cart={cart} mainProduct={mainProduct} />
                                 }
                             </LeftContainer>
+                            <MobileSummary cart={cart} mainProduct={mainProduct} />
                         </>
                 }
             </CheckoutContainer>

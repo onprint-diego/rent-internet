@@ -34,12 +34,27 @@ export const Inner = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
+
+    @media all and (max-width: 960px) {
+        width: 95%;
+    }
 `
 
 export const SectionTitle = styled.h2`
     color: #ffffff;
     font-size: 3rem;
     margin: 3rem 0;
+
+    @media all and (max-width: 650px) {
+        font-size: 2rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    @media all and (max-width: 450px) {
+        font-size: 1.5rem;
+        text-align: center; 
+        margin-bottom: .5rem;
+    }
 `
 
 export const CardsContainer = styled.div`
@@ -50,7 +65,7 @@ export const CardsContainer = styled.div`
 
 export const Card = styled.div`
     position: relative;
-    background-color: rgba(250, 250, 250, 0.8);
+    background-color: rgba(250, 250, 250, .9);
     width: 40%;
     padding: 1rem 2rem;
     margin: 2rem;
@@ -59,6 +74,19 @@ export const Card = styled.div`
 
     &:hover {
         background-color: rgba(250, 250, 250, 1);
+    }
+
+    @media all and (max-width: 760px) {
+        width: 55%;
+    }
+
+    @media all and (max-width: 650px) {
+        width: 75%;
+        margin: 1rem;
+    }
+
+    @media all and (max-width: 450px) {
+        width: 90%;
     }
 `
 
@@ -72,4 +100,7 @@ export const Title = styled.p`
 
 export const Text = styled.p`
 
+    @media all and (max-width: 450px) {
+        font-size: .9rem;
+    }
 `

@@ -8,6 +8,10 @@ export const Container = styled.section`
     min-height: var(--section-min-height);
     background-color: var(--main-dark-blue);
     padding: 5rem 0;
+
+    @media all and (max-width: 1024px) {
+        margin-top: 0;
+    }
 `
 
 export const Inner = styled.div`
@@ -15,6 +19,10 @@ export const Inner = styled.div`
     margin: 0 auto;
     width: 85%;
     max-width: var(--section-max-width);
+
+    @media all and (max-width: 450px) {
+        width: 95%;
+    }
 `
 
 export const Title = styled.h2`
@@ -22,6 +30,10 @@ export const Title = styled.h2`
     text-align: center;
     font-size: 2.5rem;
     margin-bottom: 2rem;
+
+    @media all and (max-width: 450px) {
+        font-size: 2rem;
+    }
 `
 
 export const Accordion = styled.div`

@@ -18,9 +18,15 @@ export const CalendarContainer = styled.div`
         color: var(--text-primary-color);
         font-family: var(--text-font) !important;
     }
+
     .rdp-button {
         font-family: var(--text-font) !important;
     }
+
+    .rdp-button {
+        font-family: var(--text-font) !important;
+    }
+
     @media all and (max-width: 450px) {
         .rdp {
             padding: 0 !important;
@@ -29,9 +35,11 @@ export const CalendarContainer = styled.div`
         .rdp-caption_label {
             font-size: 1rem !important;
         }
+
         .rdp-cell {
             height: 45px;
         }
+
         .rdp-button {
             font-size: 1rem !important;
             width: 35px !important;

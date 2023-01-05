@@ -26,8 +26,19 @@ export const MsjContainer = styled.div`
     border-radius: 5px;
 `
 
-export const Msj = styled.p`
+export const Msj = styled.div`
     margin-bottom: 2rem;
+`
+
+export const Head = styled.h3`
+    margin-bottom: 1rem;
+    font-size: 2rem;
+    text-align: center;
+    color: var(--main-dark-blue);
+`
+
+export const Body = styled.p`
+
 `
 
 export const ButtonContainer = styled.div`

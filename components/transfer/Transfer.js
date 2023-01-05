@@ -7,8 +7,10 @@ import { CreateWooCommerceTransferRechargeOrder } from '../../pages/api/create-w
 import { httpsCallable } from 'firebase/functions'
 import { cloudFunctions } from '../../utils/firebase'
 import {
+    Body,
     ButtonContainer,
     Container,
+    Head,
     Inner,
     Msj,
     MsjContainer,
@@ -59,12 +61,18 @@ const Transfer = () => {
                     <Msj>
                         {
                             orderId === 0 ?
-                                <p>
-                                    Las transferencias bancarias pueden tardar hasta 48 horas hábiles. Nos  pondremos en contacto con usted a la brevedad vía correo electrónico una vez efectuada la transferencia.
-                                </p> :
-                                <p>
-                                    Su orden #{orderId} ha sido procesada con éxito. A la brevedad, recibirá en su correo electrónico el proceso detallado para realizar el pago a través de Transferencia bancaria. Muchas gracias por elegir Rent Internet.
-                                </p>
+                                <>
+                                    <Body>
+                                        Las transferencias bancarias pueden tardar hasta 48 horas hábiles. Nos  pondremos en contacto con usted a la brevedad vía correo electrónico una vez efectuada la transferencia.
+                                    </Body>
+                                </>
+                                :
+                                <>
+                                    <Head>Orden #{orderId}</Head>
+                                    <Body>
+                                        Su orden #{orderId} ha sido procesada con éxito. A la brevedad, recibirá en su correo electrónico el proceso detallado para realizar el pago a través de Transferencia bancaria. Muchas gracias por elegir Rent Internet.
+                                    </Body>
+                                </>
                         }
                     </Msj>
                     <ButtonContainer>
