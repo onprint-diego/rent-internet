@@ -9,7 +9,7 @@ import Hero from '../components/home/Hero/Hero'
 import Process from '../components/home/Process/Process'
 import Recharge from '../components/home/Recharge/Recharge'
 import Faq from '../components/home/Faq/Faq'
-import HeroFeatures from '../components/home/Hero/HeroFeatures'
+import SmallFeatures from '../components/home/SmallFeatures/SmallFeatures'
 
 export default function Home(props) {
 
@@ -132,7 +132,7 @@ export default function Home(props) {
       <Details content={detailsContent} />
       <Recharge content={rechargeContent} />
       <Process content={processContent} />
-      <HeroFeatures content={heroContent} />
+      <SmallFeatures content={heroContent} />
       <Faq />
     </>
   )

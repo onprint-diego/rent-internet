@@ -76,39 +76,3 @@ export const ButtonsContainer = styled.div`
     margin-top: 3rem;
     display: flex;
 `
-
-export const SmallContainer = styled.section`
-    position: relative;
-    width: 100%;
-`
-
-export const IconsContainer = styled.div`
-    width: 85%;
-    max-width: var(--section-max-width);
-    margin: 0 auto;
-    padding: 7rem 0;
-    display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
-`
-
-export const IconContainer = styled.div`
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-`
-
-export const IconImageContainer = styled.div`
-    position: relative;
-    height: 4.5rem;
-    aspect-ratio: 16/9;
-`
-
-export const Icon = styled(Image)`   
-    object-fit: contain;
-`
-
-export const Text = styled.p`
-    font-size: .8rem;
-    text-align: center;
-`

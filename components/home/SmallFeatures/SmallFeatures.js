@@ -8,7 +8,7 @@ import {
     Text,
 } from './Elements'
 
-const HeroFeatures = ({ content }) => {
+const SmallFeatures = ({ content }) => {
     return (
         <SmallContainer>
                 <IconsContainer>
@@ -34,4 +34,4 @@ const HeroFeatures = ({ content }) => {
     )
 }
 
-export default HeroFeatures
+export default SmallFeatures

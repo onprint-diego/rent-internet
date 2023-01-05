@@ -9,8 +9,8 @@ export const Container = styled.section`
     background-color: var(--main-dark-blue);
     padding: 5rem 0;
 
-    @media all and (max-width: 450px) {
-        margin-top: 0;   
+    @media all and (max-width: 1024px) {
+        margin-top: 0;
     }
 `
 
