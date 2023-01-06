@@ -35,17 +35,22 @@ const Faq = () => {
         {
             id: 3,
             q: '¿Cuántas horas dura la batería?',
-            a: 'Una batería completamente cargada durará aproximadamente 12 horas de uso continuo.',
+            a: 'Una batería completamente cargada durará aproximadamente 8 horas de uso continuo.',
         },
         {
             id: 4,
+            q: '¿Cómo y dónde puedo recibirlo?',
+            a: 'El envío se puede efectuar directamente por correo privado en tu hotel o alojamiento en Europa.Tu dispositivo te estará esperando a tu llegada, solo debes completar el formulario de reserva con dirección europea para el envío.',
+        },
+        {
+            id: 100,
             q: '¿Cómo puedo obtener el router wifi de bolsillo?',
-            a: 'Podemos enviar el dispositivo a tu hotel o a la dirección en la que te alojes. O  bien, puedes recoger el dispositivo en la oficina de correos más cercana.',
+            a: 'Podemos enviar el dispositivo a tu hotel o a la dirección en la que te alojes.',
         },
         {
             id: 5,
-            q: '¿Cómo puedo devolver el router wifi de bolsillo?',
-            a: 'Con la entrega de tu router wifi de bolsillo, recibirás un sobre prefranqueado que podrás dejar en cualquier buzón u oficina postal.<br>PONGA TODO EN EL SOBRE PREFRANQUEADO QUE LE ENVIAMOS. Por favor, compruebe que todos los artículos están en el sobre. DEPOSITE EN UN BUZÓN DE CORREOS. Si usted se hospeda en un hotel, puede pedir en la recepción que lo devuelvan.',
+            q: '¿Cómo lo devuelvo?',
+            a: 'Junto con tu dispositivo, recibirás un sobre prefranqueado del correo, para devolver el dispositivo. Sólo debes introducirlo dentro del sobre y despacharlo en la oficina de correo o filial más cercana a tu ubicación.',
         },
         {
             id: 6,
@@ -55,7 +60,7 @@ const Faq = () => {
         {
             id: 7,
             q: '¿Cuál es el alcance de la red wifi?',
-            a: 'El alcance de la red wifi, si no hay obstáculos que se interpongan con el dispositivo (como una pared) es de unos 50m. Puedes colocar el wifi de bolsillo en tu bolso o mochila y tanto tú como todo tu grupo familiar permanecerán conectados dentro de un radio de 50m.',
+            a: 'El alcance de la red wifi, si no hay obstáculos que se interpongan con el dispositivo (como una pared) es de unos 20-30m. Puedes colocar el wifi de bolsillo en tu bolso o mochila y tanto tú como todo tu grupo familiar permanecerán conectados dentro de un radio de 20-30m.',
         },
         {
             id: 8,
@@ -69,28 +74,28 @@ const Faq = () => {
         },
         {
             id: 10,
-            q: '¿Qué tipo de dispositivos puedo contectar al rúter Rent Internet?',
-            a: 'Travelers Wifi funciona con cualquier dispositivo que se pueda conectar a través de wifi, como computadoras portátiles (Windows o Apple), Smartphones (iPhone, Android, Blackberry,Windows Phone, etc.), tablets (iPad, Samsung Galaxy, Kindle) y con cualquier otro dispositivo que tenga un adaptador wifi (como las consolas de juego PS3, PS4, XBOX, Apple TV, etc).',
+            q: '¿Qué tipo de dispositivos puedo contectar al router Rent Internet?',
+            a: 'El router funciona con cualquier dispositivo que se pueda conectar a través de wifi, como computadoras portátiles,  celulares , tablets o con cualquier otro dispositivo que tenga un adaptador wifi.',
         },
         {
             id: 11,
             q: '¿Puedo cancelar mi reserva? ¿Puedo obtener un reembolso?',
-            a: 'Por favor, háganos saber de inmediato si usted tiene que cancelar su pedido. Daremos un reembolso completo si la cancelación es hecha 7 días o más antes de la fecha de inicio del período de llegada. No daremos un reembolso por cualquier cancelación realizada más tarde que eso.',
+            a: 'Por favor, háganos saber de inmediato si usted tiene que cancelar su pedido. Daremos un reembolso completo si la cancelación es hecha como mínimo  7 días antes de la fecha de inicio de tu reserva. La cancelación en un periodo de menos de 7 días, no será posible.',
         },
         {
             id: 12,
             q: '¿Con cuántos días de anticipación debo realizar una reserva?',
-            a: 'Nuestro sitio web requiere al menos 2 días hábiles de antelación para realizar un pedido. Pero cuanto antes mejor, ya que podríamos quedarnos sin stock.',
+            a: 'Nuestro sitio web requiere al menos 4 días hábiles de antelación para realizar un pedido. Por una cuestión de logística y el tiempo de envío, cuanto antes, mejor.',
         },
         {
             id: 13,
             q: '¿Qué debo hacer si pierdo el sobre devolución?',
-            a: 'Vaya a una oficina de correos y envíela a nuestra dirección. También, puede contactarnos y nosotros organizaremos una recogida (esta opción conlleva un costo adicional)',
+            a: 'Contáctenos de inmediato para que le podamos encontrar una solución acorde para el reenvio del dispositivo.',
         },
         {
             id: 14,
             q: '¿Qué sucede si no devuelvo el dispositivo?',
-            a: 'Los artículos deben ser devueltos en buen estado de funcionamiento y buena condición física al final del período de alquiler. Los artículos no devueltos incurrirá en los siguientes cargos:<br><ul><li>Wi-Fi portátil + SIM: 100 USD</li><li>Accesorios: 20 USD</li></ul><br>En caso de una devolución tardía después del final del período de alquiler, incurrirá en una multa diaria de 3 USD / día. Consideramos la fecha de devolución, la fecha en que el sobre es sellado por el correo postal y añadimos 2 días de tolerancia adicional.',
+            a: 'Los artículos deben ser devueltos en buen estado de funcionamiento y buena condición física al final del período de alquiler. Los artículos no devueltos incurrirá en los siguientes cargos:<br><ul><li>Wi-Fi portátil + SIM: 100 USD</li><li>Accesorios: 30 USD</li></ul><br>En caso de una devolución tardía después del final del período de alquiler, incurrirá en una multa diaria de 3 USD / día. Consideramos la fecha de devolución, la fecha en que el sobre es sellado por el correo postal y añadimos 2 días de tolerancia adicional.',
         },
         {
             id: 15,
@@ -105,7 +110,7 @@ const Faq = () => {
         {
             id: 17,
             q: '¿Cuánto cuesta el alquiler de un dispositivo Rent Internet?',
-            a: 'El costo mínimo de un dispositivo Rent Internet es  de USD 50. Luego el costo será calculado en base a las fechas seleccionadas por usted en el calendario.',
+            a: 'El costo mínimo de un dispositivo Rent Internet es de USD 50. Luego el costo será calculado en base a las fechas seleccionadas por usted en el calendario.',
         },
     ]
 

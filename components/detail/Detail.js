@@ -115,7 +115,7 @@ const Detail = ({ data, loading }) => {
                                 setCart={setCart}
                             />
                             <CheckBoxContainer>
-                                <CheckBox label="Agregar un adaptador de viaje" cart={cart} setCart={setCart} extraProductData={adapter} value="adapter" />
+                                {/* <CheckBox label="Agregar un adaptador de viaje" cart={cart} setCart={setCart} extraProductData={adapter} value="adapter" /> */}
                                 <CheckBox label="Agregar Power Bank" cart={cart} setCart={setCart} extraProductData={powerBank} value="powerBank" />
                             </CheckBoxContainer>
                             <PrimaryButton to="/checkout" disabled={disabled}>

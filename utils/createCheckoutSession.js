@@ -5,7 +5,7 @@ import { cloudFunctions } from './firebase'
 
 export const createCheckOutSession = async (cart) => {
 
-    const stripePromise = loadStripe('pk_test_51LkAFuHieiQtj1QLE4R8QafLiQaeNYhlFxO0mcCOS6pbRkDlXJfAP01MxopRDHIIFYQBex9XM4XAeRncF36pJsx000o4CnQfe0')
+    const stripePromise = loadStripe('pk_live_51LkAFuHieiQtj1QLF7IM4FcsVVx7TvNf24wArWXnnHbAwVr77UKiGTBXjf08s3jbpSqiVPzEOcVliE7B7dIMIrVP00HN76W3RX')
     const stripeCreateCheckoutSession = httpsCallable(cloudFunctions, 'stripeCreateCheckoutSession')
     const stripeCreateRechargeCheckoutSession = httpsCallable(cloudFunctions, 'stripeCreateRechargeCheckoutSession')
 

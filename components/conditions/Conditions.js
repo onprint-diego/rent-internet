@@ -25,12 +25,12 @@ const Conditions = () => {
         {
             id: 2,
             q: 'DESCRIPCIÓN DE LOS SERVICIOS',
-            a: 'RENT INTERNET alquila puntos de acceso móviles 4G/LTE (dispositivos) para su uso en Europa y Estados Unidos (en los países cubiertos). Los datos incluidos, dependiendo del paquete adquirido por ud., pueden ser utilizados mientras dure el alquiler dependen del plan solicitado. Los datos que no se utilizen, no serán descontados del plan comprado, ni devueltos, ni podrán ser reclamados. Cada dispositivo puede mantener hasta 5 conexiones simultáneas.',
+            a: 'RENT INTERNET alquila puntos de acceso móviles 4G/LTE (dispositivos) para su uso en Suiza, Europa y Estados Unidos (en los países cubiertos). Los datos incluidos mientras dure el alquiler dependen del plan solicitado (25gb o 50gb). Cada dispositivo puede mantener hasta 5 conexiones simultáneas.',
         },
         {
             id: 3,
             q: 'PROCESO DE RESERVA EN LÍNEA',
-            a: 'A continuación se indican los principales pasos para realizar una reserva en línea:<p>(1) Primer paso: selección del servicio. El Arrendatario selecciona sus criterios de alquiler, incluyendo las fechas de alquiler y el equipamiento opcional. La moneda a cobrar será expresada en todos los casos en USD (dólar estadounidense).</p><p>(2) Segundo paso: El arrendatario introduce su dirección de facturación, incluyendo el nombre, los apellidos, la dirección completa, la dirección de correo electrónico y el número de teléfono móvil.</p><p>(3) Tercer paso: Datos de pago. El Arrendatario puede elegir entre pagar con tarjeta de crédito o mediante transferencia bancaria. Se introducirán los datos de la tarjeta de crédito o recibirá los datos bancarios del Arrendador e instrucciones para realizar el pago por correo electrónico.</p><p>(4) Cuarto paso: El Arrendatario es informado de los gastos de penalización en caso de no devolver el aparato, sus accesorios y equipos opcionales, mediante correo electrónico.</p><p>(5) Quinto paso: Se ejecutará el pago y se confirmará la reserva.</p><p>(6) Sexto paso: El arrendatario sube una copia de su pasaporte o documento de identidad para finalizar la reserva. Es un requisito legal de la legislación suiza. Tenga en cuenta que podemos pedirle que nos envíe otra copia si nos envía una de baja calidad.</p>',
+            a: 'A continuación se indican los principales pasos para realizar una reserva en línea:<p>(1) Primer paso: selección del servicio. El Arrendatario selecciona sus criterios de alquiler, incluyendo las fechas de éstas y el equipamiento opcional. La moneda a cobrar será expresada en todos los casos en USD (dólar estadounidense).</p><p>(2) Segundo paso: El arrendatario introduce su dirección de facturación, incluyendo el nombre, los apellidos, la dirección completa, la dirección de correo electrónico y el número de teléfono celular.</p><p>(3) Tercer paso: Datos de pago. El Arrendatario puede elegir entre pagar con tarjeta de crédito o mediante transferencia bancaria*. Se introducirán los datos de la tarjeta de crédito o recibirá los datos bancarios del Arrendador e instrucciones para realizar el pago por correo electrónico. * En el caso de transferencia bancaria, asegúrese que el importe a pagar sea excluyendo los impuestos y tasas. Estas varían según los bancos y países. Por favor infórmese con su entidad bancaria antes de efectuar la transferencia. El monto a transferir debe ser el importe exacto en dólares excluyendo de estos gastos adicionales.</p><p>(4) Cuarto paso: El Arrendatario es informado de los gastos de penalización en caso de no devolver el o los dispositivos, sus accesorios y equipos opcionales, mediante correo electrónico.</p><p>(5) Quinto paso: Se ejecutará el pago y se confirmará la reserva.</p><p>(6) Sexto paso: El arrendatario sube una copia de su pasaporte para finalizar la reserva. Es un requisito legal de la legislación para comprobar la identidad del arrendatario. Tenga en cuenta que podemos pedirle que nos envíe otra copia nuevamente en caso de que la proporcionada no sea legible o de alta calidad.</p>',
         },
         {
             id: 4,
@@ -39,23 +39,28 @@ const Conditions = () => {
         },
         {
             id: 5,
-            q: 'VIAJEROS COMPROMISO WIFI',
-            a: '<p>RENT INTERNET se esforzará razonablemente en proporcionar al Arrendatario una calidad de servicio. Sin embargo, RENT INTERNET no garantiza que el servicio (1) no se interrumpa, (2) se preste a tiempo, (3) sea seguro o (4) esté libre de fallos y (5) se preste en los países no cubiertos.</p><p>Los riesgos relativos al desgaste habitual serán asumidos por RENT INTERNET, que reparará sin demora los daños que perjudiquen materialmente el funcionamiento del Equipo, y/o sustituirá el Equipo en un plazo de 48 horas. RENT INETRNET proporcionará un reembolso de acuerdo con la política de reembolso.</p>',
+            q: 'SERVICIO DE INTERNET  WIFI',
+            a: 'RENT INTERNET se esforzará en proporcionar al arrendatario la mejor calidad de servicio en conexión de internet, ésta depende de los diferentes operadores de redes en cada país europeo donde se encuentre como por ej.: Movistar, Orange, Vodefone, Swisscom, Telekom Austria Group, United Group, Bouygues Telecom, Proximus Group, Telenor Group, Fastweb, Altice Portugal, Deutsche Telekom, BT Group, Telia, TIM Group, Telefónica, entre muchos más. En caso de que algún operador tenga una caída o corte de servicio, le recomendamos que con el App del router busque conectarse a otro operador.',
         },
         {
             id: 6,
-            q: 'USO DE DATOS',
-            a: 'Los datos de alta velocidad incluidos dependen del país de uso y de las políticas de servicio de los prestadores.',
+            q: 'USO DE DATOS Y VELOCIDAD',
+            a: 'Ni bien consuma la totalidad de datos contratados, no habrá más conexión a internet. Si desea disponer de más datos, deberá hacer una nueva recarga. La velocidad de conexión depende del operador al que esté conectado y a la distancia de la antena del operador de red. ',
+        },
+        {
+            id: 100,
+            q: 'DATOS DE LAS RESERVAS',
+            a: 'Fecha de reserva: – Podemos aceptar reservas, con un mínimo de 2 días de antelación, dependiendo de la opción de entrega. Duración mínima del alquiler: – El periodo mínimo de alquiler es de 2 días. El monto mínimo del alquiler es equivalente a 14 días (2 semanas) Duración máxima del alquiler: – El periodo máximo de alquiler es de 365 días. Para periodos de alquiler más largos, por favor contáctenos.'
         },
         {
             id: 7,
             q: 'RECEPCIÓN DEL HOTSPOT MÓVIL',
-            a: 'El Arrendatario recibirá el dispositivo, cargado y listo para su uso, así como un cargador de pared totalmente funcional, un cable USB y un equipo opcional (si se ha pedido). Las reclamaciones por parte del Arrendatario en relación con el aparato y/o los accesorios deben ser comunicadas al Arrendador inmediatamente después de su recepción (en un plazo de 24 hs).',
+            a: 'El Arrendatario recibirá el dispositivo, cargado, con las claves de acceso y  listo para su uso, así como un cargador totalmente funcional, un cable USB y un equipo opcional (si se ha pedido). Las reclamaciones por parte del Arrendatario en relación con el aparato y/o los accesorios deben ser comunicadas al Arrendador inmediatamente después de su recepción (en un plazo de 24 hs).',
         },
         {
             id: 8,
             q: 'COMPROMISOS DEL ARRENDATARIO',
-            a: '<p>Al utilizar el Equipo o los Servicios proporcionados por RENT INTERNET, el Arrendatario no debe realizar ninguna acción: - que sea abusiva, ilegal o fraudulenta; - que provoque que la Red se vea perjudicada o dañada; - que modifique la finalidad del router hotspot móvil.</p><p>El Arrendatario deberá: proteger razonablemente el Equipo contra el riesgo de destrucción, daño, pérdida, robo, etc.; mantener el Equipo en un estado ordenado y funcional. No eliminar ningún elemento de la misma (cambiar o quitar la tarjeta SIM).</p>',
+            a: 'Al utilizar el equipo o los servicios proporcionados por RENT INTERNET,  el Arrendatario se compromete a no realizar ningún tipo de acción detallada a continuaciõn: - que sea abusiva, ilegal o fraudulenta - Visitar páginas de contenido no autorizado bajo la ley del país europeo donde Ud. se encuentre.  Ni subir contenido calificado como ilegal bajo la misma ley del país europeo donde Ud. se encuentre. - que provoque que la Red se vea perjudicada o dañada; - que modifique la finalidad del router hotspot móvil.</p><p>Es de suma responsabilidad del arrendatario  el uso del router, las páginas que visita y los datos que administra bajo el router proporcionado por RENT INTERNET y que queda él, el arrendatario como único responsable por el tráfico de datos de también a los que utilicen el mismo dispositivo a los que él decida compartir el acceso.</p>',
         },
         {
             id: 9,
@@ -75,12 +80,12 @@ const Conditions = () => {
         {
             id: 12,
             q: 'IDENTIFICACIÓN DEL ARRENDATARIO',
-            a: 'La ley suiza de telecomunicaciones solicita una copia del pasaporte o documento de identidad del Arrendatario. El Arrendatario acepta que tiene que subir una copia de su pasaporte o DNI. Los datos privados del Arrendatario se tratan de forma altamente confidencial.',
+            a: 'Las leyes europeas exigen la identificación del arrendatario una copia del pasaporte de éste o éstos en caso de que sean varios. El Arrendatario da el consentimiento de proporcionar una buena copia de ese documento de identidad requerido por las autoridades correspondientes. Es el caso del uso indebido del router (Visita de contenido o manejo de datos catalogados como ilegales) RENT INTERNET no toma ninguna responsabilidad al respecto. Los datos privados del Arrendatario se tratan de forma altamente confidencial.',
         },
         {
             id: 13,
-            q: 'PRECIO DE ALQUILER',
-            a: 'El período de alquiler se calcula por día de alquiler. El primer día de duración del alquiler es el día de recogida/entrega; el último día el día de regreso. Todos los precios incluyen el 8% de impuestos. El precio del alquiler se establece en el Contrato de alquiler y comprende el uso del Dispositivo tal como se indica en el Contrato de alquiler durante la duración acordada, así como cualquier tarifa adicional que se haya acordado para equipos opcionales. Las tarifas de alquiler están estipuladas en base quincenal o en base mensual.',
+            q: 'TARIFAS',
+            a: 'El período de alquiler se calcula por día. Se considera como primer día de duración del alquiler, el día de recogida/entrega en mano del dispositivo; el último día, el día del envió de regreso. El precio del alquiler se establece en el contrato estipulado al adquirir el servicio, y comprende el uso del dispositivo tal como se indica en el contrato de alquiler con la correspondiente duración acordada, así como cualquier tarifa adicional que se haya estipulado para equipos opcionales. Las tarifas de alquiler son en base, semanal,  quincenal o mensual.',
         },
         {
             id: 14,
@@ -90,22 +95,22 @@ const Conditions = () => {
         {
             id: 15,
             q: 'MODIFICACIÓN/CANCELACIÓN/REEMBOLSO',
-            a: '<p>El Arrendatario puede cancelar cualquier pedido sin cargo hasta 7 días antes de la fecha de recogida/entrega.</p><p>Para el resto de los periodos de cancelación los cargos son los siguientes:</p><p>Hasta 6 días antes de la fecha de inicio del alquiler: 40 % del costo total del pedido;</p><p>Hasta 2 días antes de la fecha de inicio del alquiler: 70% del costo total del pedido;</p><p>En caso de que el equipo de alquiler ya haya sido enviado a los servicios postales o de mensajería para su entrega, no se pueden aplicar reembolsos.</p><p>En los casos en que no sea posible reparar los daños, lo que afecta materialmente el funcionamiento del Dispositivo, y/o reemplazar el Dispositivo dentro de las 48 horas, RENT INTERNET proporcionará un reembolso parcial al Arrendatario.</p><p>El reembolso no se proporcionará en los casos en que el Arrendatario no haya informado inmediatamente a RENT INTERNET sobre (a) cualquier problema o defecto del Dispositivo; (b) entrega inoportuna del Dispositivo; (c) imposibilidad/decisión de no recoger el Dispositivo en el momento acordado; (d) ausencia de señal de red o conexión a Internet; (e) rendimiento inadecuado del punto de acceso móvil.</p><p>Para cualquier solicitud de cambio, modificación y cancelación de la reserva, el Arrendatario deberá ponerse en contacto con RENT INETRNET: info@rent-internet.com</p>',
+            a: '<p>El Arrendatario puede cancelar cualquier pedido sin cargo hasta 7 días antes de la fecha de recogida/entrega.</p><p>Para el resto de los periodos de cancelación los cargos son los siguientes:</p><p>Hasta 6 días antes de la fecha de inicio del alquiler: 80 % del costo total del pedido;</p><p>En caso de que el equipo de alquiler ya haya sido enviado a los servicios postales o de mensajería para su entrega, no se pueden aplicar reembolsos.</p><p>En los casos en que no sea posible reparar los daños, lo que afecta materialmente el funcionamiento del dispositivo, y/o reemplazar el dispositivo dentro de las 48 horas (dependiendo del servicio de correo) RENT INTERNET proporcionará un reembolso parcial al Arrendatario.</p><p>El reembolso no se proporcionará en los casos en que el Arrendatario no haya informado inmediatamente a RENT INTERNET sobre (a) cualquier problema o defecto del Dispositivo; (b) entrega inoportuna del Dispositivo; (c) imposibilidad/decisión de no recoger el Dispositivo en el momento acordado; (d) ausencia de señal de red o conexión a Internet; (e) rendimiento inadecuado del punto de acceso móvil.</p><p>Para cualquier solicitud de cambio, modificación y cancelación de la reserva, el Arrendatario deberá ponerse en contacto con RENT INETRNET: info@rent-internet.com</p>',
         },
         {
             id: 16,
             q: 'CARGOS POR PÉRDIDA Y DAÑO',
-            a: '<p>El Arrendatario es el único responsable de toda pérdida o daño del equipo durante el período de alquiler. En caso de pérdida o daño, se cobrarán las siguientes cantidades:</p><ul><li>Pérdida o daño total de la caja WIFI de RENT INTERNET que contiene el Dispositivo y sus accesorios: CHF 150.00</li><li>Dispositivo WIFI: CHF 100.00</li><li>Tarjeta SIM: CHF 50.00</li><li>Batería: CHF 25,00</li><li>Cargador de pared: CHF 15,00</li><li>Cable USB: CHF 15.00</li><li>Inserto de madera: CHF 20.00</li><li>Cargador de coche: CHF 15,00</li></ul>',
+            a: '<p>El Arrendatario es el único responsable de toda pérdida o daño del equipo durante el período de alquiler. En caso de pérdida o daño, se cobrarán las siguientes cantidades:</p><ul><li>Pérdida o daño total de la caja WIFI de RENT INTERNET precios:</li><li>Router: U$S 125.00</li><li>SIM: U$S  45.00</li><li>Batería: U$S 30.00</li><li>Cargador USB:  15.00</li><li>Cable USB: U$S 15.00</li></ul>',
         },
         {
             id: 17,
             q: 'PRIVACIDAD',
-            a: 'Todos los datos proporcionados por el Arrendatario durante el alquiler y el uso del Dispositivo WIFI de RENT INTERNET estarán protegidos de acuerdo con la Ley Federal de Protección de Datos (DPA) y el Reglamento General de Protección de Datos (GDPR) de Suiza. Todos los datos proporcionados por el cliente guardados por RENT INTERNET se utilizarán explícitamente para fines de cumplimiento contractual y para informar al cliente sobre los productos relacionados con su acuerdo contractual. En este sentido, el cliente acepta explícitamente que aprueba y acepta el envío de dicha información, también con fines de marketing y en formato electrónico, p. vía correo electrónico. La revocación del consentimiento podrá ser notificada en cualquier momento, pero deberá efectuarse por escrito a RENT INTERNET, indicando las direcciones de correo electrónico afectadas.Más información sobre la privacidad de RENT INTERNET está disponible <a href="#" target="_blank" rel="noopener noreferrer">aquí</a>.',
+            a: 'Todos los datos proporcionados por el Arrendatario durante el alquiler y el uso del Dispositivo  de RENT INTERNET estarán protegidos de acuerdo con la Ley europea de proteccion de datos y privacidad: https://europa.eu/youreurope/citizens/consumers/internet-telecoms/data-protection-online-privacy/index_es.htm. Todos los datos proporcionados por el cliente guardados por RENT INTERNET se utilizarán explícitamente para fines de cumplimiento contractual y para informar al cliente sobre los productos relacionados con su acuerdo contractual. En este sentido, el cliente acepta explícitamente que aprueba y acepta el envío de dicha información, también con fines de marketing y en formato electrónico, p. vía correo electrónico. La revocación del consentimiento podrá ser notificada en cualquier momento, pero deberá efectuarse por escrito a RENT INTERNET, indicando las direcciones de correo electrónico afectadas.',
         },
         {
           id: 18,
           q: 'PAÍSES CUBIERTOS',
-          a: '',
+          a: 'Alemania, Austria, Bélgica, Bulgaria, Caribe Francés, Chipre, Croacia, Dinamarca, Eslovaquia, Eslovenia, Estonia, EE.UU, Finlandia, Francia, Gibraltar, Grecia, Holanda, Hungría, Irlanda, Islandia, Italia, La Reunión, Letonia, Liechtenstein, Lituania, Luxemburgo, Malta, Mónaco, Noruega, Polonia, Portugal, Reino Unido de Gran Bretaña, República Checa, Rumanía, San Marino, Suecia, Suiza, Turquía.',
         },
         {
           id: 19,
@@ -120,7 +125,7 @@ const Conditions = () => {
         {
           id: 21,
           q: 'JURISDICCIÓN Y LEY APLICABLE',
-          a: '<p>Estos Términos y condiciones se regirán por la ley sustantiva suiza (con exclusión de las disposiciones sobre conflicto de leyes y la Convención de las Naciones Unidas sobre los Contratos de Compraventa Internacional) de Mercancías (CISG) de 11 de abril de 1980).</p><p>Cualquier disputa que surja de o en conexión con estos Términos y Condiciones será exclusivamente remitido a los tribunales competentes de la ciudad de Zürich, Suiza.</p>',
+          a: '<p>Estos Términos y condiciones se regirán por la ley sustantiva suiza (con exclusión de las disposiciones sobre conflicto de leyes y la Convención de las Naciones Unidas sobre los Contratos de Compraventa Internacional).de Mercancías (CISG) de 11 de abril de 1980).</p><p>Cualquier disputa que surja de o en conexión con estos Términos y Condiciones será exclusivamente remitido a los tribunales competentes de la ciudad de Zürich, Suiza.</p>',
         },
         {
           id: 22,

@@ -1,6 +1,6 @@
 const functions = require("firebase-functions")
 const sgMail = require("@sendgrid/mail")
-const stripe = require("stripe")(functions.config().stripe.test.key)
+const stripe = require("stripe")(functions.config().stripe.live.key)
 const endpointSecret = functions.config().stripe.webhooks.checkout
 const rechargeEndpointSecret = functions.config().stripe.webhooks.checkoutrecharge
 sgMail.setApiKey(functions.config().sendgrid.key)
@@ -8,8 +8,8 @@ const WooCommerceRestApi = require('@woocommerce/woocommerce-rest-api').default
 
 const api = new WooCommerceRestApi({
     url: "https://db.rent-internet.com",
-    consumerKey: 'ck_017b4787d243489633c45153b29a045418a17c3a',
-    consumerSecret: 'cs_fdaedbaaeaf92e273946236cef7f011bf56335d7',
+    consumerKey: functions.config().woo.ck,
+    consumerSecret: functions.config().woo.sk,
     version: "wc/v3",
     queryStringAuth: true,
     axiosConfig: {
@@ -387,7 +387,7 @@ exports.stripeCreateCheckoutSession = functions.https.onCall(async (data, contex
     // firebase functions:config:set stripe.test.key = ...
     // firebase functions:config:set stripe.prod.key = ...
 
-    const stripe = require("stripe")(functions.config().stripe.test.key)
+    const stripe = require("stripe")(functions.config().stripe.live.key)
     const { cart, products } = data
 
     const customer = cart.customerDetails
@@ -513,7 +513,7 @@ exports.stripeCreateCheckoutSession = functions.https.onCall(async (data, contex
 //////////////////////////////////////////////////////
 exports.stripeCreateRechargeCheckoutSession = functions.https.onCall(async (data, context) => {
 
-    const stripe = require("stripe")(functions.config().stripe.test.key)
+    const stripe = require("stripe")(functions.config().stripe.live.key)
     const { cart } = data
 
     const productName = cart.product.name
