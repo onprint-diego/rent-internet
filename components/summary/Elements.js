@@ -64,9 +64,13 @@ export const Remark = styled.span`
 export const FootNote = styled.p`
     padding: .5rem 1rem;
     font-size: .7rem;
-    display: flex;
-    flex-direction: row;
     color: #ffffff;
+`
+
+export const FootLink = styled.span`
+    color: #ffffff;
+    cursor: pointer;
+    text-decoration: underline;
 `
 
 export const TooltipIcon = styled.span`
@@ -132,4 +136,44 @@ export const Body = styled.div`
     max-height: ${({open}) => open ? '100rem' : '0rem'};
     transition: all .3s ease-in-out;
     overflow: hidden;
+`
+
+// POP
+export const PopContainer = styled.div`
+    background-color: rgba(250, 250, 250, .8);
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 90;
+    translate: all .3s ease-in-out;
+`
+
+export const PopInner = styled.div`
+    position: relative;
+    background-color: #ffffff;
+    box-shadow: var(--container-shadow);
+    border-radius: 5px;
+    padding: 1.5rem;
+    width: 25rem;
+`
+
+export const Msj = styled.p`
+
+`
+
+export const CloseButton = styled.button`
+    position: absolute;
+    top: .5rem;
+    right: .5rem;
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 500px;
+    background-color: #edededed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 `

@@ -87,13 +87,6 @@ input {
   border: none;
 }
 
-/* REVISAR */
-/* @media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
-  body {
-    color: white;
-    background: black;
-  }
-} */
+.rdp-caption_label {
+  z-index: 0 !important;
+}

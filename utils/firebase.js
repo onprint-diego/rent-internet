@@ -17,7 +17,14 @@ const app = initializeApp(config)
 export const db = getFirestore(app)
 export const cloudFunctions = getFunctions(app)
 
-const appCheck = initializeAppCheck(app, {
-  provider: new ReCaptchaV3Provider('6LcqrNQjAAAAAJsFkdLcbNI1iumpT44qQMLWD72j'),
-  isTokenAutoRefreshEnabled: true
-});
+// const appCheck = initializeAppCheck(app, {
+//   provider: new ReCaptchaV3Provider('6LcqrNQjAAAAAJsFkdLcbNI1iumpT44qQMLWD72j'),
+//   isTokenAutoRefreshEnabled: true
+// });
+
+if (typeof window !== "undefined") {
+  const appCheck = initializeAppCheck(app, {
+    provider: new ReCaptchaV3Provider('6LcqrNQjAAAAAJsFkdLcbNI1iumpT44qQMLWD72j'),
+    isTokenAutoRefreshEnabled: true
+  });
+}

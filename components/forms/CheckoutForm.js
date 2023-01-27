@@ -60,7 +60,7 @@ const CheckoutForm = ({ cart, setCart }) => {
             deliveryCp: '',
             deliveryCity: '',
             deliveryCountry: '',
-            billingAddress: ' calle facturacion',
+            billingAddress: '',
             billingCp: '',
             billingCity: '',
             billingCountry: '',

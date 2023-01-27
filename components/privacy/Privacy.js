@@ -35,12 +35,12 @@ const Privacy = () => {
         {
             id: 4,
             q: '¿Cómo usamos su información?',
-            a: '<p>Podemos usar la información que recopilamos de usted cuando se registra, realiza una compra, se suscribe a nuestro boletín informativo, responde a una encuesta o comunicación de marketing, navega por el sitio web o usa ciertas otras funciones del sitio de las siguientes maneras:</p><ul><li>Para personalizar su experiencia y permitirnos entregar el tipo de contenido y ofertas de productos en los que está más interesado.</li><li>Para mejorar nuestro sitio web con el fin de brindarle un mejor servicio.</li><li>Para permitirnos brindarle un mejor servicio al responder a sus solicitudes de servicio al cliente.</li><li> Para solicitar calificaciones y reseñas de servicios o productos</li></ul>',
+            a: '<p>Podemos usar la información que recopilamos de usted cuando se registra, realiza una compra, se suscribe a nuestro boletín informativo, responde a una encuesta o comunicación de marketing, navega por el sitio web o usa otras funciones del sitio de las siguientes maneras:</p><ul><li>Para personalizar su experiencia y permitirnos entregar el tipo de contenido y ofertas de productos en los que está más interesado.</li><li>Para mejorar nuestro sitio web con el fin de brindarle un mejor servicio.</li><li>Para permitirnos brindarle un mejor servicio al responder a sus solicitudes de servicio al cliente.</li><li> Para solicitar calificaciones y reseñas de servicios o productos</li></ul>',
         },
         {
             id: 5,
             q: '¿Cómo protegemos tu información?',
-            a: '<p>RENT INTERNET se esforzará razonablemente en proporcionar al Arrendatario una calidad de servicio. Sin embargo, RENT INTERNET no garantiza que el servicio (1) no se interrumpa, (2) se preste a tiempo, (3) sea seguro o (4) esté libre de fallos y (5) se preste en los países no cubiertos.</p><p>Los riesgos relativos al desgaste habitual serán asumidos por RENT INTERNET, que reparará sin demora los daños que perjudiquen materialmente el funcionamiento del Equipo, y/o sustituirá el Equipo en un plazo de 48 horas. RENT INETRNET proporcionará un reembolso de acuerdo con la política de reembolso.</p>',
+            a: '<p>RENT INTERNET se esforzará razonablemente en proporcionar al Arrendatario una calidad de servicio. Sin embargo, RENT INTERNET no garantiza que el servicio (1) no se interrumpa, (2) se preste a tiempo, (3) sea seguro o (4) esté libre de fallos y (5) se preste en los países no cubiertos.</p><p>Los riesgos relativos al desgaste habitual serán asumidos por RENT INTERNET, que reparará sin demora los daños que perjudiquen materialmente el funcionamiento del Equipo, y/o sustituirá el Equipo en un plazo de 48 horas. RENT INETERNET proporcionará un reembolso de acuerdo con la política de reembolso.</p>',
         },
         {
             id: 6,
@@ -74,8 +74,8 @@ const Privacy = () => {
         },
         {
             id: 12,
-            q: 'Ley de protección de la privacidad en línea de Suiza',
-            a: '',
+            q: 'Ley de protección de la privacidad en línea de Europa',
+            a: '<p>Todos los datos proporcionados por el Arrendatario durante el alquiler y el uso del Dispositivo  de RENT INTERNET estarán protegidos de acuerdo con la Ley europea de proteccion de datos y privacidad: <a href="https://europa.eu/youreurope/citizens/consumers/internet-telecoms/data-protection-online-privacy/index_es.htm" target="_blank" rel="noopener noreferrer">https://europa.eu/youreurope/citizens/consumers/internet-telecoms/data-protection-online-privacy/index_es.htm</a></p><p>Todos los datos proporcionados por el cliente guardados por RENT INTERNET se utilizarán explícitamente para fines de cumplimiento contractual y para informar al cliente sobre los productos relacionados con su acuerdo contractual. En este sentido, el cliente acepta explícitamente que aprueba y acepta el envío de dicha información, también con fines de marketing y en formato electrónico, p. vía correo electrónico.</p><p>La revocación del consentimiento podrá ser notificada en cualquier momento, pero deberá efectuarse por escrito a RENT INTERNET, indicando las direcciones de correo electrónico afectadas.</p>',
         },
     ]
 
